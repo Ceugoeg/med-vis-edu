@@ -1,0 +1,48 @@
+# OS-specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Frontend/Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+build/
+
+# Python / FastAPI
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+ENV/
+env/
+.python-version
+jupyter_workspace/
+
+# Secrets & Local Configs
+.env
+.env.local
+*.pem
+*.key
+credentials.json
+
+# Large Assets & Logs
+*.log
+/models/*.glb
+/models/*.gltf

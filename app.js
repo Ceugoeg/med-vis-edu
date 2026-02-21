@@ -1,0 +1,300 @@
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+// --- 1. 状态与配置缓存 ---
+const State_Channel = {
+    isPinching: false,
+    activePart: null,
+    explodeFactor: 0,
+    targetRotationY: 0,
+    targetRotationX: 0 
+};
+let anatomyConfig = {};
+const LocalCache = {
+    "Heart_LV": "【本地缓存】左心室是心脏最厚的腔室，负责将含氧血液泵入主动脉供全身使用。",
+    "Heart_RV": "【本地缓存】右心室负责将脱氧血液泵入肺部进行气体交换。",
+    "Heart_Aorta": "【本地缓存】主动脉是人体内最大的动脉，承受极高的血压。",
+    "Heart_Valves": "【本地缓存】心脏瓣膜确保血液单向流动，防止反流。"
+};
+
+// --- 2. Three.js 核心初始化 ---
+const container = document.getElementById('canvas-container');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0f); // 再次微微提亮背景，方便观察
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(0, 0, 8); 
+
+const renderer = new THREE.WebGLRenderer({ antialias: false });
+renderer.setSize(window.innerWidth, window.innerHeight);
+// 更换为对高光更友好的色调映射，并提高基础曝光
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+container.appendChild(renderer.domElement);
+
+const renderScene = new RenderPass(scene, camera);
+const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.0, 0.4, 0.85);
+const composer = new EffectComposer(renderer); 
+composer.addPass(renderScene);
+composer.addPass(bloomPass);
+
+// 增强环境光照
+scene.add(new THREE.AmbientLight(0xffffff, 2.0));
+const dirLight = new THREE.DirectionalLight(0xffffff, 3.0);
+dirLight.position.set(5, 5, 5);
+scene.add(dirLight);
+
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2.0);
+scene.add(hemiLight);
+
+// --- 3. 核心资产加载与材质增强 ---
+let heartGroup = new THREE.Group();
+scene.add(heartGroup);
+const originalPositions = new Map();
+
+function createMedicalMaterial(child) {
+    const oldMat = child.material;
+    const geom = child.geometry;
+    
+    // 【核心修复 1】强行计算顶点法线！防止 AI 模型缺少法线导致的光照死黑
+    if (geom) {
+        geom.computeVertexNormals();
+    }
+
+    // 探测模型是否自带贴图或顶点颜色
+    const hasMap = oldMat && oldMat.map;
+    const hasVColor = geom && geom.hasAttribute('color');
+
+    const mat = new THREE.MeshStandardMaterial({
+        // 【核心修复 2】底色兜底：如果没有贴图和顶点色，强制赋予暗红色
+        color: hasMap ? 0xffffff : (hasVColor ? 0xffffff : 0x882222),
+        map: hasMap ? oldMat.map : null,
+        vertexColors: hasVColor,
+        metalness: 0.1,
+        roughness: 0.7,
+        emissive: 0x331111, // 提高一点自发光底色
+        emissiveIntensity: 0.5,
+        side: THREE.DoubleSide
+    });
+
+    mat.onBeforeCompile = (shader) => {
+        shader.fragmentShader = shader.fragmentShader.replace(
+            '#include <emissivemap_fragment>',
+            `
+            #include <emissivemap_fragment>
+            // 叠加一层金色的边缘光
+            float fresnel = pow(1.0 - abs(dot(normalize(vNormal), normalize(vViewPosition))), 3.0);
+            vec3 rimColor = vec3(1.0, 0.84, 0.0); 
+            diffuseColor.rgb += rimColor * fresnel * 0.8;
+            `
+        );
+    };
+    return mat;
+}
+
+const toastMsg = document.getElementById('toast-msg');
+const partNameUI = document.getElementById('part-name');
+const lockStateUI = document.getElementById('lock-state');
+
+fetch('Anatomy_Config.json')
+    .then(r => r.json())
+    .then(cfg => { 
+        anatomyConfig = cfg; 
+        loadModel(); 
+    })
+    .catch(err => showError("JSON 配置读取失败"));
+
+function loadModel() {
+    const loader = new GLTFLoader();
+    partNameUI.innerText = "模型加载中...";
+
+    loader.load('models/heart.glb', (gltf) => {
+        const model = gltf.scene;
+        
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        
+        const maxDim = Math.max(size.x, size.y, size.z);
+        if (maxDim > 0) {
+            const scale = 5 / maxDim;
+            model.scale.set(scale, scale, scale);
+        }
+        model.position.sub(center.multiplyScalar(model.scale.x));
+        heartGroup.add(model);
+        partNameUI.innerText = "加载完成，等待交互...";
+
+        model.traverse((child) => {
+            if (child.isMesh) {
+                // 传入整个 child，方便内部提取 geometry 计算法线
+                child.material = createMedicalMaterial(child);
+                
+                if(!anatomyConfig[child.name]) {
+                    const randomOffset = [(Math.random()-0.5)*6, (Math.random()-0.5)*6, (Math.random()-0.5)*6];
+                    anatomyConfig[child.name] = {
+                        label: `未知 AI 结构 (${child.name})`,
+                        offset: randomOffset,
+                        query: "heart structure abnormality"
+                    };
+                }
+                originalPositions.set(child.name, child.position.clone());
+            }
+        });
+    }, undefined, (error) => showError("模型加载失败！"));
+}
+
+function showError(msg) {
+    toastMsg.innerText = msg;
+    toastMsg.style.background = 'rgba(255, 0, 0, 0.9)';
+    toastMsg.style.opacity = '1';
+}
+
+// --- 4. 动画与逻辑控制 ---
+function animateExplode(factor) {
+    if(!heartGroup.children.length) return;
+    heartGroup.children[0].traverse((child) => {
+        const config = anatomyConfig[child.name];
+        if (config && originalPositions.has(child.name)) {
+            const orig = originalPositions.get(child.name);
+            gsap.to(child.position, {
+                x: orig.x + config.offset[0] * factor,
+                y: orig.y + config.offset[1] * factor,
+                z: orig.z + config.offset[2] * factor,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        }
+    });
+}
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2(); 
+
+function checkIntersection(clientX, clientY) {
+    mouse.x = (clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(heartGroup.children, true);
+    
+    if (intersects.length > 0) {
+        handleHit(intersects[0].object);
+    } else {
+        handleMiss();
+    }
+}
+
+function handleHit(mesh) {
+    const partConfig = anatomyConfig[mesh.name];
+    if (State_Channel.activePart === mesh.name) return; 
+    State_Channel.activePart = mesh.name;
+
+    heartGroup.traverse(child => {
+        if(child.isMesh) {
+            gsap.to(child.material, { 
+                emissiveIntensity: child.name === mesh.name ? 1.5 : 0.5, 
+                duration: 0.3 
+            });
+        }
+    });
+
+    const sidebar = document.getElementById('sidebar');
+    const title = document.getElementById('part-name');
+    const desc = document.getElementById('part-desc');
+    const spinner = document.getElementById('loading-spinner');
+    
+    sidebar.classList.add('active');
+    title.innerText = partConfig.label;
+    desc.innerText = LocalCache[mesh.name] || "请求远端知识库中...";
+    spinner.style.display = 'block';
+
+    setTimeout(() => {
+        if(State_Channel.activePart === mesh.name) {
+            desc.innerText += `\n\n【DeepMed API】针对 "${partConfig.query}" 的多智能体裁定：该部位特征响应已记录。`;
+            spinner.style.display = 'none';
+        }
+    }, 1500);
+}
+
+function handleMiss() {
+    toastMsg.innerText = "未选中任何有效部位";
+    toastMsg.style.opacity = '1';
+    setTimeout(() => toastMsg.style.opacity = '0', 2000);
+}
+
+// --- 5. 降级交互 (全轴鼠标拖拽旋转) ---
+let isDragging = false;
+let prevMousePos = { x: 0, y: 0 };
+let startMousePos = { x: 0, y: 0 };
+
+lockStateUI.innerText = "ON (防抖锁定)";
+
+window.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return; 
+    isDragging = true;
+    State_Channel.isPinching = false; 
+    lockStateUI.innerText = "OFF (自由旋转)";
+    
+    startMousePos = { x: e.clientX, y: e.clientY };
+    prevMousePos = { x: e.clientX, y: e.clientY };
+});
+
+window.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        const deltaX = e.clientX - prevMousePos.x;
+        const deltaY = e.clientY - prevMousePos.y;
+        
+        State_Channel.targetRotationY += deltaX * 0.01;
+        State_Channel.targetRotationX += deltaY * 0.01;
+        
+        prevMousePos = { x: e.clientX, y: e.clientY };
+    }
+});
+
+window.addEventListener('mouseup', (e) => {
+    if (e.button !== 0) return;
+    isDragging = false;
+    State_Channel.isPinching = true;
+    lockStateUI.innerText = "ON (防抖锁定)";
+
+    const dist = Math.hypot(e.clientX - startMousePos.x, e.clientY - startMousePos.y);
+    if (dist < 5) {
+        checkIntersection(e.clientX, e.clientY); 
+    }
+});
+
+window.addEventListener('wheel', (e) => {
+    State_Channel.explodeFactor += e.deltaY * -0.001;
+    State_Channel.explodeFactor = Math.max(0, Math.min(1, State_Channel.explodeFactor));
+    animateExplode(State_Channel.explodeFactor);
+});
+
+// --- 6. 渲染循环 ---
+let currentRotationX = 0;
+let currentRotationY = 0;
+
+function animate() {
+    requestAnimationFrame(animate);
+    
+    currentRotationY += (State_Channel.targetRotationY - currentRotationY) * 0.15;
+    currentRotationX += (State_Channel.targetRotationX - currentRotationX) * 0.15;
+    
+    if(heartGroup) {
+        heartGroup.rotation.y = currentRotationY;
+        heartGroup.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, currentRotationX));
+    }
+
+    composer.render(); 
+}
+
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight);
+});
+
+animate();

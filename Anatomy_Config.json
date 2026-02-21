@@ -1,0 +1,6 @@
+{
+  "Heart_LV": { "label": "左心室 (Left Ventricle)", "offset": [1.5, -0.5, 0.5], "query": "left ventricle function and failure" },
+  "Heart_RV": { "label": "右心室 (Right Ventricle)", "offset": [-1.5, -0.5, 0.5], "query": "right ventricle pumping mechanism" },
+  "Heart_Aorta": { "label": "主动脉 (Aorta)", "offset": [0, 2.0, -0.5], "query": "aorta structure and aneurysm" },
+  "Heart_Valves": { "label": "心脏瓣膜 (Heart Valves)", "offset": [0, 0, 1.5], "query": "heart valves stenosis mechanics" }
+}

@@ -1,0 +1,3 @@
+Please download the 3D-models and rename them as follow:
+
+ - heart.glb
