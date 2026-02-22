@@ -8,6 +8,8 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 const MOCK_MODE = true; 
 
 // --- 1. 状态与配置缓存 ---
+let currentAppMode = 'WHOLE'; // 枚举: 'WHOLE', 'SCATTERED', 'FOCUSED'
+
 const State_Channel = {
     isPinching: false,
     activePart: null,
@@ -23,9 +25,8 @@ const LocalCache = {
     "Heart_Valves": "【本地缓存】心脏瓣膜确保血液单向流动，防止反流。"
 };
 
-// 状态防抖与 Delta 锚点寄存器
 let lastGestureState = 'NONE';
-let lastHandX = 0.5; // 用于计算相对位移
+let lastHandX = 0.5; 
 let lastHandY = 0.5;
 let debounceTimer = null;
 
@@ -57,9 +58,13 @@ scene.add(dirLight);
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2.0);
 scene.add(hemiLight);
 
-// --- 3. 核心资产加载与材质增强 ---
+// --- 3. 核心资产加载与矩阵嵌套 ---
+const pivotGroup = new THREE.Group();
+scene.add(pivotGroup);
+
 let heartGroup = new THREE.Group();
-scene.add(heartGroup);
+pivotGroup.add(heartGroup); 
+
 const originalPositions = new Map();
 
 function createMedicalMaterial(child) {
@@ -101,6 +106,8 @@ const partNameUI = document.getElementById('part-name');
 const lockStateUI = document.getElementById('lock-state');
 const gestureStateUI = document.getElementById('gesture-state');
 const crosshairUI = document.getElementById('crosshair');
+const uiLayer = document.getElementById('ui-layer');
+const sidebar = document.getElementById('sidebar');
 
 fetch('Anatomy_Config.json')
     .then(r => r.json())
@@ -181,7 +188,7 @@ function checkIntersectionNDC(ndcX, ndcY) {
     if (intersects.length > 0) {
         handleHit(intersects[0].object);
     } else {
-        handleMiss();
+        handleSilentMiss();
     }
 }
 
@@ -189,6 +196,8 @@ function handleHit(mesh) {
     const partConfig = anatomyConfig[mesh.name];
     if (State_Channel.activePart === mesh.name) return; 
     State_Channel.activePart = mesh.name;
+
+    uiLayer.classList.add('hit-active');
 
     heartGroup.traverse(child => {
         if(child.isMesh) {
@@ -199,12 +208,12 @@ function handleHit(mesh) {
         }
     });
 
-    const sidebar = document.getElementById('sidebar');
     const title = document.getElementById('part-name');
     const desc = document.getElementById('part-desc');
     const spinner = document.getElementById('loading-spinner');
     
     sidebar.classList.add('active');
+    sidebar.classList.remove('error-state');
     title.innerText = partConfig.label;
     desc.innerText = LocalCache[mesh.name] || "请求远端知识库中...";
     spinner.style.display = 'block';
@@ -218,75 +227,148 @@ function handleHit(mesh) {
     }, 1500);
 }
 
-function handleMiss() {
-    toastMsg.innerText = "未选中有效部位";
-    toastMsg.style.opacity = '1';
-    setTimeout(() => toastMsg.style.opacity = '0', 2000);
+function handleSilentMiss() {
+    State_Channel.activePart = null;
+    uiLayer.classList.remove('hit-active');
+    sidebar.classList.remove('active');
+
+    heartGroup.traverse(child => {
+        if(child.isMesh) {
+            gsap.to(child.material, { emissiveIntensity: 0.5, duration: 0.3 });
+        }
+    });
 }
 
-// --- 5. 基于数据驱动的状态机轮询 (修正交互范式) ---
+// 【核心修复】计算真实几何重心并对齐原点
+function transitionToFocused() {
+    if (!State_Channel.activePart) return;
+    
+    let targetPart = null;
+    heartGroup.traverse(child => {
+        if (child.name === State_Channel.activePart) targetPart = child;
+    });
+    
+    if (targetPart) {
+        // 1. 临时消除外层 pivotGroup 旋转带来的坐标系污染
+        const tempRot = pivotGroup.rotation.clone();
+        pivotGroup.rotation.set(0, 0, 0);
+        pivotGroup.updateMatrixWorld(true);
+
+        // 2. 利用 Box3 扫描零件所有顶点，算出它在世界空间中真实的“几何中心”和尺寸
+        const box = new THREE.Box3().setFromObject(targetPart);
+        const geomCenter = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+
+        // 3. 恢复旋转矩阵
+        pivotGroup.rotation.copy(tempRot);
+        pivotGroup.updateMatrixWorld(true);
+
+        // 4. 将 heartGroup 平移，补偿这段几何重心的差值，使其彻底掉入 (0,0,0)
+        gsap.to(heartGroup.position, {
+            x: heartGroup.position.x - geomCenter.x, 
+            y: heartGroup.position.y - geomCenter.y, 
+            z: heartGroup.position.z - geomCenter.z,
+            duration: 0.8, ease: "power2.inOut"
+        });
+        
+        // 5. 根据 Box3 的尺寸，自适应计算特写镜头需要推多近
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const targetCamZ = Math.max(2.5, maxDim * 2.5); 
+
+        gsap.to(camera.position, { z: targetCamZ, duration: 0.8, ease: "power2.inOut" });
+        currentAppMode = 'FOCUSED';
+        lockStateUI.innerText = "OFF (特写检视)";
+    }
+}
+
+function resetFromFocused() {
+    // heartGroup 回归原点，恢复正常的散开矩阵
+    gsap.to(heartGroup.position, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.inOut" });
+    gsap.to(camera.position, { z: 8, duration: 0.8, ease: "power2.inOut" });
+    currentAppMode = 'SCATTERED';
+}
+
+// --- 5. 层次状态机 (HSM) 轮询 ---
 function updateFromHandData() {
     if (!window.handData) return;
     const hand = window.handData;
     const indexFinger = hand.landmarks[8];
     
-    gestureStateUI.innerText = `输入: ${hand.state}`;
+    gestureStateUI.innerText = `[${currentAppMode}] 输入: ${hand.state}`;
     
-    // UI：准星永远跟随食指（激光笔模式）
     crosshairUI.style.left = `${indexFinger.x * 100}%`;
     crosshairUI.style.top = `${indexFinger.y * 100}%`;
 
-    // 状态边缘触发逻辑
     if (hand.state !== lastGestureState) {
+        
         if (hand.state === 'OPEN') {
-            gsap.to(State_Channel, { 
-                explodeFactor: 1, duration: 0.8, ease: "power2.out",
-                onUpdate: () => animateExplode(State_Channel.explodeFactor) 
-            });
-            lockStateUI.innerText = "OFF (悬停瞄准)";
             crosshairUI.style.background = 'rgba(255, 255, 255, 0.5)';
             crosshairUI.style.transform = 'translate(-50%, -50%) scale(1)';
+
+            if (currentAppMode === 'WHOLE') {
+                gsap.to(State_Channel, { 
+                    explodeFactor: 1, duration: 0.8, ease: "power2.out",
+                    onUpdate: () => animateExplode(State_Channel.explodeFactor) 
+                });
+                currentAppMode = 'SCATTERED';
+                lockStateUI.innerText = "OFF (悬停选择)";
+            } 
+            else if (currentAppMode === 'SCATTERED' && State_Channel.activePart) {
+                transitionToFocused();
+            }
         }
+        
         else if (hand.state === 'FIST') {
-            gsap.to(State_Channel, { 
-                explodeFactor: 0, duration: 0.6, ease: "power2.inOut",
-                onUpdate: () => animateExplode(State_Channel.explodeFactor) 
-            });
-            lockStateUI.innerText = "OFF (悬停瞄准)";
             crosshairUI.style.background = 'rgba(255, 255, 255, 0.5)';
             crosshairUI.style.transform = 'translate(-50%, -50%) scale(1)';
+
+            if (currentAppMode === 'FOCUSED') {
+                resetFromFocused();
+                lockStateUI.innerText = "OFF (悬停选择)";
+            } 
+            else if (currentAppMode === 'SCATTERED') {
+                gsap.to(State_Channel, { 
+                    explodeFactor: 0, duration: 0.6, ease: "power2.inOut",
+                    onUpdate: () => animateExplode(State_Channel.explodeFactor) 
+                });
+                handleSilentMiss(); 
+                currentAppMode = 'WHOLE';
+                lockStateUI.innerText = "OFF (整体检视)";
+            }
         }
+        
         else if (hand.state === 'PINCH') {
-            // 【修正1】射线检测仅在捏合瞬间触发
-            checkIntersectionNDC((indexFinger.x * 2) - 1, -(indexFinger.y * 2) + 1);
-            
-            // 【修正2】刷新锚点，防止解除捏合后重新捏合产生跳变
             lastHandX = indexFinger.x;
             lastHandY = indexFinger.y;
             
+            crosshairUI.style.background = 'rgba(212, 175, 55, 0.9)'; 
+            crosshairUI.style.transform = 'translate(-50%, -50%) scale(0.6)'; 
             lockStateUI.innerText = "ON (抓取旋转中)";
-            crosshairUI.style.background = 'rgba(212, 175, 55, 0.9)'; // 准星变金黄色反馈抓取
-            crosshairUI.style.transform = 'translate(-50%, -50%) scale(0.6)'; // 准星缩小
+
+            if (currentAppMode === 'SCATTERED') {
+                checkIntersectionNDC((indexFinger.x * 2) - 1, -(indexFinger.y * 2) + 1);
+            }
         }
+        
         else if (hand.state === 'NONE') {
-            lockStateUI.innerText = "OFF (悬停瞄准)";
             crosshairUI.style.background = 'rgba(255, 255, 255, 0.5)';
             crosshairUI.style.transform = 'translate(-50%, -50%) scale(1)';
+            
+            if(currentAppMode === 'WHOLE') lockStateUI.innerText = "OFF (整体检视)";
+            if(currentAppMode === 'SCATTERED') lockStateUI.innerText = "OFF (悬停选择)";
+            if(currentAppMode === 'FOCUSED') lockStateUI.innerText = "OFF (特写检视)";
         }
 
         lastGestureState = hand.state;
     }
 
-    // 【修正3】持续状态处理：仅在 PINCH 状态下利用 Delta 计算旋转
     if (hand.state === 'PINCH') {
         const deltaX = indexFinger.x - lastHandX;
         const deltaY = indexFinger.y - lastHandY;
         
-        // 相对位移累加（根据手感可调整系数）
         State_Channel.targetRotationY += deltaX * Math.PI * 2.5; 
         State_Channel.targetRotationX += deltaY * Math.PI * 1.5;
         
-        // 更新锚点
         lastHandX = indexFinger.x;
         lastHandY = indexFinger.y;
     }
@@ -299,7 +381,7 @@ let startMousePos = { x: 0, y: 0 };
 
 if (!MOCK_MODE) {
     gestureStateUI.innerText = "鼠标降级模式";
-    crosshairUI.style.display = 'none'; // 原生鼠标不需要准星
+    crosshairUI.style.display = 'none'; 
     
     window.addEventListener('mousedown', (e) => {
         if (e.button !== 0) return; 
@@ -320,7 +402,8 @@ if (!MOCK_MODE) {
     window.addEventListener('mouseup', (e) => {
         if (e.button !== 0) return;
         isDragging = false;
-        lockStateUI.innerText = "OFF (悬停瞄准)";
+        lockStateUI.innerText = "OFF";
+        
         if (Math.hypot(e.clientX - startMousePos.x, e.clientY - startMousePos.y) < 5) {
             checkIntersectionNDC((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1); 
         }
@@ -342,13 +425,12 @@ function animate() {
     
     if (MOCK_MODE) updateFromHandData();
     
-    // 平滑追赶计算好的 targetRotation
     currentRotationY += (State_Channel.targetRotationY - currentRotationY) * 0.15;
     currentRotationX += (State_Channel.targetRotationX - currentRotationX) * 0.15;
     
-    if(heartGroup) {
-        heartGroup.rotation.y = currentRotationY;
-        heartGroup.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, currentRotationX));
+    if(pivotGroup) {
+        pivotGroup.rotation.y = currentRotationY;
+        pivotGroup.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, currentRotationX));
     }
 
     composer.render(); 
