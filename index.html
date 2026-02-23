@@ -21,6 +21,11 @@
         <div id="toast-msg">请精准指向目标解剖区</div>
 
         <div id="sidebar">
+            <div id="cancel-zone">
+                <div class="cancel-icon">✖</div>
+                <div class="cancel-text">松开指尖取消录音</div>
+            </div>
+
             <div id="sidebar-header">
                 <h2 id="part-name">等待选中...</h2>
                 <div class="ai-badge">DeepMed API</div>
@@ -33,8 +38,16 @@
             <div id="loading-spinner" style="display: none;">正在请求 DeepMed 远端算力...</div>
 
             <div id="chat-input-area">
-                <input type="text" id="chat-input" placeholder="输入病理或解剖问题..." disabled autocomplete="off" />
-                <button id="send-btn" disabled>发送</button>
+                <div class="input-row">
+                    <input type="text" id="chat-input" placeholder="输入病理或解剖问题..." disabled autocomplete="off" />
+                    <button id="send-btn" disabled>发送</button>
+                </div>
+                <div class="mic-container">
+                    <button id="mic-btn" disabled>
+                        <span class="mic-icon">🎙️</span>
+                        <span class="mic-hint">按住捏合说话</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -47,7 +60,7 @@
             }
         }
     </script>
-    <script src="mocks/mock_hands.js"></script>
+    <script src="drivers/mock_hands.js"></script>
     <script type="module" src="app.js"></script>
 </body>
 </html>

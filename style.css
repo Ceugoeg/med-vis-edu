@@ -1,55 +1,76 @@
 body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #fff; }
 #canvas-container { width: 100%; height: 100%; position: absolute; z-index: 1; }
 
-/* 增加了 box-sizing 和 transition 以支持内阴影动画 */
 #ui-layer { position: absolute; width: 100%; height: 100%; z-index: 10; pointer-events: none; box-sizing: border-box; transition: box-shadow 0.3s ease; }
 
-/* 命中时的金色锁定边框 */
-#ui-layer.hit-active { box-shadow: inset 0 0 0 4px rgba(212, 175, 55, 0.8); }
+/* 【重构】命中时的金色锁定边框：改为向内晕染的透明渐变边缘 */
+#ui-layer.hit-active { 
+    box-shadow: inset 0 0 120px rgba(212, 175, 55, 0.4), inset 0 0 15px rgba(212, 175, 55, 0.8); 
+}
 
-/* 脱靶时的红色闪烁动画 */
+
+/* 已废弃：
+【重构】脱靶时的红色闪烁动画：同步修改为渐变样式
 #ui-layer.error-flash { animation: flashRed 0.5s ease-out; }
+@keyframes flashRed {
+    0% { box-shadow: inset 0 0 0px rgba(255, 0, 0, 0); }
+    50% { box-shadow: inset 0 0 120px rgba(255, 0, 0, 0.5), inset 0 0 15px rgba(255, 0, 0, 0.8); }
+    100% { box-shadow: inset 0 0 0px rgba(255, 0, 0, 0); }
+} */
 
 #status-bar { position: absolute; top: 20px; left: 20px; background: rgba(0, 0, 0, 0.7); padding: 10px 20px; border: 1px solid #333; border-radius: 5px; font-size: 14px; }
 #crosshair { position: absolute; top: 50%; left: 50%; width: 10px; height: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; transform: translate(-50%, -50%); transition: background 0.2s, box-shadow 0.2s, transform 0.2s; }
 #toast-msg { position: absolute; top: 60%; left: 50%; transform: translate(-50%, 0); background: rgba(255, 0, 0, 0.8); padding: 8px 16px; border-radius: 4px; font-weight: bold; opacity: 0; transition: opacity 0.3s; }
 
-/* 侧边栏重构：采用 Flex 纵向布局 */
+/* 侧边栏重构 */
 #sidebar { position: absolute; right: 0; top: 0; width: 380px; height: 100%; background: rgba(10, 15, 20, 0.95); border-left: 1px solid #333; padding: 30px 20px; box-sizing: border-box; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.1, 0.8, 0.3, 1); display: flex; flex-direction: column; pointer-events: auto; }
 #sidebar.active { transform: translateX(0); }
 
 #sidebar.error-state { border-left: 2px solid #ff0000; background: rgba(30, 10, 10, 0.9); }
 #sidebar.error-state #part-name { color: #ff4444; }
 
+/* 【新增】取消录音的顶部红色渐变区域 */
+#cancel-zone {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 160px;
+    background: linear-gradient(to bottom, rgba(255, 40, 40, 0.9) 0%, rgba(255, 40, 40, 0) 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding-top: 25px; box-sizing: border-box;
+    color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.3s, background 0.3s;
+    z-index: 100;
+}
+#cancel-zone.active { opacity: 1; }
+/* 准星进入取消区时的视觉加重反馈 */
+#cancel-zone.hover-danger { background: linear-gradient(to bottom, rgba(255, 0, 0, 1) 0%, rgba(255, 0, 0, 0.4) 100%); }
+#cancel-zone .cancel-icon { font-size: 24px; margin-bottom: 5px; }
+#cancel-zone .cancel-text { font-size: 14px; font-weight: bold; letter-spacing: 1px; }
+
+
 #sidebar-header { flex-shrink: 0; margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 15px; }
 .ai-badge { display: inline-block; background: #00d2ff; color: #000; padding: 2px 8px; border-radius: 3px; font-size: 12px; font-weight: bold; margin-bottom: 10px; }
 #part-name { color: #d4af37; margin-top: 0; transition: color 0.3s; }
 #part-desc { line-height: 1.5; color: #aaa; font-size: 14px; }
 
-/* 聊天记录区域：占据剩余所有空间并支持滚动 */
 #chat-history { flex-grow: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 15px; }
-/* 隐藏丑陋的默认滚动条，保持赛博感 */
 #chat-history::-webkit-scrollbar { width: 4px; }
 #chat-history::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.3); border-radius: 2px; }
 
-/* 对话气泡通用样式 */
 .chat-msg { max-width: 90%; padding: 10px 14px; border-radius: 8px; font-size: 14px; line-height: 1.5; word-wrap: break-word; animation: fadeIn 0.3s ease-out; }
 .chat-msg.user { align-self: flex-end; background: rgba(0, 210, 255, 0.15); border: 1px solid rgba(0, 210, 255, 0.3); color: #fff; border-bottom-right-radius: 2px; }
 .chat-msg.assistant { align-self: flex-start; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #ddd; border-top-left-radius: 2px; }
-
-/* Markdown 内部排版重置 */
 .chat-msg.assistant p { margin: 0 0 8px 0; }
 .chat-msg.assistant p:last-child { margin: 0; }
 .chat-msg.assistant ul, .chat-msg.assistant ol { margin: 5px 0; padding-left: 20px; }
 .chat-msg.assistant strong { color: #d4af37; }
 
-/* 流式输出过程中的闪烁光标 */
 .cursor-blink::after { content: ' ▌'; color: #00d2ff; animation: pulse 1s infinite; }
 
 #loading-spinner { color: #00d2ff; font-size: 13px; margin: 10px 0; animation: pulse 1.5s infinite; text-align: center; flex-shrink: 0; }
 
-/* 输入区样式 */
-#chat-input-area { flex-shrink: 0; margin-top: 15px; display: flex; gap: 10px; }
+/* 【重构】文本与 STT 输入区布局 */
+#chat-input-area { flex-shrink: 0; margin-top: 15px; display: flex; flex-direction: column; gap: 15px; }
+.input-row { display: flex; gap: 10px; width: 100%; }
+
 #chat-input { flex-grow: 1; background: rgba(0, 0, 0, 0.5); border: 1px solid #444; color: #fff; padding: 10px 12px; border-radius: 4px; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
 #chat-input:focus:not(:disabled) { border-color: #00d2ff; box-shadow: 0 0 5px rgba(0, 210, 255, 0.3); }
 #chat-input:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -58,10 +79,30 @@ body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 #send-btn:active:not(:disabled) { transform: scale(0.95); }
 #send-btn:disabled { background: #555; color: #888; cursor: not-allowed; }
 
+/* 【新增】大尺寸正方形麦克风按钮 */
+.mic-container { display: flex; justify-content: center; width: 100%; }
+#mic-btn {
+    width: 100px; height: 100px; border-radius: 20px;
+    background: rgba(0, 210, 255, 0.1); border: 2px solid rgba(0, 210, 255, 0.4);
+    color: #00d2ff; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+#mic-btn:disabled { opacity: 0.2; cursor: not-allowed; border-color: #444; color: #666; }
+#mic-btn .mic-icon { font-size: 32px; margin-bottom: 8px; }
+#mic-btn .mic-hint { font-size: 12px; font-weight: bold; opacity: 0.8; }
+
+/* 录音中的呼吸红光特效 */
+#mic-btn.recording {
+    background: rgba(255, 50, 50, 0.15);
+    border-color: rgba(255, 50, 50, 0.8);
+    color: #ff4444;
+    animation: micPulse 1.5s infinite;
+}
+@keyframes micPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 50, 50, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0); }
+}
+
 @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes flashRed {
-    0% { box-shadow: inset 0 0 0 0px rgba(255, 0, 0, 0); }
-    50% { box-shadow: inset 0 0 0 6px rgba(255, 0, 0, 0.8); }
-    100% { box-shadow: inset 0 0 0 0px rgba(255, 0, 0, 0); }
-}

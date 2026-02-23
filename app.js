@@ -6,13 +6,15 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 
 import { LLMService } from './services/llm_service.js';
 import { AnatomyMapper } from './utils/anatomy_mapper.js';
+import { STTService } from './services/stt_service.js';
 
 // --- 0. 系统配置与依赖注入 ---
 const MOCK_MODE = true; 
 
-// 声明为全局变量，待配置文件和密钥异步读取完毕后再实例化
 let llmService = null;
 let anatomyMapper = null; 
+let sttService = null;             
+let isGestureRecording = false;    
 
 // --- 1. 状态与配置缓存 ---
 let currentAppMode = 'WHOLE'; 
@@ -116,7 +118,10 @@ const chatInputUI = document.getElementById('chat-input');
 const sendBtnUI = document.getElementById('send-btn');
 const loadingSpinner = document.getElementById('loading-spinner');
 
-// 【重构】并发请求配置文件与本地密钥
+const micBtnUI = document.getElementById('mic-btn');
+const cancelZoneUI = document.getElementById('cancel-zone');
+const micHintUI = document.querySelector('.mic-hint');
+
 Promise.all([
     fetch('Anatomy_Config.json').then(r => r.json()),
     fetch('api.key').then(r => r.text())
@@ -131,6 +136,7 @@ Promise.all([
         return;
     }
     llmService = new LLMService(apiKey);
+    sttService = new STTService(); 
     
     loadModel(); 
 })
@@ -238,6 +244,7 @@ function handleHit(mesh) {
     chatHistoryUI.innerHTML = '';
     chatInputUI.disabled = false;
     sendBtnUI.disabled = false;
+    micBtnUI.disabled = false;
 }
 
 function handleSilentMiss() {
@@ -248,6 +255,7 @@ function handleSilentMiss() {
 
     chatInputUI.disabled = true;
     sendBtnUI.disabled = true;
+    micBtnUI.disabled = true;
 
     heartGroup.traverse(child => {
         if(child.isMesh) {
@@ -337,7 +345,7 @@ function handleSendChat() {
             assistantBubble.classList.remove('cursor-blink');
             chatInputUI.disabled = false;
             sendBtnUI.disabled = false;
-            chatInputUI.focus();
+            // 【修正】：删除了 chatInputUI.focus(); 以免打断纯手势沉浸流
         },
         (err) => {
             assistantBubble.classList.remove('cursor-blink');
@@ -353,6 +361,12 @@ chatInputUI.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleSendChat();
 });
 
+// --- 附加功能：AABB 矩形碰撞检测 ---
+function checkHover(element, x, y) {
+    const rect = element.getBoundingClientRect();
+    return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+}
+
 // --- 6. 层次状态机 (HSM) 轮询 ---
 function updateFromHandData() {
     if (!window.handData) return;
@@ -364,22 +378,105 @@ function updateFromHandData() {
     crosshairUI.style.left = `${indexFinger.x * 100}%`;
     crosshairUI.style.top = `${indexFinger.y * 100}%`;
 
+    // 转换为屏幕绝对像素坐标
+    const screenX = indexFinger.x * window.innerWidth;
+    const screenY = indexFinger.y * window.innerHeight;
+    
+    // 【终极方案】：彻底抛弃 elementFromPoint，直接算 AABB 矩形包围盒，无视一切 CSS 干扰
+    const isHoveringCancel = cancelZoneUI.classList.contains('active') && checkHover(cancelZoneUI, screenX, screenY);
+    const isHoveringMic = checkHover(micBtnUI, screenX, screenY);
+
     if (hand.state !== lastGestureState) {
         
-        if (hand.state === 'OPEN') {
+        // --- 状态释放沿 (Falling Edge) ---
+        if (hand.state === 'OPEN' || hand.state === 'NONE') {
+            
+            if (isGestureRecording) {
+                isGestureRecording = false;
+                if (isHoveringCancel) {
+                    // 悬停在取消区：绝对阻断并丢弃数据
+                    sttService.onEndCallback = null; // 强行抹除结算回调
+                    sttService.stop();               // 然后再停止录音引擎
+                    chatInputUI.value = '';          // 清空输入框暂存区
+                    
+                    micBtnUI.classList.remove('recording');
+                    cancelZoneUI.classList.remove('active', 'hover-danger');
+                    micHintUI.innerText = "已取消";
+                    setTimeout(() => {
+                        if(!isGestureRecording) micHintUI.innerText = "按住捏合说话";
+                    }, 1500);
+                } else {
+                    // 正常松手：结束录音并触发回调
+                    sttService.stop();
+                    micBtnUI.classList.remove('recording');
+                    cancelZoneUI.classList.remove('active', 'hover-danger');
+                    micHintUI.innerText = "按住捏合说话";
+                }
+                lastGestureState = hand.state;
+                return; // 结束当前帧，阻断射线逻辑
+            }
+
             crosshairUI.style.background = 'rgba(255, 255, 255, 0.5)';
             crosshairUI.style.transform = 'translate(-50%, -50%) scale(1)';
 
-            if (currentAppMode === 'WHOLE') {
-                gsap.to(State_Channel, { 
-                    explodeFactor: 1, duration: 0.8, ease: "power2.out",
-                    onUpdate: () => animateExplode(State_Channel.explodeFactor) 
-                });
-                currentAppMode = 'SCATTERED';
-                lockStateUI.innerText = "OFF (悬停选择)";
-            } 
-            else if (currentAppMode === 'SCATTERED' && State_Channel.activePart) {
-                transitionToFocused();
+            if (hand.state === 'OPEN') {
+                if (currentAppMode === 'WHOLE') {
+                    gsap.to(State_Channel, { 
+                        explodeFactor: 1, duration: 0.8, ease: "power2.out",
+                        onUpdate: () => animateExplode(State_Channel.explodeFactor) 
+                    });
+                    currentAppMode = 'SCATTERED';
+                    lockStateUI.innerText = "OFF (悬停选择)";
+                } 
+                else if (currentAppMode === 'SCATTERED' && State_Channel.activePart) {
+                    transitionToFocused();
+                }
+            } else {
+                if(currentAppMode === 'WHOLE') lockStateUI.innerText = "OFF (整体检视)";
+                if(currentAppMode === 'SCATTERED') lockStateUI.innerText = "OFF (悬停选择)";
+                if(currentAppMode === 'FOCUSED') lockStateUI.innerText = "OFF (特写检视)";
+            }
+        }
+        
+        // --- 状态触发沿 (Rising Edge) ---
+        else if (hand.state === 'PINCH') {
+            
+            // 使用矩形相交判定麦克风区域，绝不穿模
+            if (isHoveringMic && !micBtnUI.disabled && sttService && sttService.isSupported) {
+                isGestureRecording = true;
+                chatInputUI.value = ''; // 录音前清空历史残留
+                micBtnUI.classList.add('recording');
+                cancelZoneUI.classList.add('active'); 
+                
+                sttService.start(
+                    (finalText, interimText) => {
+                        chatInputUI.value = finalText + interimText; 
+                    },
+                    () => {
+                        // 结束回调：有文字时才调用 LLM 请求
+                        if (chatInputUI.value.trim() !== '') handleSendChat();
+                    },
+                    (err) => {
+                        micHintUI.innerText = "麦克风异常";
+                        setTimeout(() => {
+                            if(!isGestureRecording) micHintUI.innerText = "按住捏合说话";
+                        }, 2000);
+                    }
+                );
+                
+                lastGestureState = hand.state;
+                return; 
+            }
+
+            lastHandX = indexFinger.x;
+            lastHandY = indexFinger.y;
+            
+            crosshairUI.style.background = 'rgba(212, 175, 55, 0.9)'; 
+            crosshairUI.style.transform = 'translate(-50%, -50%) scale(0.6)'; 
+            lockStateUI.innerText = "ON (抓取旋转中)";
+
+            if (currentAppMode === 'SCATTERED') {
+                checkIntersectionNDC((indexFinger.x * 2) - 1, -(indexFinger.y * 2) + 1);
             }
         }
         
@@ -401,30 +498,19 @@ function updateFromHandData() {
                 lockStateUI.innerText = "OFF (整体检视)";
             }
         }
-        
-        else if (hand.state === 'PINCH') {
-            lastHandX = indexFinger.x;
-            lastHandY = indexFinger.y;
-            
-            crosshairUI.style.background = 'rgba(212, 175, 55, 0.9)'; 
-            crosshairUI.style.transform = 'translate(-50%, -50%) scale(0.6)'; 
-            lockStateUI.innerText = "ON (抓取旋转中)";
-
-            if (currentAppMode === 'SCATTERED') {
-                checkIntersectionNDC((indexFinger.x * 2) - 1, -(indexFinger.y * 2) + 1);
-            }
-        }
-        
-        else if (hand.state === 'NONE') {
-            crosshairUI.style.background = 'rgba(255, 255, 255, 0.5)';
-            crosshairUI.style.transform = 'translate(-50%, -50%) scale(1)';
-            
-            if(currentAppMode === 'WHOLE') lockStateUI.innerText = "OFF (整体检视)";
-            if(currentAppMode === 'SCATTERED') lockStateUI.innerText = "OFF (悬停选择)";
-            if(currentAppMode === 'FOCUSED') lockStateUI.innerText = "OFF (特写检视)";
-        }
 
         lastGestureState = hand.state;
+    }
+
+    if (isGestureRecording) {
+        if (isHoveringCancel) {
+            cancelZoneUI.classList.add('hover-danger');
+            micHintUI.innerText = "松开取消";
+        } else {
+            cancelZoneUI.classList.remove('hover-danger');
+            micHintUI.innerText = "录音中...";
+        }
+        return; 
     }
 
     if (hand.state === 'PINCH') {
