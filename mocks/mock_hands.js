@@ -23,11 +23,11 @@ window.addEventListener('mousemove', (e) => {
 });
 
 // 4. 拦截键盘输入 (模拟手势状态变化)
-// 空格键 -> PINCH (捏合，用于触发射线)
-// O 键 -> OPEN (张开，用于剥离)
-// F 键 -> FIST (握拳，用于复原)
 window.addEventListener('keydown', (e) => {
     if (e.repeat) return; // 忽略长按带来的重复触发
+    
+    // 【Bug 修复】：焦点守卫。如果当前用户在输入框内打字，绝不拦截任何按键
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     
     switch(e.code) {
         case 'Space':
@@ -43,6 +43,9 @@ window.addEventListener('keydown', (e) => {
 });
 
 window.addEventListener('keyup', (e) => {
+    // 同样在抬起时也进行判断，防止状态锁死
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
     switch(e.code) {
         case 'Space':
         case 'KeyO':
@@ -89,4 +92,4 @@ setInterval(() => {
 
 }, INTERVAL_MS);
 
-console.log(`[Hardware Mock] 驱动已挂载，当前模拟采样率: ${HARDWARE_FPS}Hz`);
+console.log(`[Hardware Mock] 驱动已挂载，当前模拟采样率: ${HARDWARE_FPS}Hz，已开启输入框防冲突破坏逻辑`);

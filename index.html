@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeepMed 3D Anatomy (MVP)</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 </head>
 <body>
@@ -20,10 +21,21 @@
         <div id="toast-msg">请精准指向目标解剖区</div>
 
         <div id="sidebar">
-            <h2 id="part-name">等待选中...</h2>
-            <div class="ai-badge">DeepMed API</div>
-            <p id="part-desc">请通过鼠标点击（捏合）选中具体的解剖部位以获取深度检索信息。</p>
-            <div id="loading-spinner" style="display: none;">正在检索文献...</div>
+            <div id="sidebar-header">
+                <h2 id="part-name">等待选中...</h2>
+                <div class="ai-badge">DeepMed API</div>
+                <div id="part-desc">请通过鼠标点击（捏合）选中具体的解剖部位以获取深度检索信息。</div>
+            </div>
+
+            <div id="chat-history">
+                </div>
+            
+            <div id="loading-spinner" style="display: none;">正在请求 DeepMed 远端算力...</div>
+
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="输入病理或解剖问题..." disabled autocomplete="off" />
+                <button id="send-btn" disabled>发送</button>
+            </div>
         </div>
     </div>
 
@@ -35,7 +47,7 @@
             }
         }
     </script>
-    <script src="mock_hands.js"></script>
+    <script src="mocks/mock_hands.js"></script>
     <script type="module" src="app.js"></script>
 </body>
 </html>

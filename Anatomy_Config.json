@@ -1,6 +1,22 @@
 {
-  "Heart_LV": { "label": "左心室 (Left Ventricle)", "offset": [1.5, -0.5, 0.5], "query": "left ventricle function and failure" },
-  "Heart_RV": { "label": "右心室 (Right Ventricle)", "offset": [-1.5, -0.5, 0.5], "query": "right ventricle pumping mechanism" },
-  "Heart_Aorta": { "label": "主动脉 (Aorta)", "offset": [0, 2.0, -0.5], "query": "aorta structure and aneurysm" },
-  "Heart_Valves": { "label": "心脏瓣膜 (Heart Valves)", "offset": [0, 0, 1.5], "query": "heart valves stenosis mechanics" }
+  "Heart_LV": { 
+    "label": "左心室 (Left Ventricle)", 
+    "offset": [2.5, -1.0, 1.0], 
+    "query": "解释左心室的解剖学功能，以及心力衰竭、心肌肥厚等常见病理变化。" 
+  },
+  "Heart_RV": { 
+    "label": "右心室 (Right Ventricle)", 
+    "offset": [-2.5, -1.0, 1.0], 
+    "query": "解释右心室的泵血机制，以及肺源性心脏病对其产生的影响。" 
+  },
+  "Heart_Aorta": { 
+    "label": "主动脉复合体 (Aorta Complex)", 
+    "offset": [0, 3.0, -1.0], 
+    "query": "介绍主动脉的层级结构（内膜、中膜、外膜），以及主动脉夹层、动脉瘤的发生机制。" 
+  },
+  "Heart_Valves": { 
+    "label": "瓣膜与心房附属物 (Valves & Atrium)", 
+    "offset": [0, 1.0, 2.5], 
+    "query": "解释房室瓣和半月瓣的血流动力学作用，重点提及瓣膜狭窄与关闭不全的病理影响。" 
+  }
 }

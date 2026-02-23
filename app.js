@@ -4,31 +4,32 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-// --- 0. 系统运行模式开关 ---
+import { LLMService } from './services/llm_service.js';
+import { AnatomyMapper } from './utils/anatomy_mapper.js';
+
+// --- 0. 系统配置与依赖注入 ---
 const MOCK_MODE = true; 
 
+// 声明为全局变量，待配置文件和密钥异步读取完毕后再实例化
+let llmService = null;
+let anatomyMapper = null; 
+
 // --- 1. 状态与配置缓存 ---
-let currentAppMode = 'WHOLE'; // 枚举: 'WHOLE', 'SCATTERED', 'FOCUSED'
+let currentAppMode = 'WHOLE'; 
 
 const State_Channel = {
     isPinching: false,
-    activePart: null,
+    activePart: null,        
+    activeContext: null,     
     explodeFactor: 0,
     targetRotationY: 0,
     targetRotationX: 0 
 };
 let anatomyConfig = {};
-const LocalCache = {
-    "Heart_LV": "【本地缓存】左心室是心脏最厚的腔室，负责将含氧血液泵入主动脉供全身使用。",
-    "Heart_RV": "【本地缓存】右心室负责将脱氧血液泵入肺部进行气体交换。",
-    "Heart_Aorta": "【本地缓存】主动脉是人体内最大的动脉，承受极高的血压。",
-    "Heart_Valves": "【本地缓存】心脏瓣膜确保血液单向流动，防止反流。"
-};
 
 let lastGestureState = 'NONE';
 let lastHandX = 0.5; 
 let lastHandY = 0.5;
-let debounceTimer = null;
 
 // --- 2. Three.js 核心初始化 ---
 const container = document.getElementById('canvas-container');
@@ -103,19 +104,40 @@ function createMedicalMaterial(child) {
 
 const toastMsg = document.getElementById('toast-msg');
 const partNameUI = document.getElementById('part-name');
+const partDescUI = document.getElementById('part-desc');
 const lockStateUI = document.getElementById('lock-state');
 const gestureStateUI = document.getElementById('gesture-state');
 const crosshairUI = document.getElementById('crosshair');
 const uiLayer = document.getElementById('ui-layer');
 const sidebar = document.getElementById('sidebar');
 
-fetch('Anatomy_Config.json')
-    .then(r => r.json())
-    .then(cfg => { 
-        anatomyConfig = cfg; 
-        loadModel(); 
-    })
-    .catch(err => showError("JSON 配置读取失败"));
+const chatHistoryUI = document.getElementById('chat-history');
+const chatInputUI = document.getElementById('chat-input');
+const sendBtnUI = document.getElementById('send-btn');
+const loadingSpinner = document.getElementById('loading-spinner');
+
+// 【重构】并发请求配置文件与本地密钥
+Promise.all([
+    fetch('Anatomy_Config.json').then(r => r.json()),
+    fetch('api.key').then(r => r.text())
+])
+.then(([cfg, keyText]) => { 
+    anatomyConfig = cfg; 
+    anatomyMapper = new AnatomyMapper(anatomyConfig); 
+    
+    const apiKey = keyText.trim();
+    if (!apiKey) {
+        showError("未检测到有效密钥，请检查 api.key 内容！");
+        return;
+    }
+    llmService = new LLMService(apiKey);
+    
+    loadModel(); 
+})
+.catch(err => {
+    console.error(err);
+    showError("系统初始化失败，请确保 Anatomy_Config.json 和 api.key 存在于根目录。");
+});
 
 function loadModel() {
     const loader = new GLTFLoader();
@@ -140,14 +162,8 @@ function loadModel() {
         model.traverse((child) => {
             if (child.isMesh) {
                 child.material = createMedicalMaterial(child);
-                if(!anatomyConfig[child.name]) {
-                    anatomyConfig[child.name] = {
-                        label: `未知结构 (${child.name})`,
-                        offset: [(Math.random()-0.5)*6, (Math.random()-0.5)*6, (Math.random()-0.5)*6],
-                        query: "heart structure"
-                    };
-                }
                 originalPositions.set(child.name, child.position.clone());
+                anatomyMapper.mapPart(child); 
             }
         });
     }, undefined, () => showError("模型加载失败！"));
@@ -163,7 +179,9 @@ function showError(msg) {
 function animateExplode(factor) {
     if(!heartGroup.children.length) return;
     heartGroup.children[0].traverse((child) => {
-        const config = anatomyConfig[child.name];
+        const identity = child.userData.medicalContext?.mappedId || child.name;
+        const config = anatomyConfig[identity];
+        
         if (config && originalPositions.has(child.name)) {
             const orig = originalPositions.get(child.name);
             child.position.set(
@@ -193,9 +211,12 @@ function checkIntersectionNDC(ndcX, ndcY) {
 }
 
 function handleHit(mesh) {
-    const partConfig = anatomyConfig[mesh.name];
     if (State_Channel.activePart === mesh.name) return; 
+    
+    const partContext = mesh.userData.medicalContext;
+    
     State_Channel.activePart = mesh.name;
+    State_Channel.activeContext = partContext;
 
     uiLayer.classList.add('hit-active');
 
@@ -207,30 +228,26 @@ function handleHit(mesh) {
             });
         }
     });
-
-    const title = document.getElementById('part-name');
-    const desc = document.getElementById('part-desc');
-    const spinner = document.getElementById('loading-spinner');
     
     sidebar.classList.add('active');
     sidebar.classList.remove('error-state');
-    title.innerText = partConfig.label;
-    desc.innerText = LocalCache[mesh.name] || "请求远端知识库中...";
-    spinner.style.display = 'block';
-
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-        if(State_Channel.activePart === mesh.name) {
-            desc.innerText += `\n\n【DeepMed API】针对 "${partConfig.query}" 的特征响应已记录。`;
-            spinner.style.display = 'none';
-        }
-    }, 1500);
+    
+    partNameUI.innerText = partContext.label;
+    partDescUI.innerText = `【空间特征】${partContext.physicalDesc}\n\n已连接远端知识库。请在下方输入问题以获取深层病理学或解剖学解释。`;
+    
+    chatHistoryUI.innerHTML = '';
+    chatInputUI.disabled = false;
+    sendBtnUI.disabled = false;
 }
 
 function handleSilentMiss() {
     State_Channel.activePart = null;
+    State_Channel.activeContext = null;
     uiLayer.classList.remove('hit-active');
     sidebar.classList.remove('active');
+
+    chatInputUI.disabled = true;
+    sendBtnUI.disabled = true;
 
     heartGroup.traverse(child => {
         if(child.isMesh) {
@@ -239,7 +256,6 @@ function handleSilentMiss() {
     });
 }
 
-// 【核心修复】计算真实几何重心并对齐原点
 function transitionToFocused() {
     if (!State_Channel.activePart) return;
     
@@ -249,21 +265,17 @@ function transitionToFocused() {
     });
     
     if (targetPart) {
-        // 1. 临时消除外层 pivotGroup 旋转带来的坐标系污染
         const tempRot = pivotGroup.rotation.clone();
         pivotGroup.rotation.set(0, 0, 0);
         pivotGroup.updateMatrixWorld(true);
 
-        // 2. 利用 Box3 扫描零件所有顶点，算出它在世界空间中真实的“几何中心”和尺寸
         const box = new THREE.Box3().setFromObject(targetPart);
         const geomCenter = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
 
-        // 3. 恢复旋转矩阵
         pivotGroup.rotation.copy(tempRot);
         pivotGroup.updateMatrixWorld(true);
 
-        // 4. 将 heartGroup 平移，补偿这段几何重心的差值，使其彻底掉入 (0,0,0)
         gsap.to(heartGroup.position, {
             x: heartGroup.position.x - geomCenter.x, 
             y: heartGroup.position.y - geomCenter.y, 
@@ -271,7 +283,6 @@ function transitionToFocused() {
             duration: 0.8, ease: "power2.inOut"
         });
         
-        // 5. 根据 Box3 的尺寸，自适应计算特写镜头需要推多近
         const maxDim = Math.max(size.x, size.y, size.z);
         const targetCamZ = Math.max(2.5, maxDim * 2.5); 
 
@@ -282,13 +293,67 @@ function transitionToFocused() {
 }
 
 function resetFromFocused() {
-    // heartGroup 回归原点，恢复正常的散开矩阵
     gsap.to(heartGroup.position, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.inOut" });
     gsap.to(camera.position, { z: 8, duration: 0.8, ease: "power2.inOut" });
     currentAppMode = 'SCATTERED';
 }
 
-// --- 5. 层次状态机 (HSM) 轮询 ---
+// --- 5. 对话系统绑定 ---
+
+function appendMessage(role, content) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chat-msg ${role}`;
+    msgDiv.innerHTML = role === 'assistant' ? marked.parse(content) : content;
+    chatHistoryUI.appendChild(msgDiv);
+    chatHistoryUI.scrollTop = chatHistoryUI.scrollHeight;
+    return msgDiv;
+}
+
+function handleSendChat() {
+    const text = chatInputUI.value.trim();
+    if (!text || !State_Channel.activeContext || !llmService) return;
+    
+    chatInputUI.value = '';
+    chatInputUI.disabled = true;
+    sendBtnUI.disabled = true;
+
+    appendMessage('user', text);
+
+    const assistantBubble = appendMessage('assistant', '');
+    assistantBubble.classList.add('cursor-blink');
+    
+    let rawMarkdown = "";
+
+    llmService.askQuestion(
+        State_Channel.activeContext.id,
+        State_Channel.activeContext,
+        text,
+        (chunk) => {
+            rawMarkdown += chunk;
+            assistantBubble.innerHTML = marked.parse(rawMarkdown);
+            chatHistoryUI.scrollTop = chatHistoryUI.scrollHeight;
+        },
+        () => {
+            assistantBubble.classList.remove('cursor-blink');
+            chatInputUI.disabled = false;
+            sendBtnUI.disabled = false;
+            chatInputUI.focus();
+        },
+        (err) => {
+            assistantBubble.classList.remove('cursor-blink');
+            assistantBubble.innerHTML += `<br/><span style="color:#ff4444;">[系统断开或网络异常: ${err.message}]</span>`;
+            chatInputUI.disabled = false;
+            sendBtnUI.disabled = false;
+        }
+    );
+}
+
+sendBtnUI.addEventListener('click', handleSendChat);
+chatInputUI.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleSendChat();
+});
+
+// --- 6. 层次状态机 (HSM) 轮询 ---
 function updateFromHandData() {
     if (!window.handData) return;
     const hand = window.handData;
@@ -374,7 +439,7 @@ function updateFromHandData() {
     }
 }
 
-// --- 6. 原生降级交互 ---
+// --- 7. 原生降级交互 ---
 let isDragging = false;
 let prevMousePos = { x: 0, y: 0 };
 let startMousePos = { x: 0, y: 0 };
@@ -384,7 +449,7 @@ if (!MOCK_MODE) {
     crosshairUI.style.display = 'none'; 
     
     window.addEventListener('mousedown', (e) => {
-        if (e.button !== 0) return; 
+        if (e.button !== 0 || e.target.closest('#sidebar')) return; 
         isDragging = true;
         lockStateUI.innerText = "ON (抓取旋转中)";
         startMousePos = { x: e.clientX, y: e.clientY };
@@ -404,19 +469,22 @@ if (!MOCK_MODE) {
         isDragging = false;
         lockStateUI.innerText = "OFF";
         
+        if (e.target.closest('#sidebar')) return;
+
         if (Math.hypot(e.clientX - startMousePos.x, e.clientY - startMousePos.y) < 5) {
             checkIntersectionNDC((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1); 
         }
     });
 
     window.addEventListener('wheel', (e) => {
+        if (e.target.closest('#sidebar')) return; 
         State_Channel.explodeFactor += e.deltaY * -0.001;
         State_Channel.explodeFactor = Math.max(0, Math.min(1, State_Channel.explodeFactor));
         animateExplode(State_Channel.explodeFactor);
     });
 }
 
-// --- 7. 渲染循环 ---
+// --- 8. 渲染循环 ---
 let currentRotationX = 0;
 let currentRotationY = 0;
 
