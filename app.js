@@ -53,40 +53,44 @@ const composer = new EffectComposer(renderer);
 composer.addPass(renderScene);
 composer.addPass(bloomPass);
 
-scene.add(new THREE.AmbientLight(0xffffff, 2.0));
-const dirLight = new THREE.DirectionalLight(0xffffff, 3.0);
+// 降低基础光源强度，避免色彩溢出
+scene.add(new THREE.AmbientLight(0xffffff, 0.6)); 
+const dirLight = new THREE.DirectionalLight(0xffffff, 1.2); 
 dirLight.position.set(5, 5, 5);
 scene.add(dirLight);
 
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2.0);
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6); 
 scene.add(hemiLight);
 
 // --- 3. 核心资产加载与矩阵嵌套 ---
 const pivotGroup = new THREE.Group();
 scene.add(pivotGroup);
 
-let heartGroup = new THREE.Group();
-pivotGroup.add(heartGroup); 
+let anatomyGroup = new THREE.Group();
+pivotGroup.add(anatomyGroup); 
 
-const originalPositions = new Map();
-
-function createMedicalMaterial(child) {
-    const oldMat = child.material;
-    const geom = child.geometry;
+function getDeterministicColor(name) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const hue = Math.abs(hash % 360) / 360;
     
-    if (geom) geom.computeVertexNormals();
+    // 降低基底亮度和饱和度，让颜色显得更深沉、高级
+    const baseColor = new THREE.Color().setHSL(hue, 0.5, 0.35); 
+    // 自发光压到极低，仅保留微弱的色彩倾向
+    const emissiveColor = baseColor.clone().multiplyScalar(0.05);
+    
+    return { baseColor, emissiveColor };
+}
 
-    const hasMap = oldMat && oldMat.map;
-    const hasVColor = geom && geom.hasAttribute('color');
-
+function createMedicalMaterial(baseColor, emissiveColor) {
     const mat = new THREE.MeshStandardMaterial({
-        color: hasMap ? 0xffffff : (hasVColor ? 0xffffff : 0x882222),
-        map: hasMap ? oldMat.map : null,
-        vertexColors: hasVColor,
+        color: baseColor,
         metalness: 0.1,
         roughness: 0.7,
-        emissive: 0x331111, 
-        emissiveIntensity: 0.5,
+        emissive: emissiveColor, 
+        emissiveIntensity: 0.2, 
         side: THREE.DoubleSide
     });
 
@@ -97,7 +101,8 @@ function createMedicalMaterial(child) {
             #include <emissivemap_fragment>
             float fresnel = pow(1.0 - abs(dot(normalize(vNormal), normalize(vViewPosition))), 3.0);
             vec3 rimColor = vec3(1.0, 0.84, 0.0); 
-            diffuseColor.rgb += rimColor * fresnel * 0.8;
+            // 降低菲涅尔强度的乘数，防止边缘爆白
+            diffuseColor.rgb += rimColor * fresnel * 0.5; 
             `
         );
     };
@@ -116,7 +121,6 @@ const sidebar = document.getElementById('sidebar');
 const chatHistoryUI = document.getElementById('chat-history');
 const chatInputUI = document.getElementById('chat-input');
 const sendBtnUI = document.getElementById('send-btn');
-const loadingSpinner = document.getElementById('loading-spinner');
 
 const micBtnUI = document.getElementById('mic-btn');
 const cancelZoneUI = document.getElementById('cancel-zone');
@@ -152,23 +156,41 @@ function loadModel() {
     loader.load('models/heart.glb', (gltf) => {
         const model = gltf.scene;
         
-        const box = new THREE.Box3().setFromObject(model);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
+        const globalBox = new THREE.Box3().setFromObject(model);
+        const globalCenter = globalBox.getCenter(new THREE.Vector3());
+        const size = globalBox.getSize(new THREE.Vector3());
         
         const maxDim = Math.max(size.x, size.y, size.z);
         if (maxDim > 0) {
             const scale = 5 / maxDim;
             model.scale.set(scale, scale, scale);
         }
-        model.position.sub(center.multiplyScalar(model.scale.x));
-        heartGroup.add(model);
+        
+        model.position.sub(globalCenter.clone().multiplyScalar(model.scale.x));
+        anatomyGroup.add(model);
         partNameUI.innerText = "加载完成，等待交互...";
+
+        anatomyGroup.updateMatrixWorld(true);
 
         model.traverse((child) => {
             if (child.isMesh) {
-                child.material = createMedicalMaterial(child);
-                originalPositions.set(child.name, child.position.clone());
+                if (child.name.toLowerCase().includes('skin')) {
+                    child.visible = false;
+                    return; 
+                }
+
+                const { baseColor, emissiveColor } = getDeterministicColor(child.name);
+                child.material = createMedicalMaterial(baseColor, emissiveColor);
+
+                const localBox = new THREE.Box3().setFromObject(child);
+                const localCenter = localBox.getCenter(new THREE.Vector3());
+                
+                const escapeDir = localCenter.clone().normalize();
+                if (escapeDir.lengthSq() === 0) escapeDir.set(0, 1, 0); 
+
+                child.userData.originalPosition = child.position.clone();
+                child.userData.escapeDirection = escapeDir;
+
                 anatomyMapper.mapPart(child); 
             }
         });
@@ -183,17 +205,21 @@ function showError(msg) {
 
 // --- 4. 动画与逻辑控制 ---
 function animateExplode(factor) {
-    if(!heartGroup.children.length) return;
-    heartGroup.children[0].traverse((child) => {
-        const identity = child.userData.medicalContext?.mappedId || child.name;
-        const config = anatomyConfig[identity];
-        
-        if (config && originalPositions.has(child.name)) {
-            const orig = originalPositions.get(child.name);
+    if(!anatomyGroup.children.length) return;
+    
+    const explosionRadius = 12.0; 
+    const modelScale = anatomyGroup.children[0].scale.x;
+    const actualRadius = explosionRadius / (modelScale > 0 ? modelScale : 1);
+
+    anatomyGroup.children[0].traverse((child) => {
+        if (child.isMesh && child.visible && child.userData.originalPosition && child.userData.escapeDirection) {
+            const orig = child.userData.originalPosition;
+            const dir = child.userData.escapeDirection;
+            
             child.position.set(
-                orig.x + config.offset[0] * factor,
-                orig.y + config.offset[1] * factor,
-                orig.z + config.offset[2] * factor
+                orig.x + dir.x * actualRadius * factor,
+                orig.y + dir.y * actualRadius * factor,
+                orig.z + dir.z * actualRadius * factor
             );
         }
     });
@@ -207,7 +233,10 @@ function checkIntersectionNDC(ndcX, ndcY) {
     mouse.y = ndcY;
 
     raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects(heartGroup.children, true);
+    
+    // 关键修复：Three.js 射线默认会穿透不可见物体，必须手动将其从检测结果中过滤掉
+    const intersects = raycaster.intersectObjects(anatomyGroup.children, true)
+                                .filter(hit => hit.object.visible);
     
     if (intersects.length > 0) {
         handleHit(intersects[0].object);
@@ -226,8 +255,8 @@ function handleHit(mesh) {
 
     uiLayer.classList.add('hit-active');
 
-    heartGroup.traverse(child => {
-        if(child.isMesh) {
+    anatomyGroup.traverse(child => {
+        if(child.isMesh && child.visible) {
             gsap.to(child.material, { 
                 emissiveIntensity: child.name === mesh.name ? 1.5 : 0.5, 
                 duration: 0.3 
@@ -257,8 +286,8 @@ function handleSilentMiss() {
     sendBtnUI.disabled = true;
     micBtnUI.disabled = true;
 
-    heartGroup.traverse(child => {
-        if(child.isMesh) {
+    anatomyGroup.traverse(child => {
+        if(child.isMesh && child.visible) {
             gsap.to(child.material, { emissiveIntensity: 0.5, duration: 0.3 });
         }
     });
@@ -268,7 +297,7 @@ function transitionToFocused() {
     if (!State_Channel.activePart) return;
     
     let targetPart = null;
-    heartGroup.traverse(child => {
+    anatomyGroup.traverse(child => {
         if (child.name === State_Channel.activePart) targetPart = child;
     });
     
@@ -284,10 +313,10 @@ function transitionToFocused() {
         pivotGroup.rotation.copy(tempRot);
         pivotGroup.updateMatrixWorld(true);
 
-        gsap.to(heartGroup.position, {
-            x: heartGroup.position.x - geomCenter.x, 
-            y: heartGroup.position.y - geomCenter.y, 
-            z: heartGroup.position.z - geomCenter.z,
+        gsap.to(anatomyGroup.position, {
+            x: anatomyGroup.position.x - geomCenter.x, 
+            y: anatomyGroup.position.y - geomCenter.y, 
+            z: anatomyGroup.position.z - geomCenter.z,
             duration: 0.8, ease: "power2.inOut"
         });
         
@@ -301,7 +330,7 @@ function transitionToFocused() {
 }
 
 function resetFromFocused() {
-    gsap.to(heartGroup.position, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.inOut" });
+    gsap.to(anatomyGroup.position, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.inOut" });
     gsap.to(camera.position, { z: 8, duration: 0.8, ease: "power2.inOut" });
     currentAppMode = 'SCATTERED';
 }
@@ -345,7 +374,6 @@ function handleSendChat() {
             assistantBubble.classList.remove('cursor-blink');
             chatInputUI.disabled = false;
             sendBtnUI.disabled = false;
-            // 【修正】：删除了 chatInputUI.focus(); 以免打断纯手势沉浸流
         },
         (err) => {
             assistantBubble.classList.remove('cursor-blink');
@@ -361,7 +389,6 @@ chatInputUI.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleSendChat();
 });
 
-// --- 附加功能：AABB 矩形碰撞检测 ---
 function checkHover(element, x, y) {
     const rect = element.getBoundingClientRect();
     return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
@@ -378,26 +405,21 @@ function updateFromHandData() {
     crosshairUI.style.left = `${indexFinger.x * 100}%`;
     crosshairUI.style.top = `${indexFinger.y * 100}%`;
 
-    // 转换为屏幕绝对像素坐标
     const screenX = indexFinger.x * window.innerWidth;
     const screenY = indexFinger.y * window.innerHeight;
     
-    // 【终极方案】：彻底抛弃 elementFromPoint，直接算 AABB 矩形包围盒，无视一切 CSS 干扰
     const isHoveringCancel = cancelZoneUI.classList.contains('active') && checkHover(cancelZoneUI, screenX, screenY);
     const isHoveringMic = checkHover(micBtnUI, screenX, screenY);
 
     if (hand.state !== lastGestureState) {
-        
-        // --- 状态释放沿 (Falling Edge) ---
         if (hand.state === 'OPEN' || hand.state === 'NONE') {
             
             if (isGestureRecording) {
                 isGestureRecording = false;
                 if (isHoveringCancel) {
-                    // 悬停在取消区：绝对阻断并丢弃数据
-                    sttService.onEndCallback = null; // 强行抹除结算回调
-                    sttService.stop();               // 然后再停止录音引擎
-                    chatInputUI.value = '';          // 清空输入框暂存区
+                    sttService.onEndCallback = null; 
+                    sttService.stop();               
+                    chatInputUI.value = '';          
                     
                     micBtnUI.classList.remove('recording');
                     cancelZoneUI.classList.remove('active', 'hover-danger');
@@ -406,14 +428,13 @@ function updateFromHandData() {
                         if(!isGestureRecording) micHintUI.innerText = "按住捏合说话";
                     }, 1500);
                 } else {
-                    // 正常松手：结束录音并触发回调
                     sttService.stop();
                     micBtnUI.classList.remove('recording');
                     cancelZoneUI.classList.remove('active', 'hover-danger');
                     micHintUI.innerText = "按住捏合说话";
                 }
                 lastGestureState = hand.state;
-                return; // 结束当前帧，阻断射线逻辑
+                return; 
             }
 
             crosshairUI.style.background = 'rgba(255, 255, 255, 0.5)';
@@ -438,13 +459,10 @@ function updateFromHandData() {
             }
         }
         
-        // --- 状态触发沿 (Rising Edge) ---
         else if (hand.state === 'PINCH') {
-            
-            // 使用矩形相交判定麦克风区域，绝不穿模
             if (isHoveringMic && !micBtnUI.disabled && sttService && sttService.isSupported) {
                 isGestureRecording = true;
-                chatInputUI.value = ''; // 录音前清空历史残留
+                chatInputUI.value = ''; 
                 micBtnUI.classList.add('recording');
                 cancelZoneUI.classList.add('active'); 
                 
@@ -453,7 +471,6 @@ function updateFromHandData() {
                         chatInputUI.value = finalText + interimText; 
                     },
                     () => {
-                        // 结束回调：有文字时才调用 LLM 请求
                         if (chatInputUI.value.trim() !== '') handleSendChat();
                     },
                     (err) => {
