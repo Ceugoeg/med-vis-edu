@@ -1,0 +1,1438 @@
+{
+  "Model_5022_right_superior_temporal_sulcus": {
+    "label": "右侧颞上沟",
+    "description": "位于右侧颞叶外侧，是颞上回与颞中回的分界沟，参与听觉和语言处理。"
+  },
+  "Model_5022_right_superior_temporal_sulcus1": {
+    "label": "右侧颞上沟",
+    "description": "位于右侧颞叶外侧，是颞上沟的一部分，参与听觉和语言处理。"
+  },
+  "Model_2_white_matter_of_left_cerebral_hemisphere": {
+    "label": "左侧大脑半球白质",
+    "description": "位于左侧大脑半球皮质下，由神经纤维构成，负责传递不同脑区之间的信号。"
+  },
+  "Model_3_skin": {
+    "label": "皮肤",
+    "description": "覆盖体表的组织，具有保护、感觉、调节体温等功能。"
+  },
+  "Model_4_left_lateral_ventricle": {
+    "label": "左侧侧脑室",
+    "description": "位于左侧大脑半球内，是脑室系统的一部分，内含脑脊液。"
+  },
+  "Model_5_temporal_horn_of_left_lateral_ventricle": {
+    "label": "左侧侧脑室颞角",
+    "description": "左侧侧脑室向前下方延伸的部分，深入颞叶，内含脑脊液。"
+  },
+  "Model_7_white_matter_of_left_hemisphere_of_ce_57V3": {
+    "label": "左侧大脑半球白质",
+    "description": "位于左侧大脑半球皮质下，由神经纤维构成，负责传递不同脑区之间的信号。"
+  },
+  "Model_11_left_caudate_nucleus": {
+    "label": "左侧尾状核",
+    "description": "位于左侧大脑半球深部，是基底节的一部分，参与运动控制和认知功能。"
+  },
+  "Model_12_left_putamen": {
+    "label": "左侧壳核",
+    "description": "位于左侧大脑半球深部，是基底节的一部分，参与运动调节。"
+  },
+  "Model_13_left_globus_pallidus_pars_externa": {
+    "label": "左侧苍白球外部",
+    "description": "位于左侧基底节，是苍白球的外侧部分，参与运动调控。"
+  },
+  "Model_15_fourth_ventricle": {
+    "label": "第四脑室",
+    "description": "位于脑干与小脑之间，是脑室系统的一部分，内含脑脊液。"
+  },
+  "Model_17_left_hippocampus": {
+    "label": "左侧海马体",
+    "description": "位于左侧颞叶内侧，属于边缘系统，负责记忆巩固和空间导航。"
+  },
+  "Model_18_left_amygdala": {
+    "label": "左侧杏仁核",
+    "description": "位于左侧颞叶前部，属于边缘系统，参与情绪处理和恐惧反应。"
+  },
+  "Model_19_aqueduct": {
+    "label": "中脑导水管",
+    "description": "位于中脑，连接第三脑室和第四脑室，内含脑脊液。"
+  },
+  "Model_24_third_ventricle": {
+    "label": "第三脑室",
+    "description": "位于间脑，是脑室系统的一部分，内含脑脊液。"
+  },
+  "Model_25_left_globus_pallidus_pars_interna": {
+    "label": "左侧苍白球内部",
+    "description": "位于左侧基底节，是苍白球的内侧部分，参与运动调控。"
+  },
+  "Model_26_left_nucleus_accumbens": {
+    "label": "左侧伏隔核",
+    "description": "位于左侧基底节，是奖赏回路的重要部分，参与动机和愉悦。"
+  },
+  "Model_35_pons": {
+    "label": "脑桥",
+    "description": "位于脑干中部，连接延髓和中脑，参与呼吸调节和感觉运动信号中继。"
+  },
+  "Model_40_part_of_midbrain": {
+    "label": "中脑部分",
+    "description": "位于脑干上部，参与视觉、听觉反射和运动控制。"
+  },
+  "Model_41_white_matter_of_right_cerebral_hemisphere": {
+    "label": "右侧大脑半球白质",
+    "description": "位于右侧大脑半球皮质下，由神经纤维构成，负责传递不同脑区之间的信号。"
+  },
+  "Model_43_right_lateral_ventricle": {
+    "label": "右侧侧脑室",
+    "description": "位于右侧大脑半球内，是脑室系统的一部分，内含脑脊液。"
+  },
+  "Model_44_temporal_horn_of_right_lateral_ventricle": {
+    "label": "右侧侧脑室颞角",
+    "description": "右侧侧脑室向前下方延伸的部分，深入颞叶，内含脑脊液。"
+  },
+  "Model_46_white_matter_of_right_hemisphere_of__XB7U": {
+    "label": "右侧大脑半球白质",
+    "description": "位于右侧大脑半球皮质下，由神经纤维构成，负责传递不同脑区之间的信号。"
+  },
+  "Model_50_right_caudate_nucleus": {
+    "label": "右侧尾状核",
+    "description": "位于右侧大脑半球深部，是基底节的一部分，参与运动控制和认知功能。"
+  },
+  "Model_51_right_putamen": {
+    "label": "右侧壳核",
+    "description": "位于右侧大脑半球深部，是基底节的一部分，参与运动调节。"
+  },
+  "Model_52_right_globus_pallidus_pars_externa": {
+    "label": "右侧苍白球外部",
+    "description": "位于右侧基底节，是苍白球的外侧部分，参与运动调控。"
+  },
+  "Model_53_right_hippocampus": {
+    "label": "右侧海马体",
+    "description": "位于右侧颞叶内侧，属于边缘系统，负责记忆巩固和空间导航。"
+  },
+  "Model_54_right_amygdala": {
+    "label": "右侧杏仁核",
+    "description": "位于右侧颞叶前部，属于边缘系统，参与情绪处理和恐惧反应。"
+  },
+  "Model_58_right_nucleus_accumbens": {
+    "label": "右侧伏隔核",
+    "description": "位于右侧基底节，是奖赏回路的重要部分，参与动机和愉悦。"
+  },
+  "Model_61_medulla_oblongata": {
+    "label": "延髓",
+    "description": "位于脑干最下部，连接脊髓和脑桥，是生命中枢，调节心跳、呼吸等。"
+  },
+  "Model_66_left_substantia_nigra": {
+    "label": "左侧黑质",
+    "description": "位于左侧中脑，是多巴胺能神经元聚集区，参与运动控制。"
+  },
+  "Model_71_right_substantia_nigra": {
+    "label": "右侧黑质",
+    "description": "位于右侧中脑，是多巴胺能神经元聚集区，参与运动控制。"
+  },
+  "Model_72_pineal_body": {
+    "label": "松果体",
+    "description": "位于间脑顶部，分泌褪黑素，调节昼夜节律。"
+  },
+  "Model_77_left_optic_nerve": {
+    "label": "左侧视神经",
+    "description": "位于左侧眼眶至视交叉，传导左侧视野的视觉信息。"
+  },
+  "Model_77_left_optic_nerve1": {
+    "label": "左侧视神经",
+    "description": "位于左侧眼眶至视交叉，是视神经的一部分，传导视觉信息。"
+  },
+  "Model_78_left_optic_tract": {
+    "label": "左侧视束",
+    "description": "位于视交叉至外侧膝状体，传导视觉信息。"
+  },
+  "Model_79_left_red_nucleus": {
+    "label": "左侧红核",
+    "description": "位于左侧中脑，参与运动协调。"
+  },
+  "Model_83_right_globus_pallidus_pars_interna": {
+    "label": "右侧苍白球内部",
+    "description": "位于右侧基底节，是苍白球的内侧部分，参与运动调控。"
+  },
+  "Model_84_right_red_nucleus": {
+    "label": "右侧红核",
+    "description": "位于右侧中脑，参与运动协调。"
+  },
+  "Model_85_optic_chiasm": {
+    "label": "视交叉",
+    "description": "位于下丘脑前方，是左右视神经交叉汇合处，部分纤维交叉至对侧。"
+  },
+  "Model_96_pellucid_septum": {
+    "label": "透明隔",
+    "description": "位于两侧侧脑室之间，由两层薄膜组成，分隔侧脑室。"
+  },
+  "Model_100_left_mammillothalamic_tract": {
+    "label": "左侧乳头丘脑束",
+    "description": "连接左侧乳头体至丘脑前核的纤维束，参与边缘系统回路。"
+  },
+  "Model_142_anterior_commissure": {
+    "label": "前连合",
+    "description": "位于大脑半球间，连接两侧颞叶和嗅觉皮质的纤维束。"
+  },
+  "Model_200_right_mammillothalamic_tract": {
+    "label": "右侧乳头丘脑束",
+    "description": "连接右侧乳头体至丘脑前核的纤维束，参与边缘系统回路。"
+  },
+  "Model_215_right_optic_nerve": {
+    "label": "右侧视神经",
+    "description": "位于右侧眼眶至视交叉，传导右侧视野的视觉信息。"
+  },
+  "Model_216_right_optic_tract": {
+    "label": "右侧视束",
+    "description": "位于视交叉至外侧膝状体，传导视觉信息。"
+  },
+  "Model_300_left-I_II-v": {
+    "label": "左侧小脑蚓部I-II叶",
+    "description": "位于小脑蚓部前叶，参与躯干和肢体的平衡控制。"
+  },
+  "Model_301_left-III-v": {
+    "label": "左侧小脑蚓部III叶",
+    "description": "位于小脑蚓部前叶，参与运动协调和平衡。"
+  },
+  "Model_302_left-IV-v": {
+    "label": "左侧小脑蚓部IV叶",
+    "description": "位于小脑蚓部前叶，参与运动协调。"
+  },
+  "Model_303_left-V-v": {
+    "label": "左侧小脑蚓部V叶",
+    "description": "位于小脑蚓部，参与肢体运动协调。"
+  },
+  "Model_304_left-VI-v": {
+    "label": "左侧小脑蚓部VI叶",
+    "description": "位于小脑蚓部，参与运动协调。"
+  },
+  "Model_307_left-VIIB-v": {
+    "label": "左侧小脑蚓部VIIB叶",
+    "description": "位于小脑蚓部后叶，参与精细运动调节。"
+  },
+  "Model_308_left-VIIIA-v": {
+    "label": "左侧小脑蚓部VIIIA叶",
+    "description": "位于小脑蚓部后叶，参与眼球运动和听觉反射。"
+  },
+  "Model_309_left-VIIIB-v": {
+    "label": "左侧小脑蚓部VIIIB叶",
+    "description": "位于小脑蚓部后叶，参与平衡和眼球运动。"
+  },
+  "Model_310_left-IX-v": {
+    "label": "左侧小脑蚓部IX叶",
+    "description": "位于小脑蚓部后叶，参与内脏感觉和平衡。"
+  },
+  "Model_311_left-X-v": {
+    "label": "左侧小脑蚓部X叶",
+    "description": "位于小脑蚓部后叶，即小结，参与前庭功能。"
+  },
+  "Model_312_left-III-m": {
+    "label": "左侧小脑半球III叶",
+    "description": "位于左侧小脑半球前叶，参与同侧肢体运动协调。"
+  },
+  "Model_313_left-IV-m": {
+    "label": "左侧小脑半球IV叶",
+    "description": "位于左侧小脑半球前叶，参与运动协调。"
+  },
+  "Model_314_left-V-m": {
+    "label": "左侧小脑半球V叶",
+    "description": "位于左侧小脑半球，参与肢体运动协调。"
+  },
+  "Model_315_left-VI-m": {
+    "label": "左侧小脑半球VI叶",
+    "description": "位于左侧小脑半球，参与运动协调。"
+  },
+  "Model_316_left-VIIA_crusI-m": {
+    "label": "左侧小脑半球VIIA小叶 Crus I",
+    "description": "位于左侧小脑半球后叶，参与精细运动和认知功能。"
+  },
+  "Model_317_left-VIIA_crusII-m": {
+    "label": "左侧小脑半球VIIA小叶 Crus II",
+    "description": "位于左侧小脑半球后叶，参与运动和认知协调。"
+  },
+  "Model_318_left-VIIB-m": {
+    "label": "左侧小脑半球VIIB叶",
+    "description": "位于左侧小脑半球后叶，参与运动协调。"
+  },
+  "Model_319_left-VIIIA-m": {
+    "label": "左侧小脑半球VIIIA叶",
+    "description": "位于左侧小脑半球后叶，参与眼球运动和听觉反射。"
+  },
+  "Model_320_left-VIIIB-m": {
+    "label": "左侧小脑半球VIIIB叶",
+    "description": "位于左侧小脑半球后叶，参与平衡和眼球运动。"
+  },
+  "Model_321_left-IX-m": {
+    "label": "左侧小脑半球IX叶",
+    "description": "位于左侧小脑半球后叶，参与平衡和内脏感觉。"
+  },
+  "Model_323_left-V-l": {
+    "label": "左侧小脑半球外侧部V叶",
+    "description": "位于左侧小脑半球外侧，参与精细运动控制。"
+  },
+  "Model_324_left-VI-l": {
+    "label": "左侧小脑半球外侧部VI叶",
+    "description": "位于左侧小脑半球外侧，参与运动协调。"
+  },
+  "Model_327_left-VIIA_crusI-l1": {
+    "label": "左侧小脑半球外侧部VIIA Crus I",
+    "description": "位于左侧小脑半球外侧，参与精细运动和认知。"
+  },
+  "Model_328_left-VIIA_crusII-l1": {
+    "label": "左侧小脑半球外侧部VIIA Crus II",
+    "description": "位于左侧小脑半球外侧，参与运动和认知协调。"
+  },
+  "Model_329_left-VIIB-l": {
+    "label": "左侧小脑半球外侧部VIIB叶",
+    "description": "位于左侧小脑半球外侧，参与运动协调。"
+  },
+  "Model_330_left-VIIIA-l": {
+    "label": "左侧小脑半球外侧部VIIIA叶",
+    "description": "位于左侧小脑半球外侧，参与眼球运动和听觉反射。"
+  },
+  "Model_331_left-VIIIB-l": {
+    "label": "左侧小脑半球外侧部VIIIB叶",
+    "description": "位于左侧小脑半球外侧，参与平衡和眼球运动。"
+  },
+  "Model_332_left-VIIA_crusI-l2": {
+    "label": "左侧小脑半球外侧部VIIA Crus I（第二部分）",
+    "description": "位于左侧小脑半球外侧，是VIIA Crus I的延伸部分。"
+  },
+  "Model_333_left-VIIA_crusII-l2": {
+    "label": "左侧小脑半球外侧部VIIA Crus II（第二部分）",
+    "description": "位于左侧小脑半球外侧，是VIIA Crus II的延伸部分。"
+  },
+  "Model_334_right-I_II-v": {
+    "label": "右侧小脑蚓部I-II叶",
+    "description": "位于小脑蚓部前叶，参与躯干和肢体的平衡控制。"
+  },
+  "Model_335_right-III-v": {
+    "label": "右侧小脑蚓部III叶",
+    "description": "位于小脑蚓部前叶，参与运动协调和平衡。"
+  },
+  "Model_336_right-IV-v": {
+    "label": "右侧小脑蚓部IV叶",
+    "description": "位于小脑蚓部前叶，参与运动协调。"
+  },
+  "Model_337_right-V-v": {
+    "label": "右侧小脑蚓部V叶",
+    "description": "位于小脑蚓部，参与肢体运动协调。"
+  },
+  "Model_338_right-VI-v": {
+    "label": "右侧小脑蚓部VI叶",
+    "description": "位于小脑蚓部，参与运动协调。"
+  },
+  "Model_341_right-VIIB-v": {
+    "label": "右侧小脑蚓部VIIB叶",
+    "description": "位于小脑蚓部后叶，参与精细运动调节。"
+  },
+  "Model_342_right-VIIIA-v": {
+    "label": "右侧小脑蚓部VIIIA叶",
+    "description": "位于小脑蚓部后叶，参与眼球运动和听觉反射。"
+  },
+  "Model_343_right-VIIIB-v": {
+    "label": "右侧小脑蚓部VIIIB叶",
+    "description": "位于小脑蚓部后叶，参与平衡和眼球运动。"
+  },
+  "Model_344_right-IX-v": {
+    "label": "右侧小脑蚓部IX叶",
+    "description": "位于小脑蚓部后叶，参与内脏感觉和平衡。"
+  },
+  "Model_345_right-X-v": {
+    "label": "右侧小脑蚓部X叶",
+    "description": "位于小脑蚓部后叶，即小结，参与前庭功能。"
+  },
+  "Model_346_right-III-m": {
+    "label": "右侧小脑半球III叶",
+    "description": "位于右侧小脑半球前叶，参与同侧肢体运动协调。"
+  },
+  "Model_347_right-IV-m": {
+    "label": "右侧小脑半球IV叶",
+    "description": "位于右侧小脑半球前叶，参与运动协调。"
+  },
+  "Model_348_right-V-m": {
+    "label": "右侧小脑半球V叶",
+    "description": "位于右侧小脑半球，参与肢体运动协调。"
+  },
+  "Model_349_right-VI-m": {
+    "label": "右侧小脑半球VI叶",
+    "description": "位于右侧小脑半球，参与运动协调。"
+  },
+  "Model_350_right-VIIA_crusI-m": {
+    "label": "右侧小脑半球VIIA小叶 Crus I",
+    "description": "位于右侧小脑半球后叶，参与精细运动和认知功能。"
+  },
+  "Model_351_right-VIIA_crusII-m": {
+    "label": "右侧小脑半球VIIA小叶 Crus II",
+    "description": "位于右侧小脑半球后叶，参与运动和认知协调。"
+  },
+  "Model_352_right-VIIB-m": {
+    "label": "右侧小脑半球VIIB叶",
+    "description": "位于右侧小脑半球后叶，参与运动协调。"
+  },
+  "Model_353_right-VIIIA-m": {
+    "label": "右侧小脑半球VIIIA叶",
+    "description": "位于右侧小脑半球后叶，参与眼球运动和听觉反射。"
+  },
+  "Model_354_right-VIIIB-m": {
+    "label": "右侧小脑半球VIIIB叶",
+    "description": "位于右侧小脑半球后叶，参与平衡和眼球运动。"
+  },
+  "Model_355_right-IX-m": {
+    "label": "右侧小脑半球IX叶",
+    "description": "位于右侧小脑半球后叶，参与平衡和内脏感觉。"
+  },
+  "Model_357_right-V-l": {
+    "label": "右侧小脑半球外侧部V叶",
+    "description": "位于右侧小脑半球外侧，参与精细运动控制。"
+  },
+  "Model_358_right-VI-l": {
+    "label": "右侧小脑半球外侧部VI叶",
+    "description": "位于右侧小脑半球外侧，参与运动协调。"
+  },
+  "Model_361_right-VIIA_crusI-l1": {
+    "label": "右侧小脑半球外侧部VIIA Crus I",
+    "description": "位于右侧小脑半球外侧，参与精细运动和认知。"
+  },
+  "Model_362_right-VIIA_crusII-l1": {
+    "label": "右侧小脑半球外侧部VIIA Crus II",
+    "description": "位于右侧小脑半球外侧，参与运动和认知协调。"
+  },
+  "Model_363_right-VIIB-l": {
+    "label": "右侧小脑半球外侧部VIIB叶",
+    "description": "位于右侧小脑半球外侧，参与运动协调。"
+  },
+  "Model_364_right-VIIIA-l": {
+    "label": "右侧小脑半球外侧部VIIIA叶",
+    "description": "位于右侧小脑半球外侧，参与眼球运动和听觉反射。"
+  },
+  "Model_365_right-VIIIB-l": {
+    "label": "右侧小脑半球外侧部VIIIB叶",
+    "description": "位于右侧小脑半球外侧，参与平衡和眼球运动。"
+  },
+  "Model_366_right-VIIA_crusI-l2": {
+    "label": "右侧小脑半球外侧部VIIA Crus I（第二部分）",
+    "description": "位于右侧小脑半球外侧，是VIIA Crus I的延伸部分。"
+  },
+  "Model_367_right-VIIA_crusII-l2": {
+    "label": "右侧小脑半球外侧部VIIA Crus II（第二部分）",
+    "description": "位于右侧小脑半球外侧，是VIIA Crus II的延伸部分。"
+  },
+  "Model_371_left-Dentate-nucleus": {
+    "label": "左侧齿状核",
+    "description": "位于左侧小脑半球内，是小脑最大的核团，参与运动计划和协调。"
+  },
+  "Model_373_left-FaGE_nuclei": {
+    "label": "左侧小脑核群（顶核、球状核、栓状核）",
+    "description": "位于左侧小脑白质内，包括顶核、球状核和栓状核，参与平衡和运动调节。"
+  },
+  "Model_375_right-Dentate-nucleus": {
+    "label": "右侧齿状核",
+    "description": "位于右侧小脑半球内，是小脑最大的核团，参与运动计划和协调。"
+  },
+  "Model_377_right-FaGE_nuclei": {
+    "label": "右侧小脑核群（顶核、球状核、栓状核）",
+    "description": "位于右侧小脑白质内，包括顶核、球状核和栓状核，参与平衡和运动调节。"
+  },
+  "Model_380_left_anterior_superior_hypothalamus": {
+    "label": "左侧下丘脑前上区",
+    "description": "位于左侧下丘脑前部，参与体温调节和自主神经控制。"
+  },
+  "Model_381_left_anterior_inferior_hypothalamus": {
+    "label": "左侧下丘脑前下区",
+    "description": "位于左侧下丘脑前部，参与摄食行为和内分泌调节。"
+  },
+  "Model_382_left_superior_tuberal_hypothalamus": {
+    "label": "左侧下丘脑结节上区",
+    "description": "位于左侧下丘脑结节部上方，参与能量平衡和内分泌。"
+  },
+  "Model_383_left_inferior_tuberal_hypothalamus": {
+    "label": "左侧下丘脑结节下区",
+    "description": "位于左侧下丘脑结节部下方，参与自主神经调节。"
+  },
+  "Model_384_left_posterior_superior_hypothalamus": {
+    "label": "左侧下丘脑后上区",
+    "description": "位于左侧下丘脑后部，参与体温调节和觉醒。"
+  },
+  "Model_385_right_anterior_superior_hypothalamus": {
+    "label": "右侧下丘脑前上区",
+    "description": "位于右侧下丘脑前部，参与体温调节和自主神经控制。"
+  },
+  "Model_386_right_anterior_inferior_hypothalamus": {
+    "label": "右侧下丘脑前下区",
+    "description": "位于右侧下丘脑前部，参与摄食行为和内分泌调节。"
+  },
+  "Model_387_right_superior_tuberal_hypothalamus": {
+    "label": "右侧下丘脑结节上区",
+    "description": "位于右侧下丘脑结节部上方，参与能量平衡和内分泌。"
+  },
+  "Model_388_right_inferior_tuberal_hypothalamus": {
+    "label": "右侧下丘脑结节下区",
+    "description": "位于右侧下丘脑结节部下方，参与自主神经调节。"
+  },
+  "Model_389_right_posterior_superior_hypothalamus": {
+    "label": "右侧下丘脑后上区",
+    "description": "位于右侧下丘脑后部，参与体温调节和觉醒。"
+  },
+  "Model_390_right_subthalamic_nucleus": {
+    "label": "右侧丘脑底核",
+    "description": "位于右侧丘脑底部，是基底节的一部分，参与运动控制。"
+  },
+  "Model_391_left_subthalamic_nucleus": {
+    "label": "左侧丘脑底核",
+    "description": "位于左侧丘脑底部，是基底节的一部分，参与运动控制。"
+  },
+  "Model_500_right_internal_medullary_lamina": {
+    "label": "右侧丘脑内髓板",
+    "description": "位于右侧丘脑内，由白质纤维构成，分隔丘脑各核团。"
+  },
+  "Model_501_left_internal_medullary_lamina": {
+    "label": "左侧丘脑内髓板",
+    "description": "位于左侧丘脑内，由白质纤维构成，分隔丘脑各核团。"
+  },
+  "Model_502_right_medial_geniculate_body": {
+    "label": "右侧内侧膝状体",
+    "description": "位于右侧丘脑，是听觉通路的中继核，接收下丘来的听觉信息。"
+  },
+  "Model_503_left_medial_geniculate_body": {
+    "label": "左侧内侧膝状体",
+    "description": "位于左侧丘脑，是听觉通路的中继核，接收下丘来的听觉信息。"
+  },
+  "Model_504_right_lateral_geniculate_body": {
+    "label": "右侧外侧膝状体",
+    "description": "位于右侧丘脑，是视觉通路的中继核，接收视束来的视觉信息。"
+  },
+  "Model_505_left_lateral_geniculate_body": {
+    "label": "左侧外侧膝状体",
+    "description": "位于左侧丘脑，是视觉通路的中继核，接收视束来的视觉信息。"
+  },
+  "Model_506_right_pulvinar": {
+    "label": "右侧丘脑枕",
+    "description": "位于右侧丘脑后部，参与视觉注意和整合。"
+  },
+  "Model_507_left_pulvinar": {
+    "label": "左侧丘脑枕",
+    "description": "位于左侧丘脑后部，参与视觉注意和整合。"
+  },
+  "Model_508_right_anterior_thalamic_nucleus": {
+    "label": "右侧丘脑前核",
+    "description": "位于右侧丘脑前部，参与边缘系统回路和记忆。"
+  },
+  "Model_509_left_anterior_thalamic_nucleus": {
+    "label": "左侧丘脑前核",
+    "description": "位于左侧丘脑前部，参与边缘系统回路和记忆。"
+  },
+  "Model_510_right_dorsomedial_thalamic_nucleus": {
+    "label": "右侧丘脑背内侧核",
+    "description": "位于右侧丘脑内侧，参与情绪和认知功能。"
+  },
+  "Model_511_left_dorsomedial_thalamic_nucleus": {
+    "label": "左侧丘脑背内侧核",
+    "description": "位于左侧丘脑内侧，参与情绪和认知功能。"
+  },
+  "Model_512_right_centromedian_thalamic_nucleus": {
+    "label": "右侧丘脑中央中核",
+    "description": "位于右侧丘脑，是板内核群的一部分，参与觉醒和运动控制。"
+  },
+  "Model_513_left_centromedian_thalamic_nucleus": {
+    "label": "左侧丘脑中央中核",
+    "description": "位于左侧丘脑，是板内核群的一部分，参与觉醒和运动控制。"
+  },
+  "Model_514_right_ventral_anterior_thalamic_nucleus": {
+    "label": "右侧丘脑腹前核",
+    "description": "位于右侧丘脑腹侧，参与运动调控，接收基底节来的信号。"
+  },
+  "Model_515_left_ventral_anterior_thalamic_nucleus": {
+    "label": "左侧丘脑腹前核",
+    "description": "位于左侧丘脑腹侧，参与运动调控，接收基底节来的信号。"
+  },
+  "Model_516_right_ventral_lateral_thalamic_nucleus": {
+    "label": "右侧丘脑腹外侧核",
+    "description": "位于右侧丘脑腹侧，参与运动调控，接收小脑和基底节信号。"
+  },
+  "Model_517_left_ventral_lateral_thalamic_nucleus": {
+    "label": "左侧丘脑腹外侧核",
+    "description": "位于左侧丘脑腹侧，参与运动调控，接收小脑和基底节信号。"
+  },
+  "Model_518_right_lateral_posterior_thalamic_nucleus": {
+    "label": "右侧丘脑后外侧核",
+    "description": "位于右侧丘脑后部，参与感觉整合。"
+  },
+  "Model_519_left_lateral_posterior_thalamic_nucleus": {
+    "label": "左侧丘脑后外侧核",
+    "description": "位于左侧丘脑后部，参与感觉整合。"
+  },
+  "Model_520_right_lateral_dorsal_thalamic_nucleus": {
+    "label": "右侧丘脑背外侧核",
+    "description": "位于右侧丘脑背侧，参与边缘系统功能。"
+  },
+  "Model_521_left_lateral_dorsal_thalamic_nucleus": {
+    "label": "左侧丘脑背外侧核",
+    "description": "位于左侧丘脑背侧，参与边缘系统功能。"
+  },
+  "Model_522_right_ventral_posteromedial_thalami_1ZVX": {
+    "label": "右侧丘脑腹后内侧核",
+    "description": "位于右侧丘脑腹侧，接收头面部的感觉信息。"
+  },
+  "Model_523_left_ventral_posteromedial_thalamic_XAB1": {
+    "label": "左侧丘脑腹后内侧核",
+    "description": "位于左侧丘脑腹侧，接收头面部的感觉信息。"
+  },
+  "Model_524_right_ventral_posterolateral_thalam_M9ML": {
+    "label": "右侧丘脑腹后外侧核",
+    "description": "位于右侧丘脑腹侧，接收躯干和四肢的感觉信息。"
+  },
+  "Model_525_left_ventral_posterolateral_thalami_1ZVX": {
+    "label": "左侧丘脑腹后外侧核",
+    "description": "位于左侧丘脑腹侧，接收躯干和四肢的感觉信息。"
+  },
+  "Model_1000_left_insula": {
+    "label": "左侧岛叶",
+    "description": "位于左侧大脑半球外侧沟深部，参与内脏感觉、情绪和味觉处理。"
+  },
+  "Model_1001_left_superior_temporal_gyrus_(bank_86Y9": {
+    "label": "左侧颞上回",
+    "description": "位于左侧颞叶外侧，是听觉皮层所在，参与声音处理和语言理解。"
+  },
+  "Model_1002_caudal_part_of_left_anterior_cingu_L2YW": {
+    "label": "左侧前扣带回尾部",
+    "description": "位于左侧扣带回前部，参与情绪和认知控制。"
+  },
+  "Model_1003_posterior_part_of_left_middle_fron_2INS": {
+    "label": "左侧额中回后部",
+    "description": "位于左侧额叶中部后方，参与认知控制和运动规划。"
+  },
+  "Model_1005_left_cuneus": {
+    "label": "左侧楔叶",
+    "description": "位于左侧枕叶内侧，参与视觉处理。"
+  },
+  "Model_1006_left_ambiens_gyrus": {
+    "label": "左侧环回",
+    "description": "位于左侧颞叶内侧，与嗅觉和记忆相关。"
+  },
+  "Model_1007_left_fusiform_gyrus": {
+    "label": "左侧梭状回",
+    "description": "位于左侧颞叶和枕叶底部，参与面孔和物体识别。"
+  },
+  "Model_1008_left_inferior_parietal_lobule": {
+    "label": "左侧顶下小叶",
+    "description": "位于左侧顶叶下部，参与空间感知和语言处理。"
+  },
+  "Model_1009_left_inferior_temporal_gyrus": {
+    "label": "左侧颞下回",
+    "description": "位于左侧颞叶下部，参与视觉识别和语义处理。"
+  },
+  "Model_1010_isthmus_of_left_cingulate_gyrus": {
+    "label": "左侧扣带回峡部",
+    "description": "位于左侧扣带回后部，连接扣带回和海马旁回，参与记忆和情绪。"
+  },
+  "Model_1011_left_lateral_occipital_gyrus": {
+    "label": "左侧枕外侧回",
+    "description": "位于左侧枕叶外侧，参与视觉处理。"
+  },
+  "Model_1012_left_lateral_orbital_gyrus": {
+    "label": "左侧眶外侧回",
+    "description": "位于左侧额叶眶面外侧，参与情绪和决策。"
+  },
+  "Model_1013_left_lingual_gyrus": {
+    "label": "左侧舌回",
+    "description": "位于左侧枕叶内侧，参与视觉处理，特别是文字识别。"
+  },
+  "Model_1014_left_straight_gyrus": {
+    "label": "左侧直回",
+    "description": "位于左侧额叶眶面内侧，参与情绪和嗅觉。"
+  },
+  "Model_1015_left_middle_temporal_gyrus": {
+    "label": "左侧颞中回",
+    "description": "位于左侧颞叶中部，参与听觉和语义处理。"
+  },
+  "Model_1016_left_parahippocampal_gyrus": {
+    "label": "左侧海马旁回",
+    "description": "位于左侧颞叶内侧，环绕海马，参与记忆和空间导航。"
+  },
+  "Model_1017_left_paracentral_lobule": {
+    "label": "左侧中央旁小叶",
+    "description": "位于左侧大脑半球内侧，中央沟上下，参与下肢感觉和运动。"
+  },
+  "Model_1018_opercular_part_of_left_inferior_fr_PDN5": {
+    "label": "左侧额下回岛盖部",
+    "description": "位于左侧额下回后部，参与语言运动（Broca区）。"
+  },
+  "Model_1019_orbital_part_of_left_inferior_fron_2INS": {
+    "label": "左侧额下回眶部",
+    "description": "位于左侧额下回前部，参与情绪和认知控制。"
+  },
+  "Model_1020_triangular_part_of_left_inferior_f_PO4Y": {
+    "label": "左侧额下回三角部",
+    "description": "位于左侧额下回中部，参与语言理解和生成。"
+  },
+  "Model_1021_left_visual_cortex": {
+    "label": "左侧视觉皮层",
+    "description": "位于左侧枕叶，接收和处理视觉信息。"
+  },
+  "Model_1022_left_postcentral_gyrus": {
+    "label": "左侧中央后回",
+    "description": "位于左侧顶叶，是初级躯体感觉皮层，接收对侧身体的感觉信息。"
+  },
+  "Model_1023_left_posterior_cingulate_gyrus": {
+    "label": "左侧后扣带回",
+    "description": "位于左侧扣带回后部，参与记忆和默认模式网络。"
+  },
+  "Model_1024_left_precentral_gyrus": {
+    "label": "左侧中央前回",
+    "description": "位于左侧额叶，是初级运动皮层，控制对侧肢体的随意运动。"
+  },
+  "Model_1025_left_precuneus": {
+    "label": "左侧楔前叶",
+    "description": "位于左侧顶叶内侧，参与自我意识和情景记忆。"
+  },
+  "Model_1026_rostral_part_of_left_anterior_cing_DF5M": {
+    "label": "左侧前扣带回嘴部",
+    "description": "位于左侧扣带回前部，参与情绪和自主神经调节。"
+  },
+  "Model_1027_anterior_part_of_left_middle_front_CLFU": {
+    "label": "左侧额中回前部",
+    "description": "位于左侧额叶中部前方，参与认知控制和执行功能。"
+  },
+  "Model_1028_left_superior_frontal_gyrus": {
+    "label": "左侧额上回",
+    "description": "位于左侧额叶上部，参与执行功能和认知控制。"
+  },
+  "Model_1029_left_superior_parietal_lobule": {
+    "label": "左侧顶上小叶",
+    "description": "位于左侧顶叶上部，参与躯体感觉和空间注意。"
+  },
+  "Model_1030_left_superior_temporal_gyrus": {
+    "label": "左侧颞上回",
+    "description": "位于左侧颞叶外侧，是听觉皮层所在，参与声音处理和语言理解。"
+  },
+  "Model_1031_left_supramarginal_gyrus": {
+    "label": "左侧缘上回",
+    "description": "位于左侧顶叶，围绕外侧沟后部，参与语言和空间处理。"
+  },
+  "Model_1032_left_frontal_pole": {
+    "label": "左侧额极",
+    "description": "位于左侧额叶最前端，参与高级认知和决策。"
+  },
+  "Model_1033_left_temporal_pole": {
+    "label": "左侧颞极",
+    "description": "位于左侧颞叶最前端，参与语义处理和情绪。"
+  },
+  "Model_1034_left_transverse_temporal_gyrus": {
+    "label": "左侧颞横回",
+    "description": "位于左侧颞叶上部，是初级听觉皮层（Heschl回）。"
+  },
+  "Model_1035_left_limen_insulae": {
+    "label": "左侧岛阈",
+    "description": "位于左侧岛叶前部，是岛叶与额叶的连接处。"
+  },
+  "Model_2000_right_insula": {
+    "label": "右侧岛叶",
+    "description": "位于右侧大脑半球外侧沟深部，参与内脏感觉、情绪和味觉处理。"
+  },
+  "Model_2001_right_superior_temporal_gyrus_(ban_PMWX": {
+    "label": "右侧颞上回",
+    "description": "位于右侧颞叶外侧，是听觉皮层所在，参与声音处理和语言理解（右侧更侧重语调）。"
+  },
+  "Model_2002_caudal_part_of_right_anterior_cing_DF5M": {
+    "label": "右侧前扣带回尾部",
+    "description": "位于右侧扣带回前部，参与情绪和认知控制。"
+  },
+  "Model_2003_posterior_part_of_right_middle_fro_53AE": {
+    "label": "右侧额中回后部",
+    "description": "位于右侧额叶中部后方，参与认知控制和运动规划。"
+  },
+  "Model_2005_right_cuneus": {
+    "label": "右侧楔叶",
+    "description": "位于右侧枕叶内侧，参与视觉处理。"
+  },
+  "Model_2006_right_ambiens_gyrus": {
+    "label": "右侧环回",
+    "description": "位于右侧颞叶内侧，与嗅觉和记忆相关。"
+  },
+  "Model_2007_right_fusiform_gyrus": {
+    "label": "右侧梭状回",
+    "description": "位于右侧颞叶和枕叶底部，参与面孔和物体识别。"
+  },
+  "Model_2008_right_inferior_parietal_lobule": {
+    "label": "右侧顶下小叶",
+    "description": "位于右侧顶叶下部，参与空间感知和注意。"
+  },
+  "Model_2009_right_inferior_temporal_gyrus": {
+    "label": "右侧颞下回",
+    "description": "位于右侧颞叶下部，参与视觉识别和语义处理。"
+  },
+  "Model_2010_isthmus_of_right_cingulate_gyrus": {
+    "label": "右侧扣带回峡部",
+    "description": "位于右侧扣带回后部，连接扣带回和海马旁回，参与记忆和情绪。"
+  },
+  "Model_2011_right_lateral_occipital_gyrus": {
+    "label": "右侧枕外侧回",
+    "description": "位于右侧枕叶外侧，参与视觉处理。"
+  },
+  "Model_2012_right_lateral_orbital_gyrus": {
+    "label": "右侧眶外侧回",
+    "description": "位于右侧额叶眶面外侧，参与情绪和决策。"
+  },
+  "Model_2013_right_lingual_gyrus": {
+    "label": "右侧舌回",
+    "description": "位于右侧枕叶内侧，参与视觉处理，特别是文字识别。"
+  },
+  "Model_2014_right_straight_gyrus": {
+    "label": "右侧直回",
+    "description": "位于右侧额叶眶面内侧，参与情绪和嗅觉。"
+  },
+  "Model_2015_right_middle_temporal_gyrus": {
+    "label": "右侧颞中回",
+    "description": "位于右侧颞叶中部，参与听觉和语义处理。"
+  },
+  "Model_2016_right_parahippocampal_gyrus": {
+    "label": "右侧海马旁回",
+    "description": "位于右侧颞叶内侧，环绕海马，参与记忆和空间导航。"
+  },
+  "Model_2017_right_paracentral_lobule": {
+    "label": "右侧中央旁小叶",
+    "description": "位于右侧大脑半球内侧，中央沟上下，参与下肢感觉和运动。"
+  },
+  "Model_2018_opercular_part_of_right_inferior_f_PO4Y": {
+    "label": "右侧额下回岛盖部",
+    "description": "位于右侧额下回后部，在右侧可能参与语言韵律。"
+  },
+  "Model_2019_orbital_part_of_right_inferior_fro_53AE": {
+    "label": "右侧额下回眶部",
+    "description": "位于右侧额下回前部，参与情绪和认知控制。"
+  },
+  "Model_2020_triangular_part_of_right_inferior__654O": {
+    "label": "右侧额下回三角部",
+    "description": "位于右侧额下回中部，在右侧可能参与语言理解。"
+  },
+  "Model_2021_right_visual_cortex": {
+    "label": "右侧视觉皮层",
+    "description": "位于右侧枕叶，接收和处理视觉信息。"
+  },
+  "Model_2022_right_postcentral_gyrus": {
+    "label": "右侧中央后回",
+    "description": "位于右侧顶叶，是初级躯体感觉皮层，接收对侧身体的感觉信息。"
+  },
+  "Model_2023_right_posterior_cingulate_gyrus": {
+    "label": "右侧后扣带回",
+    "description": "位于右侧扣带回后部，参与记忆和默认模式网络。"
+  },
+  "Model_2024_right_precentral_gyrus": {
+    "label": "右侧中央前回",
+    "description": "位于右侧额叶，是初级运动皮层，控制对侧肢体的随意运动。"
+  },
+  "Model_2025_right_precuneus": {
+    "label": "右侧楔前叶",
+    "description": "位于右侧顶叶内侧，参与自我意识和情景记忆。"
+  },
+  "Model_2026_rostral_part_of_right_anterior_cin_MLJ7": {
+    "label": "右侧前扣带回嘴部",
+    "description": "位于右侧扣带回前部，参与情绪和自主神经调节。"
+  },
+  "Model_2027_anterior_part_of_right_middle_fron_2INS": {
+    "label": "右侧额中回前部",
+    "description": "位于右侧额叶中部前方，参与认知控制和执行功能。"
+  },
+  "Model_2028_right_superior_frontal_gyrus": {
+    "label": "右侧额上回",
+    "description": "位于右侧额叶上部，参与执行功能和认知控制。"
+  },
+  "Model_2029_right_superior_parietal_lobule": {
+    "label": "右侧顶上小叶",
+    "description": "位于右侧顶叶上部，参与躯体感觉和空间注意。"
+  },
+  "Model_2030_right_superior_temporal_gyrus": {
+    "label": "右侧颞上回",
+    "description": "位于右侧颞叶外侧，是听觉皮层所在，参与声音处理和语言理解（右侧更侧重语调）。"
+  },
+  "Model_2031_right_supramarginal_gyrus": {
+    "label": "右侧缘上回",
+    "description": "位于右侧顶叶，围绕外侧沟后部，参与语言和空间处理。"
+  },
+  "Model_2032_right_frontal_pole": {
+    "label": "右侧额极",
+    "description": "位于右侧额叶最前端，参与高级认知和决策。"
+  },
+  "Model_2033_right_temporal_pole": {
+    "label": "右侧颞极",
+    "description": "位于右侧颞叶最前端，参与语义处理和情绪。"
+  },
+  "Model_2034_right_transverse_temporal_gyrus": {
+    "label": "右侧颞横回",
+    "description": "位于右侧颞叶上部，是初级听觉皮层（Heschl回）。"
+  },
+  "Model_2035_right_limen_insulae": {
+    "label": "右侧岛阈",
+    "description": "位于右侧岛叶前部，是岛叶与额叶的连接处。"
+  },
+  "Model_3000_right_claustrum": {
+    "label": "右侧屏状核",
+    "description": "位于右侧岛叶皮质与壳核之间，功能未完全明确，可能与意识有关。"
+  },
+  "Model_3001_left_claustrum": {
+    "label": "左侧屏状核",
+    "description": "位于左侧岛叶皮质与壳核之间，功能未完全明确，可能与意识有关。"
+  },
+  "Model_3002_right_mammillary_body": {
+    "label": "右侧乳头体",
+    "description": "位于下丘脑底部，属于边缘系统，参与记忆巩固。"
+  },
+  "Model_3003_left_mammillary_body": {
+    "label": "左侧乳头体",
+    "description": "位于下丘脑底部，属于边缘系统，参与记忆巩固。"
+  },
+  "Model_3004_corpus_callosum": {
+    "label": "胼胝体",
+    "description": "位于大脑半球间，是最大的连合纤维束，连接左右大脑半球。"
+  },
+  "Model_3005_right_fornix_of_forebrain": {
+    "label": "右侧穹窿",
+    "description": "位于右侧大脑半球，是海马体至下丘脑的纤维束，参与记忆回路。"
+  },
+  "Model_3007_left_fornix_of_forebrain": {
+    "label": "左侧穹窿",
+    "description": "位于左侧大脑半球，是海马体至下丘脑的纤维束，参与记忆回路。"
+  },
+  "Model_3008_infundibulum_of_neurohypophysis": {
+    "label": "神经垂体漏斗",
+    "description": "连接下丘脑和神经垂体，输送抗利尿激素和催产素。"
+  },
+  "Model_3011_adenohypophysis": {
+    "label": "腺垂体",
+    "description": "位于垂体前部，分泌多种激素，调节生长、代谢和生殖。"
+  },
+  "Model_3012_neurohypophysis": {
+    "label": "神经垂体",
+    "description": "位于垂体后部，储存和释放下丘脑合成的抗利尿激素和催产素。"
+  },
+  "Model_3020_right_superior_colliculus": {
+    "label": "右侧上丘",
+    "description": "位于中脑顶盖，参与视觉反射和眼球运动。"
+  },
+  "Model_3020_right_superior_colliculus1": {
+    "label": "右侧上丘",
+    "description": "位于中脑顶盖，参与视觉反射和眼球运动。"
+  },
+  "Model_3021_left_superior_colliculus": {
+    "label": "左侧上丘",
+    "description": "位于中脑顶盖，参与视觉反射和眼球运动。"
+  },
+  "Model_3021_left_superior_colliculus1": {
+    "label": "左侧上丘",
+    "description": "位于中脑顶盖，参与视觉反射和眼球运动。"
+  },
+  "Model_3022_right_inferior_colliculus": {
+    "label": "右侧下丘",
+    "description": "位于中脑顶盖，参与听觉反射和声音定位。"
+  },
+  "Model_3022_right_inferior_colliculus1": {
+    "label": "右侧下丘",
+    "description": "位于中脑顶盖，参与听觉反射和声音定位。"
+  },
+  "Model_3023_left_inferior_colliculus": {
+    "label": "左侧下丘",
+    "description": "位于中脑顶盖，参与听觉反射和声音定位。"
+  },
+  "Model_3023_left_inferior_colliculus1": {
+    "label": "左侧下丘",
+    "description": "位于中脑顶盖，参与听觉反射和声音定位。"
+  },
+  "Model_3030_brachia_of_right_superior_colliculus": {
+    "label": "右侧上丘臂",
+    "description": "连接右侧上丘与外侧膝状体的纤维束，参与视觉反射。"
+  },
+  "Model_3030_brachia_of_right_superior_colliculus1": {
+    "label": "右侧上丘臂",
+    "description": "连接右侧上丘与外侧膝状体的纤维束，参与视觉反射。"
+  },
+  "Model_3031_brachia_of_left_superior_colliculus": {
+    "label": "左侧上丘臂",
+    "description": "连接左侧上丘与外侧膝状体的纤维束，参与视觉反射。"
+  },
+  "Model_3031_brachia_of_left_superior_colliculus1": {
+    "label": "左侧上丘臂",
+    "description": "连接左侧上丘与外侧膝状体的纤维束，参与视觉反射。"
+  },
+  "Model_3032_brachia_of_right_inferior_colliculus": {
+    "label": "右侧下丘臂",
+    "description": "连接右侧下丘与内侧膝状体的纤维束，参与听觉传导。"
+  },
+  "Model_3032_brachia_of_right_inferior_colliculus1": {
+    "label": "右侧下丘臂",
+    "description": "连接右侧下丘与内侧膝状体的纤维束，参与听觉传导。"
+  },
+  "Model_3033_brachia_of_left_inferior_colliculus": {
+    "label": "左侧下丘臂",
+    "description": "连接左侧下丘与内侧膝状体的纤维束，参与听觉传导。"
+  },
+  "Model_3033_brachia_of_left_inferior_colliculus1": {
+    "label": "左侧下丘臂",
+    "description": "连接左侧下丘与内侧膝状体的纤维束，参与听觉传导。"
+  },
+  "Model_4001_left_temporalis": {
+    "label": "左侧颞肌",
+    "description": "位于左侧颞窝，是咀嚼肌之一，收缩时上提下颌骨。"
+  },
+  "Model_4002_right_temporalis": {
+    "label": "右侧颞肌",
+    "description": "位于右侧颞窝，是咀嚼肌之一，收缩时上提下颌骨。"
+  },
+  "Model_4003_left_masseter": {
+    "label": "左侧咬肌",
+    "description": "位于左侧下颌支外侧，是咀嚼肌之一，收缩时上提下颌骨。"
+  },
+  "Model_4004_right_masseter": {
+    "label": "右侧咬肌",
+    "description": "位于右侧下颌支外侧，是咀嚼肌之一，收缩时上提下颌骨。"
+  },
+  "Model_4005_left_lateral_pterygoid": {
+    "label": "左侧翼外肌",
+    "description": "位于左侧颞下窝，参与张口和下颌前伸运动。"
+  },
+  "Model_4006_right_lateral_pterygoid": {
+    "label": "右侧翼外肌",
+    "description": "位于右侧颞下窝，参与张口和下颌前伸运动。"
+  },
+  "Model_4007_left_medial_pterygoid": {
+    "label": "左侧翼内肌",
+    "description": "位于左侧下颌支内侧，是咀嚼肌之一，收缩时上提下颌骨。"
+  },
+  "Model_4008_right_medial_pterygoid": {
+    "label": "右侧翼内肌",
+    "description": "位于右侧下颌支内侧，是咀嚼肌之一，收缩时上提下颌骨。"
+  },
+  "Model_4011_left_medial_rectus": {
+    "label": "左侧内直肌",
+    "description": "位于左侧眼眶内，是眼外肌之一，收缩时使眼球向内转动。"
+  },
+  "Model_4012_right_medial_rectus": {
+    "label": "右侧内直肌",
+    "description": "位于右侧眼眶内，是眼外肌之一，收缩时使眼球向内转动。"
+  },
+  "Model_4013_left_superior_rectus": {
+    "label": "左侧上直肌",
+    "description": "位于左侧眼眶内，是眼外肌之一，收缩时使眼球向上转动。"
+  },
+  "Model_4014_right_superior_rectus": {
+    "label": "右侧上直肌",
+    "description": "位于右侧眼眶内，是眼外肌之一，收缩时使眼球向上转动。"
+  },
+  "Model_4015_left_superior_oblique": {
+    "label": "左侧上斜肌",
+    "description": "位于左侧眼眶内，是眼外肌之一，收缩时使眼球向下向外转动。"
+  },
+  "Model_4016_right_superior_oblique": {
+    "label": "右侧上斜肌",
+    "description": "位于右侧眼眶内，是眼外肌之一，收缩时使眼球向下向外转动。"
+  },
+  "Model_4017_left_inferior_rectus": {
+    "label": "左侧下直肌",
+    "description": "位于左侧眼眶内，是眼外肌之一，收缩时使眼球向下转动。"
+  },
+  "Model_4018_right_inferior_rectus": {
+    "label": "右侧下直肌",
+    "description": "位于右侧眼眶内，是眼外肌之一，收缩时使眼球向下转动。"
+  },
+  "Model_4019_left_lateral_rectus": {
+    "label": "左侧外直肌",
+    "description": "位于左侧眼眶内，是眼外肌之一，收缩时使眼球向外转动。"
+  },
+  "Model_4020_right_lateral_rectus": {
+    "label": "右侧外直肌",
+    "description": "位于右侧眼眶内，是眼外肌之一，收缩时使眼球向外转动。"
+  },
+  "Model_4021_left_levator_palpebrae_superioris": {
+    "label": "左侧上睑提肌",
+    "description": "位于左侧眼眶内，收缩时上提上眼睑，睁眼。"
+  },
+  "Model_4022_right_levator_palpebrae_superioris": {
+    "label": "右侧上睑提肌",
+    "description": "位于右侧眼眶内，收缩时上提上眼睑，睁眼。"
+  },
+  "Model_4027_left_eyeball": {
+    "label": "左侧眼球",
+    "description": "位于左侧眼眶内，是视觉器官，接收光线并转化为神经信号。"
+  },
+  "Model_4028_right_eyeball": {
+    "label": "右侧眼球",
+    "description": "位于右侧眼眶内，是视觉器官，接收光线并转化为神经信号。"
+  },
+  "Model_4030_uvula": {
+    "label": "悬雍垂",
+    "description": "位于软腭后缘正中，参与吞咽和发音。"
+  },
+  "Model_4031_left_tensor_veli_palatini": {
+    "label": "左侧腭帆张肌",
+    "description": "位于左侧软腭，收缩时紧张腭帆，打开咽鼓管。"
+  },
+  "Model_4032_right_tensor_veli_palatini": {
+    "label": "右侧腭帆张肌",
+    "description": "位于右侧软腭，收缩时紧张腭帆，打开咽鼓管。"
+  },
+  "Model_4033_left_palatoglossus": {
+    "label": "左侧腭舌肌",
+    "description": "位于左侧腭舌弓内，收缩时上提舌根，缩小咽峡。"
+  },
+  "Model_4034_right_palatoglossus": {
+    "label": "右侧腭舌肌",
+    "description": "位于右侧腭舌弓内，收缩时上提舌根，缩小咽峡。"
+  },
+  "Model_4035_left_levator_veli_palatini": {
+    "label": "左侧腭帆提肌",
+    "description": "位于左侧软腭，收缩时上提软腭，关闭鼻咽腔。"
+  },
+  "Model_4036_right_levator_veli_palatini": {
+    "label": "右侧腭帆提肌",
+    "description": "位于右侧软腭，收缩时上提软腭，关闭鼻咽腔。"
+  },
+  "Model_4037_left_palatopharyngeus": {
+    "label": "左侧腭咽肌",
+    "description": "位于左侧腭咽弓内，收缩时上提咽部，缩小咽峡。"
+  },
+  "Model_4038_right_palatopharyngeus": {
+    "label": "右侧腭咽肌",
+    "description": "位于右侧腭咽弓内，收缩时上提咽部，缩小咽峡。"
+  },
+  "Model_4041_left_zygomaticus_major": {
+    "label": "左侧颧大肌",
+    "description": "位于左侧面部，收缩时拉口角向外上方，产生笑容。"
+  },
+  "Model_4042_right_zygomaticus_major": {
+    "label": "右侧颧大肌",
+    "description": "位于右侧面部，收缩时拉口角向外上方，产生笑容。"
+  },
+  "Model_4043_left_nasalis": {
+    "label": "左侧鼻肌",
+    "description": "位于左侧鼻部，收缩时压缩鼻孔。"
+  },
+  "Model_4044_right_nasalis": {
+    "label": "右侧鼻肌",
+    "description": "位于右侧鼻部，收缩时压缩鼻孔。"
+  },
+  "Model_4045_left_levator_labii_superioris": {
+    "label": "左侧上唇提肌",
+    "description": "位于左侧面部，收缩时上提上唇，露出上牙。"
+  },
+  "Model_4046_right_levator_labii_superioris": {
+    "label": "右侧上唇提肌",
+    "description": "位于右侧面部，收缩时上提上唇，露出上牙。"
+  },
+  "Model_4047_left_buccinator": {
+    "label": "左侧颊肌",
+    "description": "位于左侧颊部，收缩时使颊部紧贴牙齿，参与咀嚼和吹气。"
+  },
+  "Model_4048_right_buccinator": {
+    "label": "右侧颊肌",
+    "description": "位于右侧颊部，收缩时使颊部紧贴牙齿，参与咀嚼和吹气。"
+  },
+  "Model_4050_tongue": {
+    "label": "舌",
+    "description": "位于口腔内，由肌肉构成，参与咀嚼、吞咽、发音和味觉。"
+  },
+  "Model_4051_left_hyoglossus": {
+    "label": "左侧舌骨舌肌",
+    "description": "位于左侧舌部，收缩时下压和回缩舌。"
+  },
+  "Model_4052_right_hyoglossus": {
+    "label": "右侧舌骨舌肌",
+    "description": "位于右侧舌部，收缩时下压和回缩舌。"
+  },
+  "Model_4060_middle_constrictor": {
+    "label": "咽中缩肌",
+    "description": "位于咽部，是咽缩肌之一，收缩时缩小咽腔，推动食团。"
+  },
+  "Model_4061_left_stylopharyngeus": {
+    "label": "左侧茎突咽肌",
+    "description": "位于左侧咽部，收缩时上提咽部，协助吞咽。"
+  },
+  "Model_4062_right_stylopharyngeus": {
+    "label": "右侧茎突咽肌",
+    "description": "位于右侧咽部，收缩时上提咽部，协助吞咽。"
+  },
+  "Model_4071_left_rectus_capitis_posterior_minor": {
+    "label": "左侧头后小直肌",
+    "description": "位于左侧颈后部，收缩时使头后仰。"
+  },
+  "Model_4072_right_rectus_capitis_posterior_minor": {
+    "label": "右侧头后小直肌",
+    "description": "位于右侧颈后部，收缩时使头后仰。"
+  },
+  "Model_4073_left_longissimus_capitis": {
+    "label": "左侧头最长肌",
+    "description": "位于左侧颈后部，是竖脊肌的一部分，收缩时使头后仰和侧屈。"
+  },
+  "Model_4074_right_longissimus_capitis": {
+    "label": "右侧头最长肌",
+    "description": "位于右侧颈后部，是竖脊肌的一部分，收缩时使头后仰和侧屈。"
+  },
+  "Model_4075_left_semispinalis_capitis": {
+    "label": "左侧头半棘肌",
+    "description": "位于左侧颈后部，收缩时使头后仰和旋转。"
+  },
+  "Model_4076_right_semispinalis_capitis": {
+    "label": "右侧头半棘肌",
+    "description": "位于右侧颈后部，收缩时使头后仰和旋转。"
+  },
+  "Model_4077_left_longus_colli": {
+    "label": "左侧颈长肌",
+    "description": "位于左侧颈椎前方，收缩时使颈前屈。"
+  },
+  "Model_4078_right_longus_colli": {
+    "label": "右侧颈长肌",
+    "description": "位于右侧颈椎前方，收缩时使颈前屈。"
+  },
+  "Model_4079_left_superior_oblique_capitis": {
+    "label": "左侧头上斜肌",
+    "description": "位于左侧颈后部，收缩时使头后仰和侧屈。"
+  },
+  "Model_4080_right_superior_oblique_capitis": {
+    "label": "右侧头上斜肌",
+    "description": "位于右侧颈后部，收缩时使头后仰和侧屈。"
+  },
+  "Model_4081_left_stylohyoid": {
+    "label": "左侧茎突舌骨肌",
+    "description": "位于左侧颈部，收缩时上提舌骨。"
+  },
+  "Model_4082_right_stylohyoid": {
+    "label": "右侧茎突舌骨肌",
+    "description": "位于右侧颈部，收缩时上提舌骨。"
+  },
+  "Model_4083_left_anterior_rectus_capitis": {
+    "label": "左侧头前直肌",
+    "description": "位于左侧颈椎前方，收缩时使头前屈。"
+  },
+  "Model_4084_right_anterior_rectus_capitis": {
+    "label": "右侧头前直肌",
+    "description": "位于右侧颈椎前方，收缩时使头前屈。"
+  },
+  "Model_4085_left_trapezius": {
+    "label": "左侧斜方肌",
+    "description": "位于左侧颈部和背部，收缩时使肩胛骨内收、上提或下降。"
+  },
+  "Model_4086_right_trapezius": {
+    "label": "右侧斜方肌",
+    "description": "位于右侧颈部和背部，收缩时使肩胛骨内收、上提或下降。"
+  },
+  "Model_4087_left_longus_capitis": {
+    "label": "左侧头长肌",
+    "description": "位于左侧颈椎前方，收缩时使头前屈。"
+  },
+  "Model_4088_right_longus_capitis": {
+    "label": "右侧头长肌",
+    "description": "位于右侧颈椎前方，收缩时使头前屈。"
+  },
+  "Model_4089_left_sternocleidomastoid": {
+    "label": "左侧胸锁乳突肌",
+    "description": "位于左侧颈部，收缩时使头向同侧屈、面向对侧旋转。"
+  },
+  "Model_4090_right_sternocleidomastoid": {
+    "label": "右侧胸锁乳突肌",
+    "description": "位于右侧颈部，收缩时使头向同侧屈、面向对侧旋转。"
+  },
+  "Model_4091_left_middle_scalenus": {
+    "label": "左侧中斜角肌",
+    "description": "位于左侧颈椎外侧，收缩时使颈侧屈，并协助吸气。"
+  },
+  "Model_4092_right_middle_scalenus": {
+    "label": "右侧中斜角肌",
+    "description": "位于右侧颈椎外侧，收缩时使颈侧屈，并协助吸气。"
+  },
+  "Model_4093_left_digastric": {
+    "label": "左侧二腹肌",
+    "description": "位于左侧下颌骨下方，收缩时上提舌骨或下降下颌骨。"
+  },
+  "Model_4094_right_digastric": {
+    "label": "右侧二腹肌",
+    "description": "位于右侧下颌骨下方，收缩时上提舌骨或下降下颌骨。"
+  },
+  "Model_4095_left_splenius_capitis": {
+    "label": "左侧头夹肌",
+    "description": "位于左侧颈后部，收缩时使头后仰和旋转。"
+  },
+  "Model_4096_right_splenius_capitis": {
+    "label": "右侧头夹肌",
+    "description": "位于右侧颈后部，收缩时使头后仰和旋转。"
+  },
+  "Model_4097_left_inferior_oblique_capitis": {
+    "label": "左侧头下斜肌",
+    "description": "位于左侧颈后部，收缩时使头旋转。"
+  },
+  "Model_4098_right_inferior_oblique_capitis": {
+    "label": "右侧头下斜肌",
+    "description": "位于右侧颈后部，收缩时使头旋转。"
+  },
+  "Model_4099_left_rectus_capitis_posterior_major": {
+    "label": "左侧头后大直肌",
+    "description": "位于左侧颈后部，收缩时使头后仰。"
+  },
+  "Model_4100_right_rectus_capitis_posterior_major": {
+    "label": "右侧头后大直肌",
+    "description": "位于右侧颈后部，收缩时使头后仰。"
+  },
+  "Model_5001_left_calcarine_sulcus": {
+    "label": "左侧距状沟",
+    "description": "位于左侧枕叶内侧，是初级视觉皮层的所在位置。"
+  },
+  "Model_5001_left_calcarine_sulcus1": {
+    "label": "左侧距状沟",
+    "description": "位于左侧枕叶内侧，是初级视觉皮层的所在位置。"
+  },
+  "Model_5002_right_calcarine_sulcus": {
+    "label": "右侧距状沟",
+    "description": "位于右侧枕叶内侧，是初级视觉皮层的所在位置。"
+  },
+  "Model_5002_right_calcarine_sulcus1": {
+    "label": "右侧距状沟",
+    "description": "位于右侧枕叶内侧，是初级视觉皮层的所在位置。"
+  },
+  "Model_5003_left_central_sulcus": {
+    "label": "左侧中央沟",
+    "description": "位于左侧大脑半球，分隔额叶和顶叶，前方是中央前回，后方是中央后回。"
+  },
+  "Model_5003_left_central_sulcus1": {
+    "label": "左侧中央沟",
+    "description": "位于左侧大脑半球，分隔额叶和顶叶，前方是中央前回，后方是中央后回。"
+  },
+  "Model_5004_right_central_sulcus": {
+    "label": "右侧中央沟",
+    "description": "位于右侧大脑半球，分隔额叶和顶叶，前方是中央前回，后方是中央后回。"
+  },
+  "Model_5004_right_central_sulcus1": {
+    "label": "右侧中央沟",
+    "description": "位于右侧大脑半球，分隔额叶和顶叶，前方是中央前回，后方是中央后回。"
+  },
+  "Model_5005_left_cingulate_sulcus": {
+    "label": "左侧扣带沟",
+    "description": "位于左侧大脑半球内侧，分隔扣带回和额上回。"
+  },
+  "Model_5005_left_cingulate_sulcus1": {
+    "label": "左侧扣带沟",
+    "description": "位于左侧大脑半球内侧，分隔扣带回和额上回。"
+  },
+  "Model_5006_right_cingulate_sulcus": {
+    "label": "右侧扣带沟",
+    "description": "位于右侧大脑半球内侧，分隔扣带回和额上回。"
+  },
+  "Model_5006_right_cingulate_sulcus1": {
+    "label": "右侧扣带沟",
+    "description": "位于右侧大脑半球内侧，分隔扣带回和额上回。"
+  },
+  "Model_5007_left_collateral_sulcus": {
+    "label": "左侧侧副沟",
+    "description": "位于左侧颞叶和枕叶底部，分隔梭状回和海马旁回。"
+  },
+  "Model_5007_left_collateral_sulcus1": {
+    "label": "左侧侧副沟",
+    "description": "位于左侧颞叶和枕叶底部，分隔梭状回和海马旁回。"
+  },
+  "Model_5008_right_collateral_sulcus": {
+    "label": "右侧侧副沟",
+    "description": "位于右侧颞叶和枕叶底部，分隔梭状回和海马旁回。"
+  },
+  "Model_5008_right_collateral_sulcus1": {
+    "label": "右侧侧副沟",
+    "description": "位于右侧颞叶和枕叶底部，分隔梭状回和海马旁回。"
+  },
+  "Model_5009_left_inferior_frontal_sulcus": {
+    "label": "左侧额下沟",
+    "description": "位于左侧额叶，分隔额下回和额中回。"
+  },
+  "Model_5009_left_inferior_frontal_sulcus1": {
+    "label": "左侧额下沟",
+    "description": "位于左侧额叶，分隔额下回和额中回。"
+  },
+  "Model_5010_right_inferior_frontal_sulcus": {
+    "label": "右侧额下沟",
+    "description": "位于右侧额叶，分隔额下回和额中回。"
+  },
+  "Model_5010_right_inferior_frontal_sulcus1": {
+    "label": "右侧额下沟",
+    "description": "位于右侧额叶，分隔额下回和额中回。"
+  },
+  "Model_5011_left_intraparietal_sulcus": {
+    "label": "左侧顶内沟",
+    "description": "位于左侧顶叶，分隔顶上小叶和顶下小叶。"
+  },
+  "Model_5011_left_intraparietal_sulcus1": {
+    "label": "左侧顶内沟",
+    "description": "位于左侧顶叶，分隔顶上小叶和顶下小叶。"
+  },
+  "Model_5012_right_intraparietal_sulcus": {
+    "label": "右侧顶内沟",
+    "description": "位于右侧顶叶，分隔顶上小叶和顶下小叶。"
+  },
+  "Model_5012_right_intraparietal_sulcus1": {
+    "label": "右侧顶内沟",
+    "description": "位于右侧顶叶，分隔顶上小叶和顶下小叶。"
+  },
+  "Model_5013_left_parieto-occipital_sulcus": {
+    "label": "左侧顶枕沟",
+    "description": "位于左侧大脑半球内侧，分隔顶叶和枕叶。"
+  },
+  "Model_5013_left_parieto-occipital_sulcus1": {
+    "label": "左侧顶枕沟",
+    "description": "位于左侧大脑半球内侧，分隔顶叶和枕叶。"
+  },
+  "Model_5014_right_parieto-occipital_sulcus": {
+    "label": "右侧顶枕沟",
+    "description": "位于右侧大脑半球内侧，分隔顶叶和枕叶。"
+  },
+  "Model_5014_right_parieto-occipital_sulcus1": {
+    "label": "右侧顶枕沟",
+    "description": "位于右侧大脑半球内侧，分隔顶叶和枕叶。"
+  },
+  "Model_5015_left_postcentral_sulcus": {
+    "label": "左侧中央后沟",
+    "description": "位于左侧顶叶，位于中央后回后方。"
+  },
+  "Model_5015_left_postcentral_sulcus1": {
+    "label": "左侧中央后沟",
+    "description": "位于左侧顶叶，位于中央后回后方。"
+  },
+  "Model_5016_right_postcentral_sulcus": {
+    "label": "右侧中央后沟",
+    "description": "位于右侧顶叶，位于中央后回后方。"
+  },
+  "Model_5016_right_postcentral_sulcus1": {
+    "label": "右侧中央后沟",
+    "description": "位于右侧顶叶，位于中央后回后方。"
+  },
+  "Model_5017_left_precentral_sulcus": {
+    "label": "左侧中央前沟",
+    "description": "位于左侧额叶，位于中央前回前方。"
+  },
+  "Model_5017_left_precentral_sulcus1": {
+    "label": "左侧中央前沟",
+    "description": "位于左侧额叶，位于中央前回前方。"
+  },
+  "Model_5018_right_precentral_sulcus": {
+    "label": "右侧中央前沟",
+    "description": "位于右侧额叶，位于中央前回前方。"
+  },
+  "Model_5018_right_precentral_sulcus1": {
+    "label": "右侧中央前沟",
+    "description": "位于右侧额叶，位于中央前回前方。"
+  },
+  "Model_5019_left_superior_frontal_sulcus": {
+    "label": "左侧额上沟",
+    "description": "位于左侧额叶，分隔额上回和额中回。"
+  },
+  "Model_5019_left_superior_frontal_sulcus1": {
+    "label": "左侧额上沟",
+    "description": "位于左侧额叶，分隔额上回和额中回。"
+  },
+  "Model_5020_right_superior_frontal_sulcus": {
+    "label": "右侧额上沟",
+    "description": "位于右侧额叶，分隔额上回和额中回。"
+  },
+  "Model_5020_right_superior_frontal_sulcus1": {
+    "label": "右侧额上沟",
+    "description": "位于右侧额叶，分隔额上回和额中回。"
+  },
+  "Model_5021_left_superior_temporal_sulcus": {
+    "label": "左侧颞上沟",
+    "description": "位于左侧颞叶，分隔颞上回和颞中回。"
+  },
+  "Model_5021_left_superior_temporal_sulcus1": {
+    "label": "左侧颞上沟",
+    "description": "位于左侧颞叶，分隔颞上回和颞中回。"
+  }
+}

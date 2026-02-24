@@ -44,7 +44,7 @@ credentials.json
 
 # Large Assets & Logs
 *.log
-/models/*.glb
-/models/*.glb.bak
-/models/*.gltf
-/models/*.gltf.bak
+/assets/models/*.glb
+/assets/models/*.glb.bak
+/assets/models/*.gltf
+/assets/models/*.gltf.bak

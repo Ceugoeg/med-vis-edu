@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepMed 3D Anatomy (MVP)</title>
+    <title>DeepMed 3D Anatomy (Intent-Driven)</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
@@ -12,42 +12,56 @@
     <div id="canvas-container"></div>
     
     <div id="ui-layer">
+        <div id="top-nav">
+            <div class="nav-group">
+                <label for="model-select">解剖模型</label>
+                <select id="model-select">
+                    <option value="brain">Brain (高精度脑部)</option>
+                </select>
+            </div>
+            <div class="nav-group">
+                <label for="lang-select">医学语境</label>
+                <select id="lang-select">
+                    <option value="zh">中文 (zh-CN)</option>
+                    <option value="en">English (en-US)</option>
+                </select>
+            </div>
+        </div>
+
         <div id="status-bar">
-            手势状态: <span id="gesture-state">使用鼠标降级模式</span> | 
+            手势状态: <span id="gesture-state">系统初始化中...</span> | 
             交互锁定: <span id="lock-state">OFF</span>
         </div>
         
         <div id="crosshair"></div>
-        <div id="toast-msg">请精准指向目标解剖区</div>
+        <div id="toast-msg">系统提示</div>
+
+        <div id="cancel-zone">
+            <div class="cancel-icon">✖</div>
+            <div class="cancel-text">将手势移至此处并松开以取消录音</div>
+        </div>
 
         <div id="sidebar">
-            <div id="cancel-zone">
-                <div class="cancel-icon">✖</div>
-                <div class="cancel-text">松开指尖取消录音</div>
-            </div>
-
             <div id="sidebar-header">
-                <h2 id="part-name">等待选中...</h2>
+                <h2 id="part-name">等待探索...</h2>
                 <div class="ai-badge">DeepMed API</div>
-                <div id="part-desc">请通过鼠标点击（捏合）选中具体的解剖部位以获取深度检索信息。</div>
+                <div id="part-desc">请通过悬停与捏合（PINCH）选中特定的解剖部位，或在下方直接下达全局语音指令。</div>
             </div>
 
-            <div id="chat-history">
-                </div>
-            
+            <div id="chat-history"></div>
             <div id="loading-spinner" style="display: none;">正在请求 DeepMed 远端算力...</div>
+        </div>
 
-            <div id="chat-input-area">
-                <div class="input-row">
-                    <input type="text" id="chat-input" placeholder="输入病理或解剖问题..." disabled autocomplete="off" />
-                    <button id="send-btn" disabled>发送</button>
-                </div>
-                <div class="mic-container">
-                    <button id="mic-btn" disabled>
-                        <span class="mic-icon">🎙️</span>
-                        <span class="mic-hint">按住捏合说话</span>
-                    </button>
-                </div>
+        <div id="bottom-console">
+            <div class="mic-container">
+                <button id="mic-btn" disabled>
+                    <span class="mic-icon">🎙️</span>
+                    <span class="mic-hint">捏合说话</span>
+                </button>
+            </div>
+            <div class="input-row">
+                <input type="text" id="chat-input" placeholder="语音或输入全局指令 (如：展示左侧海马体)..." disabled autocomplete="off" />
+                <button id="send-btn" disabled>发送</button>
             </div>
         </div>
     </div>

@@ -1,0 +1,1438 @@
+{
+  "Model_5022_right_superior_temporal_sulcus": {
+    "label": "Right Superior Temporal Sulcus",
+    "description": "Located in the lateral right temporal lobe, it separates the superior and middle temporal gyri and is involved in auditory and language processing."
+  },
+  "Model_5022_right_superior_temporal_sulcus1": {
+    "label": "Right Superior Temporal Sulcus",
+    "description": "Located in the lateral right temporal lobe, it is part of the superior temporal sulcus and participates in auditory and language processing."
+  },
+  "Model_2_white_matter_of_left_cerebral_hemisphere": {
+    "label": "Left Cerebral Hemisphere White Matter",
+    "description": "Located beneath the cortex of the left cerebral hemisphere, it consists of nerve fibers that transmit signals between different brain regions."
+  },
+  "Model_3_skin": {
+    "label": "Skin",
+    "description": "The tissue covering the body surface, providing protection, sensation, and temperature regulation."
+  },
+  "Model_4_left_lateral_ventricle": {
+    "label": "Left Lateral Ventricle",
+    "description": "Located within the left cerebral hemisphere, it is part of the ventricular system and contains cerebrospinal fluid."
+  },
+  "Model_5_temporal_horn_of_left_lateral_ventricle": {
+    "label": "Left Lateral Ventricle Temporal Horn",
+    "description": "An anterior extension of the left lateral ventricle into the temporal lobe, containing cerebrospinal fluid."
+  },
+  "Model_7_white_matter_of_left_hemisphere_of_ce_57V3": {
+    "label": "Left Cerebral Hemisphere White Matter",
+    "description": "Located beneath the cortex of the left cerebral hemisphere, it consists of nerve fibers that transmit signals between different brain regions."
+  },
+  "Model_11_left_caudate_nucleus": {
+    "label": "Left Caudate Nucleus",
+    "description": "Located deep in the left cerebral hemisphere, it is part of the basal ganglia and involved in motor control and cognition."
+  },
+  "Model_12_left_putamen": {
+    "label": "Left Putamen",
+    "description": "Located deep in the left cerebral hemisphere, it is part of the basal ganglia and involved in motor regulation."
+  },
+  "Model_13_left_globus_pallidus_pars_externa": {
+    "label": "Left Globus Pallidus Pars Externa",
+    "description": "Located in the left basal ganglia, it is the external part of the globus pallidus and participates in motor regulation."
+  },
+  "Model_15_fourth_ventricle": {
+    "label": "Fourth Ventricle",
+    "description": "Located between the brainstem and cerebellum, it is part of the ventricular system and contains cerebrospinal fluid."
+  },
+  "Model_17_left_hippocampus": {
+    "label": "Left Hippocampus",
+    "description": "Located in the medial temporal lobe of the left hemisphere, it is critical for consolidating short-term memory into long-term memory and spatial navigation."
+  },
+  "Model_18_left_amygdala": {
+    "label": "Left Amygdala",
+    "description": "Located in the anterior temporal lobe of the left hemisphere, it is involved in emotional processing and fear responses."
+  },
+  "Model_19_aqueduct": {
+    "label": "Cerebral Aqueduct",
+    "description": "Located in the midbrain, it connects the third and fourth ventricles and contains cerebrospinal fluid."
+  },
+  "Model_24_third_ventricle": {
+    "label": "Third Ventricle",
+    "description": "Located in the diencephalon, it is part of the ventricular system and contains cerebrospinal fluid."
+  },
+  "Model_25_left_globus_pallidus_pars_interna": {
+    "label": "Left Globus Pallidus Pars Interna",
+    "description": "Located in the left basal ganglia, it is the internal part of the globus pallidus and participates in motor regulation."
+  },
+  "Model_26_left_nucleus_accumbens": {
+    "label": "Left Nucleus Accumbens",
+    "description": "Located in the left basal ganglia, it is a key part of the reward circuit involved in motivation and pleasure."
+  },
+  "Model_35_pons": {
+    "label": "Pons",
+    "description": "Located in the midbrainstem, it connects the medulla oblongata and midbrain, involved in respiratory regulation and sensory-motor relay."
+  },
+  "Model_40_part_of_midbrain": {
+    "label": "Part of Midbrain",
+    "description": "Located in the upper brainstem, it participates in visual and auditory reflexes and motor control."
+  },
+  "Model_41_white_matter_of_right_cerebral_hemisphere": {
+    "label": "Right Cerebral Hemisphere White Matter",
+    "description": "Located beneath the cortex of the right cerebral hemisphere, it consists of nerve fibers that transmit signals between different brain regions."
+  },
+  "Model_43_right_lateral_ventricle": {
+    "label": "Right Lateral Ventricle",
+    "description": "Located within the right cerebral hemisphere, it is part of the ventricular system and contains cerebrospinal fluid."
+  },
+  "Model_44_temporal_horn_of_right_lateral_ventricle": {
+    "label": "Right Lateral Ventricle Temporal Horn",
+    "description": "An anterior extension of the right lateral ventricle into the temporal lobe, containing cerebrospinal fluid."
+  },
+  "Model_46_white_matter_of_right_hemisphere_of__XB7U": {
+    "label": "Right Cerebral Hemisphere White Matter",
+    "description": "Located beneath the cortex of the right cerebral hemisphere, it consists of nerve fibers that transmit signals between different brain regions."
+  },
+  "Model_50_right_caudate_nucleus": {
+    "label": "Right Caudate Nucleus",
+    "description": "Located deep in the right cerebral hemisphere, it is part of the basal ganglia and involved in motor control and cognition."
+  },
+  "Model_51_right_putamen": {
+    "label": "Right Putamen",
+    "description": "Located deep in the right cerebral hemisphere, it is part of the basal ganglia and involved in motor regulation."
+  },
+  "Model_52_right_globus_pallidus_pars_externa": {
+    "label": "Right Globus Pallidus Pars Externa",
+    "description": "Located in the right basal ganglia, it is the external part of the globus pallidus and participates in motor regulation."
+  },
+  "Model_53_right_hippocampus": {
+    "label": "Right Hippocampus",
+    "description": "Located in the medial temporal lobe of the right hemisphere, it is critical for memory consolidation and spatial navigation."
+  },
+  "Model_54_right_amygdala": {
+    "label": "Right Amygdala",
+    "description": "Located in the anterior temporal lobe of the right hemisphere, it is involved in emotional processing and fear responses."
+  },
+  "Model_58_right_nucleus_accumbens": {
+    "label": "Right Nucleus Accumbens",
+    "description": "Located in the right basal ganglia, it is a key part of the reward circuit involved in motivation and pleasure."
+  },
+  "Model_61_medulla_oblongata": {
+    "label": "Medulla Oblongata",
+    "description": "Located at the lowest part of the brainstem, it connects the spinal cord and pons, and regulates vital functions such as heartbeat and respiration."
+  },
+  "Model_66_left_substantia_nigra": {
+    "label": "Left Substantia Nigra",
+    "description": "Located in the left midbrain, it is a cluster of dopaminergic neurons involved in motor control."
+  },
+  "Model_71_right_substantia_nigra": {
+    "label": "Right Substantia Nigra",
+    "description": "Located in the right midbrain, it is a cluster of dopaminergic neurons involved in motor control."
+  },
+  "Model_72_pineal_body": {
+    "label": "Pineal Body",
+    "description": "Located at the top of the diencephalon, it secretes melatonin and regulates circadian rhythms."
+  },
+  "Model_77_left_optic_nerve": {
+    "label": "Left Optic Nerve",
+    "description": "Extending from the left orbit to the optic chiasm, it transmits visual information from the left visual field."
+  },
+  "Model_77_left_optic_nerve1": {
+    "label": "Left Optic Nerve",
+    "description": "Part of the left optic nerve, it conducts visual signals from the eye to the brain."
+  },
+  "Model_78_left_optic_tract": {
+    "label": "Left Optic Tract",
+    "description": "Extending from the optic chiasm to the lateral geniculate body, it carries visual information."
+  },
+  "Model_79_left_red_nucleus": {
+    "label": "Left Red Nucleus",
+    "description": "Located in the left midbrain, it is involved in motor coordination."
+  },
+  "Model_83_right_globus_pallidus_pars_interna": {
+    "label": "Right Globus Pallidus Pars Interna",
+    "description": "Located in the right basal ganglia, it is the internal part of the globus pallidus and participates in motor regulation."
+  },
+  "Model_84_right_red_nucleus": {
+    "label": "Right Red Nucleus",
+    "description": "Located in the right midbrain, it is involved in motor coordination."
+  },
+  "Model_85_optic_chiasm": {
+    "label": "Optic Chiasm",
+    "description": "Located anterior to the hypothalamus, it is where the left and right optic nerves partially cross."
+  },
+  "Model_96_pellucid_septum": {
+    "label": "Septum Pellucidum",
+    "description": "Located between the lateral ventricles, it consists of two thin membranes separating the ventricles."
+  },
+  "Model_100_left_mammillothalamic_tract": {
+    "label": "Left Mammillothalamic Tract",
+    "description": "A fiber bundle connecting the left mammillary body to the anterior thalamic nucleus, part of the limbic circuit."
+  },
+  "Model_142_anterior_commissure": {
+    "label": "Anterior Commissure",
+    "description": "A fiber bundle connecting the temporal lobes and olfactory cortices across hemispheres."
+  },
+  "Model_200_right_mammillothalamic_tract": {
+    "label": "Right Mammillothalamic Tract",
+    "description": "A fiber bundle connecting the right mammillary body to the anterior thalamic nucleus, part of the limbic circuit."
+  },
+  "Model_215_right_optic_nerve": {
+    "label": "Right Optic Nerve",
+    "description": "Extending from the right orbit to the optic chiasm, it transmits visual information from the right visual field."
+  },
+  "Model_216_right_optic_tract": {
+    "label": "Right Optic Tract",
+    "description": "Extending from the optic chiasm to the lateral geniculate body, it carries visual information."
+  },
+  "Model_300_left-I_II-v": {
+    "label": "Left Cerebellar Vermis Lobules I-II",
+    "description": "Located in the anterior cerebellar vermis, involved in balance control of the trunk and limbs."
+  },
+  "Model_301_left-III-v": {
+    "label": "Left Cerebellar Vermis Lobule III",
+    "description": "Located in the anterior cerebellar vermis, involved in motor coordination and balance."
+  },
+  "Model_302_left-IV-v": {
+    "label": "Left Cerebellar Vermis Lobule IV",
+    "description": "Located in the anterior cerebellar vermis, involved in motor coordination."
+  },
+  "Model_303_left-V-v": {
+    "label": "Left Cerebellar Vermis Lobule V",
+    "description": "Located in the cerebellar vermis, involved in limb motor coordination."
+  },
+  "Model_304_left-VI-v": {
+    "label": "Left Cerebellar Vermis Lobule VI",
+    "description": "Located in the cerebellar vermis, involved in motor coordination."
+  },
+  "Model_307_left-VIIB-v": {
+    "label": "Left Cerebellar Vermis Lobule VIIB",
+    "description": "Located in the posterior cerebellar vermis, involved in fine motor control."
+  },
+  "Model_308_left-VIIIA-v": {
+    "label": "Left Cerebellar Vermis Lobule VIIIA",
+    "description": "Located in the posterior cerebellar vermis, involved in eye movements and auditory reflexes."
+  },
+  "Model_309_left-VIIIB-v": {
+    "label": "Left Cerebellar Vermis Lobule VIIIB",
+    "description": "Located in the posterior cerebellar vermis, involved in balance and eye movements."
+  },
+  "Model_310_left-IX-v": {
+    "label": "Left Cerebellar Vermis Lobule IX",
+    "description": "Located in the posterior cerebellar vermis, involved in visceral sensation and balance."
+  },
+  "Model_311_left-X-v": {
+    "label": "Left Cerebellar Vermis Lobule X",
+    "description": "Located in the posterior cerebellar vermis (nodulus), involved in vestibular function."
+  },
+  "Model_312_left-III-m": {
+    "label": "Left Cerebellar Hemisphere Lobule III",
+    "description": "Located in the left anterior cerebellar hemisphere, involved in ipsilateral limb motor coordination."
+  },
+  "Model_313_left-IV-m": {
+    "label": "Left Cerebellar Hemisphere Lobule IV",
+    "description": "Located in the left anterior cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_314_left-V-m": {
+    "label": "Left Cerebellar Hemisphere Lobule V",
+    "description": "Located in the left cerebellar hemisphere, involved in limb motor coordination."
+  },
+  "Model_315_left-VI-m": {
+    "label": "Left Cerebellar Hemisphere Lobule VI",
+    "description": "Located in the left cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_316_left-VIIA_crusI-m": {
+    "label": "Left Cerebellar Hemisphere Lobule VIIA Crus I",
+    "description": "Located in the left posterior cerebellar hemisphere, involved in fine motor control and cognitive functions."
+  },
+  "Model_317_left-VIIA_crusII-m": {
+    "label": "Left Cerebellar Hemisphere Lobule VIIA Crus II",
+    "description": "Located in the left posterior cerebellar hemisphere, involved in motor and cognitive coordination."
+  },
+  "Model_318_left-VIIB-m": {
+    "label": "Left Cerebellar Hemisphere Lobule VIIB",
+    "description": "Located in the left posterior cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_319_left-VIIIA-m": {
+    "label": "Left Cerebellar Hemisphere Lobule VIIIA",
+    "description": "Located in the left posterior cerebellar hemisphere, involved in eye movements and auditory reflexes."
+  },
+  "Model_320_left-VIIIB-m": {
+    "label": "Left Cerebellar Hemisphere Lobule VIIIB",
+    "description": "Located in the left posterior cerebellar hemisphere, involved in balance and eye movements."
+  },
+  "Model_321_left-IX-m": {
+    "label": "Left Cerebellar Hemisphere Lobule IX",
+    "description": "Located in the left posterior cerebellar hemisphere, involved in balance and visceral sensation."
+  },
+  "Model_323_left-V-l": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule V",
+    "description": "Located in the lateral left cerebellar hemisphere, involved in fine motor control."
+  },
+  "Model_324_left-VI-l": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule VI",
+    "description": "Located in the lateral left cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_327_left-VIIA_crusI-l1": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule VIIA Crus I",
+    "description": "Located in the lateral left cerebellar hemisphere, involved in fine motor control and cognition."
+  },
+  "Model_328_left-VIIA_crusII-l1": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule VIIA Crus II",
+    "description": "Located in the lateral left cerebellar hemisphere, involved in motor and cognitive coordination."
+  },
+  "Model_329_left-VIIB-l": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule VIIB",
+    "description": "Located in the lateral left cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_330_left-VIIIA-l": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule VIIIA",
+    "description": "Located in the lateral left cerebellar hemisphere, involved in eye movements and auditory reflexes."
+  },
+  "Model_331_left-VIIIB-l": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule VIIIB",
+    "description": "Located in the lateral left cerebellar hemisphere, involved in balance and eye movements."
+  },
+  "Model_332_left-VIIA_crusI-l2": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule VIIA Crus I (Part 2)",
+    "description": "An extension of the left lateral cerebellar Crus I, involved in fine motor control and cognition."
+  },
+  "Model_333_left-VIIA_crusII-l2": {
+    "label": "Left Lateral Cerebellar Hemisphere Lobule VIIA Crus II (Part 2)",
+    "description": "An extension of the left lateral cerebellar Crus II, involved in motor and cognitive coordination."
+  },
+  "Model_334_right-I_II-v": {
+    "label": "Right Cerebellar Vermis Lobules I-II",
+    "description": "Located in the anterior cerebellar vermis, involved in balance control of the trunk and limbs."
+  },
+  "Model_335_right-III-v": {
+    "label": "Right Cerebellar Vermis Lobule III",
+    "description": "Located in the anterior cerebellar vermis, involved in motor coordination and balance."
+  },
+  "Model_336_right-IV-v": {
+    "label": "Right Cerebellar Vermis Lobule IV",
+    "description": "Located in the anterior cerebellar vermis, involved in motor coordination."
+  },
+  "Model_337_right-V-v": {
+    "label": "Right Cerebellar Vermis Lobule V",
+    "description": "Located in the cerebellar vermis, involved in limb motor coordination."
+  },
+  "Model_338_right-VI-v": {
+    "label": "Right Cerebellar Vermis Lobule VI",
+    "description": "Located in the cerebellar vermis, involved in motor coordination."
+  },
+  "Model_341_right-VIIB-v": {
+    "label": "Right Cerebellar Vermis Lobule VIIB",
+    "description": "Located in the posterior cerebellar vermis, involved in fine motor control."
+  },
+  "Model_342_right-VIIIA-v": {
+    "label": "Right Cerebellar Vermis Lobule VIIIA",
+    "description": "Located in the posterior cerebellar vermis, involved in eye movements and auditory reflexes."
+  },
+  "Model_343_right-VIIIB-v": {
+    "label": "Right Cerebellar Vermis Lobule VIIIB",
+    "description": "Located in the posterior cerebellar vermis, involved in balance and eye movements."
+  },
+  "Model_344_right-IX-v": {
+    "label": "Right Cerebellar Vermis Lobule IX",
+    "description": "Located in the posterior cerebellar vermis, involved in visceral sensation and balance."
+  },
+  "Model_345_right-X-v": {
+    "label": "Right Cerebellar Vermis Lobule X",
+    "description": "Located in the posterior cerebellar vermis (nodulus), involved in vestibular function."
+  },
+  "Model_346_right-III-m": {
+    "label": "Right Cerebellar Hemisphere Lobule III",
+    "description": "Located in the right anterior cerebellar hemisphere, involved in ipsilateral limb motor coordination."
+  },
+  "Model_347_right-IV-m": {
+    "label": "Right Cerebellar Hemisphere Lobule IV",
+    "description": "Located in the right anterior cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_348_right-V-m": {
+    "label": "Right Cerebellar Hemisphere Lobule V",
+    "description": "Located in the right cerebellar hemisphere, involved in limb motor coordination."
+  },
+  "Model_349_right-VI-m": {
+    "label": "Right Cerebellar Hemisphere Lobule VI",
+    "description": "Located in the right cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_350_right-VIIA_crusI-m": {
+    "label": "Right Cerebellar Hemisphere Lobule VIIA Crus I",
+    "description": "Located in the right posterior cerebellar hemisphere, involved in fine motor control and cognitive functions."
+  },
+  "Model_351_right-VIIA_crusII-m": {
+    "label": "Right Cerebellar Hemisphere Lobule VIIA Crus II",
+    "description": "Located in the right posterior cerebellar hemisphere, involved in motor and cognitive coordination."
+  },
+  "Model_352_right-VIIB-m": {
+    "label": "Right Cerebellar Hemisphere Lobule VIIB",
+    "description": "Located in the right posterior cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_353_right-VIIIA-m": {
+    "label": "Right Cerebellar Hemisphere Lobule VIIIA",
+    "description": "Located in the right posterior cerebellar hemisphere, involved in eye movements and auditory reflexes."
+  },
+  "Model_354_right-VIIIB-m": {
+    "label": "Right Cerebellar Hemisphere Lobule VIIIB",
+    "description": "Located in the right posterior cerebellar hemisphere, involved in balance and eye movements."
+  },
+  "Model_355_right-IX-m": {
+    "label": "Right Cerebellar Hemisphere Lobule IX",
+    "description": "Located in the right posterior cerebellar hemisphere, involved in balance and visceral sensation."
+  },
+  "Model_357_right-V-l": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule V",
+    "description": "Located in the lateral right cerebellar hemisphere, involved in fine motor control."
+  },
+  "Model_358_right-VI-l": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule VI",
+    "description": "Located in the lateral right cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_361_right-VIIA_crusI-l1": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule VIIA Crus I",
+    "description": "Located in the lateral right cerebellar hemisphere, involved in fine motor control and cognition."
+  },
+  "Model_362_right-VIIA_crusII-l1": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule VIIA Crus II",
+    "description": "Located in the lateral right cerebellar hemisphere, involved in motor and cognitive coordination."
+  },
+  "Model_363_right-VIIB-l": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule VIIB",
+    "description": "Located in the lateral right cerebellar hemisphere, involved in motor coordination."
+  },
+  "Model_364_right-VIIIA-l": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule VIIIA",
+    "description": "Located in the lateral right cerebellar hemisphere, involved in eye movements and auditory reflexes."
+  },
+  "Model_365_right-VIIIB-l": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule VIIIB",
+    "description": "Located in the lateral right cerebellar hemisphere, involved in balance and eye movements."
+  },
+  "Model_366_right-VIIA_crusI-l2": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule VIIA Crus I (Part 2)",
+    "description": "An extension of the right lateral cerebellar Crus I, involved in fine motor control and cognition."
+  },
+  "Model_367_right-VIIA_crusII-l2": {
+    "label": "Right Lateral Cerebellar Hemisphere Lobule VIIA Crus II (Part 2)",
+    "description": "An extension of the right lateral cerebellar Crus II, involved in motor and cognitive coordination."
+  },
+  "Model_371_left-Dentate-nucleus": {
+    "label": "Left Dentate Nucleus",
+    "description": "Located in the left cerebellar hemisphere, it is the largest cerebellar nucleus, involved in motor planning and coordination."
+  },
+  "Model_373_left-FaGE_nuclei": {
+    "label": "Left Cerebellar Nuclei (Fastigial, Globose, Emboliform)",
+    "description": "Located in the left cerebellar white matter, these nuclei include fastigial, globose, and emboliform, involved in balance and motor regulation."
+  },
+  "Model_375_right-Dentate-nucleus": {
+    "label": "Right Dentate Nucleus",
+    "description": "Located in the right cerebellar hemisphere, it is the largest cerebellar nucleus, involved in motor planning and coordination."
+  },
+  "Model_377_right-FaGE_nuclei": {
+    "label": "Right Cerebellar Nuclei (Fastigial, Globose, Emboliform)",
+    "description": "Located in the right cerebellar white matter, these nuclei include fastigial, globose, and emboliform, involved in balance and motor regulation."
+  },
+  "Model_380_left_anterior_superior_hypothalamus": {
+    "label": "Left Anterior Superior Hypothalamus",
+    "description": "Located in the left anterior hypothalamus, involved in thermoregulation and autonomic control."
+  },
+  "Model_381_left_anterior_inferior_hypothalamus": {
+    "label": "Left Anterior Inferior Hypothalamus",
+    "description": "Located in the left anterior hypothalamus, involved in feeding behavior and endocrine regulation."
+  },
+  "Model_382_left_superior_tuberal_hypothalamus": {
+    "label": "Left Superior Tuberal Hypothalamus",
+    "description": "Located above the left tuberal region, involved in energy balance and endocrine function."
+  },
+  "Model_383_left_inferior_tuberal_hypothalamus": {
+    "label": "Left Inferior Tuberal Hypothalamus",
+    "description": "Located below the left tuberal region, involved in autonomic regulation."
+  },
+  "Model_384_left_posterior_superior_hypothalamus": {
+    "label": "Left Posterior Superior Hypothalamus",
+    "description": "Located in the left posterior hypothalamus, involved in thermoregulation and arousal."
+  },
+  "Model_385_right_anterior_superior_hypothalamus": {
+    "label": "Right Anterior Superior Hypothalamus",
+    "description": "Located in the right anterior hypothalamus, involved in thermoregulation and autonomic control."
+  },
+  "Model_386_right_anterior_inferior_hypothalamus": {
+    "label": "Right Anterior Inferior Hypothalamus",
+    "description": "Located in the right anterior hypothalamus, involved in feeding behavior and endocrine regulation."
+  },
+  "Model_387_right_superior_tuberal_hypothalamus": {
+    "label": "Right Superior Tuberal Hypothalamus",
+    "description": "Located above the right tuberal region, involved in energy balance and endocrine function."
+  },
+  "Model_388_right_inferior_tuberal_hypothalamus": {
+    "label": "Right Inferior Tuberal Hypothalamus",
+    "description": "Located below the right tuberal region, involved in autonomic regulation."
+  },
+  "Model_389_right_posterior_superior_hypothalamus": {
+    "label": "Right Posterior Superior Hypothalamus",
+    "description": "Located in the right posterior hypothalamus, involved in thermoregulation and arousal."
+  },
+  "Model_390_right_subthalamic_nucleus": {
+    "label": "Right Subthalamic Nucleus",
+    "description": "Located in the right subthalamus, it is part of the basal ganglia and involved in motor control."
+  },
+  "Model_391_left_subthalamic_nucleus": {
+    "label": "Left Subthalamic Nucleus",
+    "description": "Located in the left subthalamus, it is part of the basal ganglia and involved in motor control."
+  },
+  "Model_500_right_internal_medullary_lamina": {
+    "label": "Right Internal Medullary Lamina",
+    "description": "Located in the right thalamus, it is a white matter layer that separates thalamic nuclei."
+  },
+  "Model_501_left_internal_medullary_lamina": {
+    "label": "Left Internal Medullary Lamina",
+    "description": "Located in the left thalamus, it is a white matter layer that separates thalamic nuclei."
+  },
+  "Model_502_right_medial_geniculate_body": {
+    "label": "Right Medial Geniculate Body",
+    "description": "Located in the right thalamus, it is a relay nucleus for auditory information from the inferior colliculus."
+  },
+  "Model_503_left_medial_geniculate_body": {
+    "label": "Left Medial Geniculate Body",
+    "description": "Located in the left thalamus, it is a relay nucleus for auditory information from the inferior colliculus."
+  },
+  "Model_504_right_lateral_geniculate_body": {
+    "label": "Right Lateral Geniculate Body",
+    "description": "Located in the right thalamus, it is a relay nucleus for visual information from the optic tract."
+  },
+  "Model_505_left_lateral_geniculate_body": {
+    "label": "Left Lateral Geniculate Body",
+    "description": "Located in the left thalamus, it is a relay nucleus for visual information from the optic tract."
+  },
+  "Model_506_right_pulvinar": {
+    "label": "Right Pulvinar",
+    "description": "Located in the posterior right thalamus, it is involved in visual attention and integration."
+  },
+  "Model_507_left_pulvinar": {
+    "label": "Left Pulvinar",
+    "description": "Located in the posterior left thalamus, it is involved in visual attention and integration."
+  },
+  "Model_508_right_anterior_thalamic_nucleus": {
+    "label": "Right Anterior Thalamic Nucleus",
+    "description": "Located in the anterior right thalamus, it participates in limbic circuitry and memory."
+  },
+  "Model_509_left_anterior_thalamic_nucleus": {
+    "label": "Left Anterior Thalamic Nucleus",
+    "description": "Located in the anterior left thalamus, it participates in limbic circuitry and memory."
+  },
+  "Model_510_right_dorsomedial_thalamic_nucleus": {
+    "label": "Right Dorsomedial Thalamic Nucleus",
+    "description": "Located in the medial right thalamus, it is involved in emotion and cognition."
+  },
+  "Model_511_left_dorsomedial_thalamic_nucleus": {
+    "label": "Left Dorsomedial Thalamic Nucleus",
+    "description": "Located in the medial left thalamus, it is involved in emotion and cognition."
+  },
+  "Model_512_right_centromedian_thalamic_nucleus": {
+    "label": "Right Centromedian Thalamic Nucleus",
+    "description": "Located in the right thalamus, it is part of the intralaminar nuclei and involved in arousal and motor control."
+  },
+  "Model_513_left_centromedian_thalamic_nucleus": {
+    "label": "Left Centromedian Thalamic Nucleus",
+    "description": "Located in the left thalamus, it is part of the intralaminar nuclei and involved in arousal and motor control."
+  },
+  "Model_514_right_ventral_anterior_thalamic_nucleus": {
+    "label": "Right Ventral Anterior Thalamic Nucleus",
+    "description": "Located in the ventral right thalamus, it is involved in motor regulation, receiving input from the basal ganglia."
+  },
+  "Model_515_left_ventral_anterior_thalamic_nucleus": {
+    "label": "Left Ventral Anterior Thalamic Nucleus",
+    "description": "Located in the ventral left thalamus, it is involved in motor regulation, receiving input from the basal ganglia."
+  },
+  "Model_516_right_ventral_lateral_thalamic_nucleus": {
+    "label": "Right Ventral Lateral Thalamic Nucleus",
+    "description": "Located in the ventral right thalamus, it is involved in motor control, receiving signals from the cerebellum and basal ganglia."
+  },
+  "Model_517_left_ventral_lateral_thalamic_nucleus": {
+    "label": "Left Ventral Lateral Thalamic Nucleus",
+    "description": "Located in the ventral left thalamus, it is involved in motor control, receiving signals from the cerebellum and basal ganglia."
+  },
+  "Model_518_right_lateral_posterior_thalamic_nucleus": {
+    "label": "Right Lateral Posterior Thalamic Nucleus",
+    "description": "Located in the posterior right thalamus, it is involved in sensory integration."
+  },
+  "Model_519_left_lateral_posterior_thalamic_nucleus": {
+    "label": "Left Lateral Posterior Thalamic Nucleus",
+    "description": "Located in the posterior left thalamus, it is involved in sensory integration."
+  },
+  "Model_520_right_lateral_dorsal_thalamic_nucleus": {
+    "label": "Right Lateral Dorsal Thalamic Nucleus",
+    "description": "Located in the dorsal right thalamus, it is involved in limbic functions."
+  },
+  "Model_521_left_lateral_dorsal_thalamic_nucleus": {
+    "label": "Left Lateral Dorsal Thalamic Nucleus",
+    "description": "Located in the dorsal left thalamus, it is involved in limbic functions."
+  },
+  "Model_522_right_ventral_posteromedial_thalami_1ZVX": {
+    "label": "Right Ventral Posteromedial Thalamic Nucleus",
+    "description": "Located in the ventral right thalamus, it receives sensory information from the head and face."
+  },
+  "Model_523_left_ventral_posteromedial_thalamic_XAB1": {
+    "label": "Left Ventral Posteromedial Thalamic Nucleus",
+    "description": "Located in the ventral left thalamus, it receives sensory information from the head and face."
+  },
+  "Model_524_right_ventral_posterolateral_thalam_M9ML": {
+    "label": "Right Ventral Posterolateral Thalamic Nucleus",
+    "description": "Located in the ventral right thalamus, it receives sensory information from the trunk and limbs."
+  },
+  "Model_525_left_ventral_posterolateral_thalami_1ZVX": {
+    "label": "Left Ventral Posterolateral Thalamic Nucleus",
+    "description": "Located in the ventral left thalamus, it receives sensory information from the trunk and limbs."
+  },
+  "Model_1000_left_insula": {
+    "label": "Left Insula",
+    "description": "Located deep in the lateral sulcus of the left hemisphere, it is involved in visceral sensation, emotion, and taste processing."
+  },
+  "Model_1001_left_superior_temporal_gyrus_(bank_86Y9": {
+    "label": "Left Superior Temporal Gyrus",
+    "description": "Located in the lateral left temporal lobe, it contains the auditory cortex and is involved in sound processing and language comprehension."
+  },
+  "Model_1002_caudal_part_of_left_anterior_cingu_L2YW": {
+    "label": "Left Anterior Cingulate Cortex (Caudal Part)",
+    "description": "Located in the anterior left cingulate gyrus, it is involved in emotion and cognitive control."
+  },
+  "Model_1003_posterior_part_of_left_middle_fron_2INS": {
+    "label": "Left Middle Frontal Gyrus (Posterior Part)",
+    "description": "Located in the posterior part of the left middle frontal gyrus, involved in cognitive control and motor planning."
+  },
+  "Model_1005_left_cuneus": {
+    "label": "Left Cuneus",
+    "description": "Located in the medial left occipital lobe, it is involved in visual processing."
+  },
+  "Model_1006_left_ambiens_gyrus": {
+    "label": "Left Ambiens Gyrus",
+    "description": "Located in the medial left temporal lobe, associated with olfaction and memory."
+  },
+  "Model_1007_left_fusiform_gyrus": {
+    "label": "Left Fusiform Gyrus",
+    "description": "Located in the basal left temporal and occipital lobes, involved in face and object recognition."
+  },
+  "Model_1008_left_inferior_parietal_lobule": {
+    "label": "Left Inferior Parietal Lobule",
+    "description": "Located in the inferior left parietal lobe, involved in spatial perception and language processing."
+  },
+  "Model_1009_left_inferior_temporal_gyrus": {
+    "label": "Left Inferior Temporal Gyrus",
+    "description": "Located in the inferior left temporal lobe, involved in visual recognition and semantic processing."
+  },
+  "Model_1010_isthmus_of_left_cingulate_gyrus": {
+    "label": "Left Isthmus of Cingulate Gyrus",
+    "description": "Located posteriorly in the left cingulate gyrus, connecting the cingulate and parahippocampal gyri, involved in memory and emotion."
+  },
+  "Model_1011_left_lateral_occipital_gyrus": {
+    "label": "Left Lateral Occipital Gyrus",
+    "description": "Located in the lateral left occipital lobe, involved in visual processing."
+  },
+  "Model_1012_left_lateral_orbital_gyrus": {
+    "label": "Left Lateral Orbital Gyrus",
+    "description": "Located on the lateral orbital surface of the left frontal lobe, involved in emotion and decision-making."
+  },
+  "Model_1013_left_lingual_gyrus": {
+    "label": "Left Lingual Gyrus",
+    "description": "Located in the medial left occipital lobe, involved in visual processing, particularly word recognition."
+  },
+  "Model_1014_left_straight_gyrus": {
+    "label": "Left Straight Gyrus",
+    "description": "Located on the medial orbital surface of the left frontal lobe, involved in emotion and olfaction."
+  },
+  "Model_1015_left_middle_temporal_gyrus": {
+    "label": "Left Middle Temporal Gyrus",
+    "description": "Located in the middle left temporal lobe, involved in auditory and semantic processing."
+  },
+  "Model_1016_left_parahippocampal_gyrus": {
+    "label": "Left Parahippocampal Gyrus",
+    "description": "Located in the medial left temporal lobe, surrounding the hippocampus, involved in memory and spatial navigation."
+  },
+  "Model_1017_left_paracentral_lobule": {
+    "label": "Left Paracentral Lobule",
+    "description": "Located on the medial surface of the left hemisphere, spanning the central sulcus, involved in lower limb sensation and movement."
+  },
+  "Model_1018_opercular_part_of_left_inferior_fr_PDN5": {
+    "label": "Left Inferior Frontal Gyrus (Pars Opercularis)",
+    "description": "Located in the posterior left inferior frontal gyrus, involved in speech production (Broca's area)."
+  },
+  "Model_1019_orbital_part_of_left_inferior_fron_2INS": {
+    "label": "Left Inferior Frontal Gyrus (Pars Orbitalis)",
+    "description": "Located in the anterior left inferior frontal gyrus, involved in emotion and cognitive control."
+  },
+  "Model_1020_triangular_part_of_left_inferior_f_PO4Y": {
+    "label": "Left Inferior Frontal Gyrus (Pars Triangularis)",
+    "description": "Located in the middle left inferior frontal gyrus, involved in language comprehension and production."
+  },
+  "Model_1021_left_visual_cortex": {
+    "label": "Left Visual Cortex",
+    "description": "Located in the left occipital lobe, it receives and processes visual information."
+  },
+  "Model_1022_left_postcentral_gyrus": {
+    "label": "Left Postcentral Gyrus",
+    "description": "Located in the left parietal lobe, it is the primary somatosensory cortex, receiving sensory input from the contralateral body."
+  },
+  "Model_1023_left_posterior_cingulate_gyrus": {
+    "label": "Left Posterior Cingulate Gyrus",
+    "description": "Located in the posterior left cingulate gyrus, involved in memory and the default mode network."
+  },
+  "Model_1024_left_precentral_gyrus": {
+    "label": "Left Precentral Gyrus",
+    "description": "Located in the left frontal lobe, it is the primary motor cortex, controlling voluntary movements of the contralateral limbs."
+  },
+  "Model_1025_left_precuneus": {
+    "label": "Left Precuneus",
+    "description": "Located in the medial left parietal lobe, involved in self-awareness and episodic memory."
+  },
+  "Model_1026_rostral_part_of_left_anterior_cing_DF5M": {
+    "label": "Left Anterior Cingulate Cortex (Rostral Part)",
+    "description": "Located in the anterior left cingulate gyrus, involved in emotion and autonomic regulation."
+  },
+  "Model_1027_anterior_part_of_left_middle_front_CLFU": {
+    "label": "Left Middle Frontal Gyrus (Anterior Part)",
+    "description": "Located in the anterior part of the left middle frontal gyrus, involved in cognitive control and executive function."
+  },
+  "Model_1028_left_superior_frontal_gyrus": {
+    "label": "Left Superior Frontal Gyrus",
+    "description": "Located in the superior left frontal lobe, involved in executive functions and cognitive control."
+  },
+  "Model_1029_left_superior_parietal_lobule": {
+    "label": "Left Superior Parietal Lobule",
+    "description": "Located in the superior left parietal lobe, involved in somatosensation and spatial attention."
+  },
+  "Model_1030_left_superior_temporal_gyrus": {
+    "label": "Left Superior Temporal Gyrus",
+    "description": "Located in the lateral left temporal lobe, it contains the auditory cortex and is involved in sound processing and language comprehension."
+  },
+  "Model_1031_left_supramarginal_gyrus": {
+    "label": "Left Supramarginal Gyrus",
+    "description": "Located in the left parietal lobe, surrounding the posterior lateral sulcus, involved in language and spatial processing."
+  },
+  "Model_1032_left_frontal_pole": {
+    "label": "Left Frontal Pole",
+    "description": "Located at the anterior tip of the left frontal lobe, involved in higher cognition and decision-making."
+  },
+  "Model_1033_left_temporal_pole": {
+    "label": "Left Temporal Pole",
+    "description": "Located at the anterior tip of the left temporal lobe, involved in semantic processing and emotion."
+  },
+  "Model_1034_left_transverse_temporal_gyrus": {
+    "label": "Left Transverse Temporal Gyrus",
+    "description": "Located in the superior left temporal lobe, it is the primary auditory cortex (Heschl's gyrus)."
+  },
+  "Model_1035_left_limen_insulae": {
+    "label": "Left Limen Insulae",
+    "description": "Located at the anterior part of the left insula, it is the junction between the insula and frontal lobe."
+  },
+  "Model_2000_right_insula": {
+    "label": "Right Insula",
+    "description": "Located deep in the lateral sulcus of the right hemisphere, it is involved in visceral sensation, emotion, and taste processing."
+  },
+  "Model_2001_right_superior_temporal_gyrus_(ban_PMWX": {
+    "label": "Right Superior Temporal Gyrus",
+    "description": "Located in the lateral right temporal lobe, it contains the auditory cortex and is involved in sound processing and language comprehension (right hemisphere more involved in prosody)."
+  },
+  "Model_2002_caudal_part_of_right_anterior_cing_DF5M": {
+    "label": "Right Anterior Cingulate Cortex (Caudal Part)",
+    "description": "Located in the anterior right cingulate gyrus, it is involved in emotion and cognitive control."
+  },
+  "Model_2003_posterior_part_of_right_middle_fro_53AE": {
+    "label": "Right Middle Frontal Gyrus (Posterior Part)",
+    "description": "Located in the posterior part of the right middle frontal gyrus, involved in cognitive control and motor planning."
+  },
+  "Model_2005_right_cuneus": {
+    "label": "Right Cuneus",
+    "description": "Located in the medial right occipital lobe, it is involved in visual processing."
+  },
+  "Model_2006_right_ambiens_gyrus": {
+    "label": "Right Ambiens Gyrus",
+    "description": "Located in the medial right temporal lobe, associated with olfaction and memory."
+  },
+  "Model_2007_right_fusiform_gyrus": {
+    "label": "Right Fusiform Gyrus",
+    "description": "Located in the basal right temporal and occipital lobes, involved in face and object recognition."
+  },
+  "Model_2008_right_inferior_parietal_lobule": {
+    "label": "Right Inferior Parietal Lobule",
+    "description": "Located in the inferior right parietal lobe, involved in spatial perception and attention."
+  },
+  "Model_2009_right_inferior_temporal_gyrus": {
+    "label": "Right Inferior Temporal Gyrus",
+    "description": "Located in the inferior right temporal lobe, involved in visual recognition and semantic processing."
+  },
+  "Model_2010_isthmus_of_right_cingulate_gyrus": {
+    "label": "Right Isthmus of Cingulate Gyrus",
+    "description": "Located posteriorly in the right cingulate gyrus, connecting the cingulate and parahippocampal gyri, involved in memory and emotion."
+  },
+  "Model_2011_right_lateral_occipital_gyrus": {
+    "label": "Right Lateral Occipital Gyrus",
+    "description": "Located in the lateral right occipital lobe, involved in visual processing."
+  },
+  "Model_2012_right_lateral_orbital_gyrus": {
+    "label": "Right Lateral Orbital Gyrus",
+    "description": "Located on the lateral orbital surface of the right frontal lobe, involved in emotion and decision-making."
+  },
+  "Model_2013_right_lingual_gyrus": {
+    "label": "Right Lingual Gyrus",
+    "description": "Located in the medial right occipital lobe, involved in visual processing, particularly word recognition."
+  },
+  "Model_2014_right_straight_gyrus": {
+    "label": "Right Straight Gyrus",
+    "description": "Located on the medial orbital surface of the right frontal lobe, involved in emotion and olfaction."
+  },
+  "Model_2015_right_middle_temporal_gyrus": {
+    "label": "Right Middle Temporal Gyrus",
+    "description": "Located in the middle right temporal lobe, involved in auditory and semantic processing."
+  },
+  "Model_2016_right_parahippocampal_gyrus": {
+    "label": "Right Parahippocampal Gyrus",
+    "description": "Located in the medial right temporal lobe, surrounding the hippocampus, involved in memory and spatial navigation."
+  },
+  "Model_2017_right_paracentral_lobule": {
+    "label": "Right Paracentral Lobule",
+    "description": "Located on the medial surface of the right hemisphere, spanning the central sulcus, involved in lower limb sensation and movement."
+  },
+  "Model_2018_opercular_part_of_right_inferior_f_PO4Y": {
+    "label": "Right Inferior Frontal Gyrus (Pars Opercularis)",
+    "description": "Located in the posterior right inferior frontal gyrus, in the right hemisphere it may be involved in language prosody."
+  },
+  "Model_2019_orbital_part_of_right_inferior_fro_53AE": {
+    "label": "Right Inferior Frontal Gyrus (Pars Orbitalis)",
+    "description": "Located in the anterior right inferior frontal gyrus, involved in emotion and cognitive control."
+  },
+  "Model_2020_triangular_part_of_right_inferior__654O": {
+    "label": "Right Inferior Frontal Gyrus (Pars Triangularis)",
+    "description": "Located in the middle right inferior frontal gyrus, in the right hemisphere it may be involved in language comprehension."
+  },
+  "Model_2021_right_visual_cortex": {
+    "label": "Right Visual Cortex",
+    "description": "Located in the right occipital lobe, it receives and processes visual information."
+  },
+  "Model_2022_right_postcentral_gyrus": {
+    "label": "Right Postcentral Gyrus",
+    "description": "Located in the right parietal lobe, it is the primary somatosensory cortex, receiving sensory input from the contralateral body."
+  },
+  "Model_2023_right_posterior_cingulate_gyrus": {
+    "label": "Right Posterior Cingulate Gyrus",
+    "description": "Located in the posterior right cingulate gyrus, involved in memory and the default mode network."
+  },
+  "Model_2024_right_precentral_gyrus": {
+    "label": "Right Precentral Gyrus",
+    "description": "Located in the right frontal lobe, it is the primary motor cortex, controlling voluntary movements of the contralateral limbs."
+  },
+  "Model_2025_right_precuneus": {
+    "label": "Right Precuneus",
+    "description": "Located in the medial right parietal lobe, involved in self-awareness and episodic memory."
+  },
+  "Model_2026_rostral_part_of_right_anterior_cin_MLJ7": {
+    "label": "Right Anterior Cingulate Cortex (Rostral Part)",
+    "description": "Located in the anterior right cingulate gyrus, involved in emotion and autonomic regulation."
+  },
+  "Model_2027_anterior_part_of_right_middle_fron_2INS": {
+    "label": "Right Middle Frontal Gyrus (Anterior Part)",
+    "description": "Located in the anterior part of the right middle frontal gyrus, involved in cognitive control and executive function."
+  },
+  "Model_2028_right_superior_frontal_gyrus": {
+    "label": "Right Superior Frontal Gyrus",
+    "description": "Located in the superior right frontal lobe, involved in executive functions and cognitive control."
+  },
+  "Model_2029_right_superior_parietal_lobule": {
+    "label": "Right Superior Parietal Lobule",
+    "description": "Located in the superior right parietal lobe, involved in somatosensation and spatial attention."
+  },
+  "Model_2030_right_superior_temporal_gyrus": {
+    "label": "Right Superior Temporal Gyrus",
+    "description": "Located in the lateral right temporal lobe, it contains the auditory cortex and is involved in sound processing and language comprehension (right hemisphere more involved in prosody)."
+  },
+  "Model_2031_right_supramarginal_gyrus": {
+    "label": "Right Supramarginal Gyrus",
+    "description": "Located in the right parietal lobe, surrounding the posterior lateral sulcus, involved in language and spatial processing."
+  },
+  "Model_2032_right_frontal_pole": {
+    "label": "Right Frontal Pole",
+    "description": "Located at the anterior tip of the right frontal lobe, involved in higher cognition and decision-making."
+  },
+  "Model_2033_right_temporal_pole": {
+    "label": "Right Temporal Pole",
+    "description": "Located at the anterior tip of the right temporal lobe, involved in semantic processing and emotion."
+  },
+  "Model_2034_right_transverse_temporal_gyrus": {
+    "label": "Right Transverse Temporal Gyrus",
+    "description": "Located in the superior right temporal lobe, it is the primary auditory cortex (Heschl's gyrus)."
+  },
+  "Model_2035_right_limen_insulae": {
+    "label": "Right Limen Insulae",
+    "description": "Located at the anterior part of the right insula, it is the junction between the insula and frontal lobe."
+  },
+  "Model_3000_right_claustrum": {
+    "label": "Right Claustrum",
+    "description": "Located between the right insular cortex and putamen, its function is not fully understood, possibly involved in consciousness."
+  },
+  "Model_3001_left_claustrum": {
+    "label": "Left Claustrum",
+    "description": "Located between the left insular cortex and putamen, its function is not fully understood, possibly involved in consciousness."
+  },
+  "Model_3002_right_mammillary_body": {
+    "label": "Right Mammillary Body",
+    "description": "Located at the base of the hypothalamus, part of the limbic system, involved in memory consolidation."
+  },
+  "Model_3003_left_mammillary_body": {
+    "label": "Left Mammillary Body",
+    "description": "Located at the base of the hypothalamus, part of the limbic system, involved in memory consolidation."
+  },
+  "Model_3004_corpus_callosum": {
+    "label": "Corpus Callosum",
+    "description": "Located between the cerebral hemispheres, it is the largest commissural fiber bundle, connecting the left and right hemispheres."
+  },
+  "Model_3005_right_fornix_of_forebrain": {
+    "label": "Right Fornix",
+    "description": "Located in the right hemisphere, it is a fiber bundle from the hippocampus to the hypothalamus, involved in memory circuits."
+  },
+  "Model_3007_left_fornix_of_forebrain": {
+    "label": "Left Fornix",
+    "description": "Located in the left hemisphere, it is a fiber bundle from the hippocampus to the hypothalamus, involved in memory circuits."
+  },
+  "Model_3008_infundibulum_of_neurohypophysis": {
+    "label": "Infundibulum of Neurohypophysis",
+    "description": "Connects the hypothalamus and neurohypophysis, transporting antidiuretic hormone and oxytocin."
+  },
+  "Model_3011_adenohypophysis": {
+    "label": "Adenohypophysis",
+    "description": "The anterior part of the pituitary gland, it secretes multiple hormones regulating growth, metabolism, and reproduction."
+  },
+  "Model_3012_neurohypophysis": {
+    "label": "Neurohypophysis",
+    "description": "The posterior part of the pituitary gland, it stores and releases antidiuretic hormone and oxytocin synthesized by the hypothalamus."
+  },
+  "Model_3020_right_superior_colliculus": {
+    "label": "Right Superior Colliculus",
+    "description": "Located in the midbrain tectum, involved in visual reflexes and eye movements."
+  },
+  "Model_3020_right_superior_colliculus1": {
+    "label": "Right Superior Colliculus",
+    "description": "Located in the midbrain tectum, involved in visual reflexes and eye movements."
+  },
+  "Model_3021_left_superior_colliculus": {
+    "label": "Left Superior Colliculus",
+    "description": "Located in the midbrain tectum, involved in visual reflexes and eye movements."
+  },
+  "Model_3021_left_superior_colliculus1": {
+    "label": "Left Superior Colliculus",
+    "description": "Located in the midbrain tectum, involved in visual reflexes and eye movements."
+  },
+  "Model_3022_right_inferior_colliculus": {
+    "label": "Right Inferior Colliculus",
+    "description": "Located in the midbrain tectum, involved in auditory reflexes and sound localization."
+  },
+  "Model_3022_right_inferior_colliculus1": {
+    "label": "Right Inferior Colliculus",
+    "description": "Located in the midbrain tectum, involved in auditory reflexes and sound localization."
+  },
+  "Model_3023_left_inferior_colliculus": {
+    "label": "Left Inferior Colliculus",
+    "description": "Located in the midbrain tectum, involved in auditory reflexes and sound localization."
+  },
+  "Model_3023_left_inferior_colliculus1": {
+    "label": "Left Inferior Colliculus",
+    "description": "Located in the midbrain tectum, involved in auditory reflexes and sound localization."
+  },
+  "Model_3030_brachia_of_right_superior_colliculus": {
+    "label": "Right Superior Colliculus Brachium",
+    "description": "Fiber bundle connecting the right superior colliculus to the lateral geniculate body, involved in visual reflexes."
+  },
+  "Model_3030_brachia_of_right_superior_colliculus1": {
+    "label": "Right Superior Colliculus Brachium",
+    "description": "Fiber bundle connecting the right superior colliculus to the lateral geniculate body, involved in visual reflexes."
+  },
+  "Model_3031_brachia_of_left_superior_colliculus": {
+    "label": "Left Superior Colliculus Brachium",
+    "description": "Fiber bundle connecting the left superior colliculus to the lateral geniculate body, involved in visual reflexes."
+  },
+  "Model_3031_brachia_of_left_superior_colliculus1": {
+    "label": "Left Superior Colliculus Brachium",
+    "description": "Fiber bundle connecting the left superior colliculus to the lateral geniculate body, involved in visual reflexes."
+  },
+  "Model_3032_brachia_of_right_inferior_colliculus": {
+    "label": "Right Inferior Colliculus Brachium",
+    "description": "Fiber bundle connecting the right inferior colliculus to the medial geniculate body, involved in auditory conduction."
+  },
+  "Model_3032_brachia_of_right_inferior_colliculus1": {
+    "label": "Right Inferior Colliculus Brachium",
+    "description": "Fiber bundle connecting the right inferior colliculus to the medial geniculate body, involved in auditory conduction."
+  },
+  "Model_3033_brachia_of_left_inferior_colliculus": {
+    "label": "Left Inferior Colliculus Brachium",
+    "description": "Fiber bundle connecting the left inferior colliculus to the medial geniculate body, involved in auditory conduction."
+  },
+  "Model_3033_brachia_of_left_inferior_colliculus1": {
+    "label": "Left Inferior Colliculus Brachium",
+    "description": "Fiber bundle connecting the left inferior colliculus to the medial geniculate body, involved in auditory conduction."
+  },
+  "Model_4001_left_temporalis": {
+    "label": "Left Temporalis Muscle",
+    "description": "Located in the left temporal fossa, it is a masticatory muscle that elevates the mandible."
+  },
+  "Model_4002_right_temporalis": {
+    "label": "Right Temporalis Muscle",
+    "description": "Located in the right temporal fossa, it is a masticatory muscle that elevates the mandible."
+  },
+  "Model_4003_left_masseter": {
+    "label": "Left Masseter Muscle",
+    "description": "Located on the lateral left mandibular ramus, it is a masticatory muscle that elevates the mandible."
+  },
+  "Model_4004_right_masseter": {
+    "label": "Right Masseter Muscle",
+    "description": "Located on the lateral right mandibular ramus, it is a masticatory muscle that elevates the mandible."
+  },
+  "Model_4005_left_lateral_pterygoid": {
+    "label": "Left Lateral Pterygoid Muscle",
+    "description": "Located in the left infratemporal fossa, it assists in mouth opening and protrusion of the mandible."
+  },
+  "Model_4006_right_lateral_pterygoid": {
+    "label": "Right Lateral Pterygoid Muscle",
+    "description": "Located in the right infratemporal fossa, it assists in mouth opening and protrusion of the mandible."
+  },
+  "Model_4007_left_medial_pterygoid": {
+    "label": "Left Medial Pterygoid Muscle",
+    "description": "Located on the medial left mandibular ramus, it is a masticatory muscle that elevates the mandible."
+  },
+  "Model_4008_right_medial_pterygoid": {
+    "label": "Right Medial Pterygoid Muscle",
+    "description": "Located on the medial right mandibular ramus, it is a masticatory muscle that elevates the mandible."
+  },
+  "Model_4011_left_medial_rectus": {
+    "label": "Left Medial Rectus Muscle",
+    "description": "Located in the left orbit, it is an extraocular muscle that adducts the eye."
+  },
+  "Model_4012_right_medial_rectus": {
+    "label": "Right Medial Rectus Muscle",
+    "description": "Located in the right orbit, it is an extraocular muscle that adducts the eye."
+  },
+  "Model_4013_left_superior_rectus": {
+    "label": "Left Superior Rectus Muscle",
+    "description": "Located in the left orbit, it is an extraocular muscle that elevates the eye."
+  },
+  "Model_4014_right_superior_rectus": {
+    "label": "Right Superior Rectus Muscle",
+    "description": "Located in the right orbit, it is an extraocular muscle that elevates the eye."
+  },
+  "Model_4015_left_superior_oblique": {
+    "label": "Left Superior Oblique Muscle",
+    "description": "Located in the left orbit, it is an extraocular muscle that depresses and abducts the eye."
+  },
+  "Model_4016_right_superior_oblique": {
+    "label": "Right Superior Oblique Muscle",
+    "description": "Located in the right orbit, it is an extraocular muscle that depresses and abducts the eye."
+  },
+  "Model_4017_left_inferior_rectus": {
+    "label": "Left Inferior Rectus Muscle",
+    "description": "Located in the left orbit, it is an extraocular muscle that depresses the eye."
+  },
+  "Model_4018_right_inferior_rectus": {
+    "label": "Right Inferior Rectus Muscle",
+    "description": "Located in the right orbit, it is an extraocular muscle that depresses the eye."
+  },
+  "Model_4019_left_lateral_rectus": {
+    "label": "Left Lateral Rectus Muscle",
+    "description": "Located in the left orbit, it is an extraocular muscle that abducts the eye."
+  },
+  "Model_4020_right_lateral_rectus": {
+    "label": "Right Lateral Rectus Muscle",
+    "description": "Located in the right orbit, it is an extraocular muscle that abducts the eye."
+  },
+  "Model_4021_left_levator_palpebrae_superioris": {
+    "label": "Left Levator Palpebrae Superioris Muscle",
+    "description": "Located in the left orbit, it elevates the upper eyelid, opening the eye."
+  },
+  "Model_4022_right_levator_palpebrae_superioris": {
+    "label": "Right Levator Palpebrae Superioris Muscle",
+    "description": "Located in the right orbit, it elevates the upper eyelid, opening the eye."
+  },
+  "Model_4027_left_eyeball": {
+    "label": "Left Eyeball",
+    "description": "Located in the left orbit, it is the organ of vision, receiving light and converting it into neural signals."
+  },
+  "Model_4028_right_eyeball": {
+    "label": "Right Eyeball",
+    "description": "Located in the right orbit, it is the organ of vision, receiving light and converting it into neural signals."
+  },
+  "Model_4030_uvula": {
+    "label": "Uvula",
+    "description": "Located at the midline of the soft palate, it participates in swallowing and phonation."
+  },
+  "Model_4031_left_tensor_veli_palatini": {
+    "label": "Left Tensor Veli Palatini Muscle",
+    "description": "Located in the left soft palate, it tenses the velum and opens the auditory tube."
+  },
+  "Model_4032_right_tensor_veli_palatini": {
+    "label": "Right Tensor Veli Palatini Muscle",
+    "description": "Located in the right soft palate, it tenses the velum and opens the auditory tube."
+  },
+  "Model_4033_left_palatoglossus": {
+    "label": "Left Palatoglossus Muscle",
+    "description": "Located in the left palatoglossal arch, it elevates the tongue root and constricts the fauces."
+  },
+  "Model_4034_right_palatoglossus": {
+    "label": "Right Palatoglossus Muscle",
+    "description": "Located in the right palatoglossal arch, it elevates the tongue root and constricts the fauces."
+  },
+  "Model_4035_left_levator_veli_palatini": {
+    "label": "Left Levator Veli Palatini Muscle",
+    "description": "Located in the left soft palate, it elevates the soft palate, closing the nasopharynx."
+  },
+  "Model_4036_right_levator_veli_palatini": {
+    "label": "Right Levator Veli Palatini Muscle",
+    "description": "Located in the right soft palate, it elevates the soft palate, closing the nasopharynx."
+  },
+  "Model_4037_left_palatopharyngeus": {
+    "label": "Left Palatopharyngeus Muscle",
+    "description": "Located in the left palatopharyngeal arch, it elevates the pharynx and constricts the fauces."
+  },
+  "Model_4038_right_palatopharyngeus": {
+    "label": "Right Palatopharyngeus Muscle",
+    "description": "Located in the right palatopharyngeal arch, it elevates the pharynx and constricts the fauces."
+  },
+  "Model_4041_left_zygomaticus_major": {
+    "label": "Left Zygomaticus Major Muscle",
+    "description": "Located in the left face, it pulls the angle of the mouth upward and laterally, producing a smile."
+  },
+  "Model_4042_right_zygomaticus_major": {
+    "label": "Right Zygomaticus Major Muscle",
+    "description": "Located in the right face, it pulls the angle of the mouth upward and laterally, producing a smile."
+  },
+  "Model_4043_left_nasalis": {
+    "label": "Left Nasalis Muscle",
+    "description": "Located on the left nose, it compresses the nostrils."
+  },
+  "Model_4044_right_nasalis": {
+    "label": "Right Nasalis Muscle",
+    "description": "Located on the right nose, it compresses the nostrils."
+  },
+  "Model_4045_left_levator_labii_superioris": {
+    "label": "Left Levator Labii Superioris Muscle",
+    "description": "Located in the left face, it elevates the upper lip, exposing the upper teeth."
+  },
+  "Model_4046_right_levator_labii_superioris": {
+    "label": "Right Levator Labii Superioris Muscle",
+    "description": "Located in the right face, it elevates the upper lip, exposing the upper teeth."
+  },
+  "Model_4047_left_buccinator": {
+    "label": "Left Buccinator Muscle",
+    "description": "Located in the left cheek, it compresses the cheek against the teeth, aiding in chewing and blowing."
+  },
+  "Model_4048_right_buccinator": {
+    "label": "Right Buccinator Muscle",
+    "description": "Located in the right cheek, it compresses the cheek against the teeth, aiding in chewing and blowing."
+  },
+  "Model_4050_tongue": {
+    "label": "Tongue",
+    "description": "Located in the oral cavity, it is composed of muscles and involved in chewing, swallowing, speech, and taste."
+  },
+  "Model_4051_left_hyoglossus": {
+    "label": "Left Hyoglossus Muscle",
+    "description": "Located in the left tongue, it depresses and retracts the tongue."
+  },
+  "Model_4052_right_hyoglossus": {
+    "label": "Right Hyoglossus Muscle",
+    "description": "Located in the right tongue, it depresses and retracts the tongue."
+  },
+  "Model_4060_middle_constrictor": {
+    "label": "Middle Constrictor Muscle",
+    "description": "Located in the pharynx, it is one of the pharyngeal constrictors, narrowing the pharyngeal cavity to propel the bolus."
+  },
+  "Model_4061_left_stylopharyngeus": {
+    "label": "Left Stylopharyngeus Muscle",
+    "description": "Located in the left pharynx, it elevates the pharynx during swallowing."
+  },
+  "Model_4062_right_stylopharyngeus": {
+    "label": "Right Stylopharyngeus Muscle",
+    "description": "Located in the right pharynx, it elevates the pharynx during swallowing."
+  },
+  "Model_4071_left_rectus_capitis_posterior_minor": {
+    "label": "Left Rectus Capitis Posterior Minor Muscle",
+    "description": "Located in the left posterior neck, it extends the head."
+  },
+  "Model_4072_right_rectus_capitis_posterior_minor": {
+    "label": "Right Rectus Capitis Posterior Minor Muscle",
+    "description": "Located in the right posterior neck, it extends the head."
+  },
+  "Model_4073_left_longissimus_capitis": {
+    "label": "Left Longissimus Capitis Muscle",
+    "description": "Located in the left posterior neck, part of the erector spinae, it extends and laterally flexes the head."
+  },
+  "Model_4074_right_longissimus_capitis": {
+    "label": "Right Longissimus Capitis Muscle",
+    "description": "Located in the right posterior neck, part of the erector spinae, it extends and laterally flexes the head."
+  },
+  "Model_4075_left_semispinalis_capitis": {
+    "label": "Left Semispinalis Capitis Muscle",
+    "description": "Located in the left posterior neck, it extends and rotates the head."
+  },
+  "Model_4076_right_semispinalis_capitis": {
+    "label": "Right Semispinalis Capitis Muscle",
+    "description": "Located in the right posterior neck, it extends and rotates the head."
+  },
+  "Model_4077_left_longus_colli": {
+    "label": "Left Longus Colli Muscle",
+    "description": "Located anterior to the left cervical spine, it flexes the neck."
+  },
+  "Model_4078_right_longus_colli": {
+    "label": "Right Longus Colli Muscle",
+    "description": "Located anterior to the right cervical spine, it flexes the neck."
+  },
+  "Model_4079_left_superior_oblique_capitis": {
+    "label": "Left Superior Oblique Capitis Muscle",
+    "description": "Located in the left posterior neck, it extends and laterally flexes the head."
+  },
+  "Model_4080_right_superior_oblique_capitis": {
+    "label": "Right Superior Oblique Capitis Muscle",
+    "description": "Located in the right posterior neck, it extends and laterally flexes the head."
+  },
+  "Model_4081_left_stylohyoid": {
+    "label": "Left Stylohyoid Muscle",
+    "description": "Located in the left neck, it elevates the hyoid bone."
+  },
+  "Model_4082_right_stylohyoid": {
+    "label": "Right Stylohyoid Muscle",
+    "description": "Located in the right neck, it elevates the hyoid bone."
+  },
+  "Model_4083_left_anterior_rectus_capitis": {
+    "label": "Left Anterior Rectus Capitis Muscle",
+    "description": "Located anterior to the left cervical spine, it flexes the head."
+  },
+  "Model_4084_right_anterior_rectus_capitis": {
+    "label": "Right Anterior Rectus Capitis Muscle",
+    "description": "Located anterior to the right cervical spine, it flexes the head."
+  },
+  "Model_4085_left_trapezius": {
+    "label": "Left Trapezius Muscle",
+    "description": "Located in the left neck and back, it retracts, elevates, or depresses the scapula."
+  },
+  "Model_4086_right_trapezius": {
+    "label": "Right Trapezius Muscle",
+    "description": "Located in the right neck and back, it retracts, elevates, or depresses the scapula."
+  },
+  "Model_4087_left_longus_capitis": {
+    "label": "Left Longus Capitis Muscle",
+    "description": "Located anterior to the left cervical spine, it flexes the head."
+  },
+  "Model_4088_right_longus_capitis": {
+    "label": "Right Longus Capitis Muscle",
+    "description": "Located anterior to the right cervical spine, it flexes the head."
+  },
+  "Model_4089_left_sternocleidomastoid": {
+    "label": "Left Sternocleidomastoid Muscle",
+    "description": "Located in the left neck, it flexes the head to the same side and rotates the face to the opposite side."
+  },
+  "Model_4090_right_sternocleidomastoid": {
+    "label": "Right Sternocleidomastoid Muscle",
+    "description": "Located in the right neck, it flexes the head to the same side and rotates the face to the opposite side."
+  },
+  "Model_4091_left_middle_scalenus": {
+    "label": "Left Middle Scalenus Muscle",
+    "description": "Located lateral to the left cervical spine, it laterally flexes the neck and assists in inspiration."
+  },
+  "Model_4092_right_middle_scalenus": {
+    "label": "Right Middle Scalenus Muscle",
+    "description": "Located lateral to the right cervical spine, it laterally flexes the neck and assists in inspiration."
+  },
+  "Model_4093_left_digastric": {
+    "label": "Left Digastric Muscle",
+    "description": "Located below the left mandible, it elevates the hyoid or depresses the mandible."
+  },
+  "Model_4094_right_digastric": {
+    "label": "Right Digastric Muscle",
+    "description": "Located below the right mandible, it elevates the hyoid or depresses the mandible."
+  },
+  "Model_4095_left_splenius_capitis": {
+    "label": "Left Splenius Capitis Muscle",
+    "description": "Located in the left posterior neck, it extends and rotates the head."
+  },
+  "Model_4096_right_splenius_capitis": {
+    "label": "Right Splenius Capitis Muscle",
+    "description": "Located in the right posterior neck, it extends and rotates the head."
+  },
+  "Model_4097_left_inferior_oblique_capitis": {
+    "label": "Left Inferior Oblique Capitis Muscle",
+    "description": "Located in the left posterior neck, it rotates the head."
+  },
+  "Model_4098_right_inferior_oblique_capitis": {
+    "label": "Right Inferior Oblique Capitis Muscle",
+    "description": "Located in the right posterior neck, it rotates the head."
+  },
+  "Model_4099_left_rectus_capitis_posterior_major": {
+    "label": "Left Rectus Capitis Posterior Major Muscle",
+    "description": "Located in the left posterior neck, it extends the head."
+  },
+  "Model_4100_right_rectus_capitis_posterior_major": {
+    "label": "Right Rectus Capitis Posterior Major Muscle",
+    "description": "Located in the right posterior neck, it extends the head."
+  },
+  "Model_5001_left_calcarine_sulcus": {
+    "label": "Left Calcarine Sulcus",
+    "description": "Located in the medial left occipital lobe, it contains the primary visual cortex."
+  },
+  "Model_5001_left_calcarine_sulcus1": {
+    "label": "Left Calcarine Sulcus",
+    "description": "Located in the medial left occipital lobe, it contains the primary visual cortex."
+  },
+  "Model_5002_right_calcarine_sulcus": {
+    "label": "Right Calcarine Sulcus",
+    "description": "Located in the medial right occipital lobe, it contains the primary visual cortex."
+  },
+  "Model_5002_right_calcarine_sulcus1": {
+    "label": "Right Calcarine Sulcus",
+    "description": "Located in the medial right occipital lobe, it contains the primary visual cortex."
+  },
+  "Model_5003_left_central_sulcus": {
+    "label": "Left Central Sulcus",
+    "description": "Located in the left hemisphere, it separates the frontal and parietal lobes, with the precentral gyrus anteriorly and postcentral gyrus posteriorly."
+  },
+  "Model_5003_left_central_sulcus1": {
+    "label": "Left Central Sulcus",
+    "description": "Located in the left hemisphere, it separates the frontal and parietal lobes, with the precentral gyrus anteriorly and postcentral gyrus posteriorly."
+  },
+  "Model_5004_right_central_sulcus": {
+    "label": "Right Central Sulcus",
+    "description": "Located in the right hemisphere, it separates the frontal and parietal lobes, with the precentral gyrus anteriorly and postcentral gyrus posteriorly."
+  },
+  "Model_5004_right_central_sulcus1": {
+    "label": "Right Central Sulcus",
+    "description": "Located in the right hemisphere, it separates the frontal and parietal lobes, with the precentral gyrus anteriorly and postcentral gyrus posteriorly."
+  },
+  "Model_5005_left_cingulate_sulcus": {
+    "label": "Left Cingulate Sulcus",
+    "description": "Located on the medial surface of the left hemisphere, it separates the cingulate gyrus from the superior frontal gyrus."
+  },
+  "Model_5005_left_cingulate_sulcus1": {
+    "label": "Left Cingulate Sulcus",
+    "description": "Located on the medial surface of the left hemisphere, it separates the cingulate gyrus from the superior frontal gyrus."
+  },
+  "Model_5006_right_cingulate_sulcus": {
+    "label": "Right Cingulate Sulcus",
+    "description": "Located on the medial surface of the right hemisphere, it separates the cingulate gyrus from the superior frontal gyrus."
+  },
+  "Model_5006_right_cingulate_sulcus1": {
+    "label": "Right Cingulate Sulcus",
+    "description": "Located on the medial surface of the right hemisphere, it separates the cingulate gyrus from the superior frontal gyrus."
+  },
+  "Model_5007_left_collateral_sulcus": {
+    "label": "Left Collateral Sulcus",
+    "description": "Located on the basal surface of the left temporal and occipital lobes, it separates the fusiform gyrus from the parahippocampal gyrus."
+  },
+  "Model_5007_left_collateral_sulcus1": {
+    "label": "Left Collateral Sulcus",
+    "description": "Located on the basal surface of the left temporal and occipital lobes, it separates the fusiform gyrus from the parahippocampal gyrus."
+  },
+  "Model_5008_right_collateral_sulcus": {
+    "label": "Right Collateral Sulcus",
+    "description": "Located on the basal surface of the right temporal and occipital lobes, it separates the fusiform gyrus from the parahippocampal gyrus."
+  },
+  "Model_5008_right_collateral_sulcus1": {
+    "label": "Right Collateral Sulcus",
+    "description": "Located on the basal surface of the right temporal and occipital lobes, it separates the fusiform gyrus from the parahippocampal gyrus."
+  },
+  "Model_5009_left_inferior_frontal_sulcus": {
+    "label": "Left Inferior Frontal Sulcus",
+    "description": "Located in the left frontal lobe, it separates the inferior frontal gyrus from the middle frontal gyrus."
+  },
+  "Model_5009_left_inferior_frontal_sulcus1": {
+    "label": "Left Inferior Frontal Sulcus",
+    "description": "Located in the left frontal lobe, it separates the inferior frontal gyrus from the middle frontal gyrus."
+  },
+  "Model_5010_right_inferior_frontal_sulcus": {
+    "label": "Right Inferior Frontal Sulcus",
+    "description": "Located in the right frontal lobe, it separates the inferior frontal gyrus from the middle frontal gyrus."
+  },
+  "Model_5010_right_inferior_frontal_sulcus1": {
+    "label": "Right Inferior Frontal Sulcus",
+    "description": "Located in the right frontal lobe, it separates the inferior frontal gyrus from the middle frontal gyrus."
+  },
+  "Model_5011_left_intraparietal_sulcus": {
+    "label": "Left Intraparietal Sulcus",
+    "description": "Located in the left parietal lobe, it separates the superior parietal lobule from the inferior parietal lobule."
+  },
+  "Model_5011_left_intraparietal_sulcus1": {
+    "label": "Left Intraparietal Sulcus",
+    "description": "Located in the left parietal lobe, it separates the superior parietal lobule from the inferior parietal lobule."
+  },
+  "Model_5012_right_intraparietal_sulcus": {
+    "label": "Right Intraparietal Sulcus",
+    "description": "Located in the right parietal lobe, it separates the superior parietal lobule from the inferior parietal lobule."
+  },
+  "Model_5012_right_intraparietal_sulcus1": {
+    "label": "Right Intraparietal Sulcus",
+    "description": "Located in the right parietal lobe, it separates the superior parietal lobule from the inferior parietal lobule."
+  },
+  "Model_5013_left_parieto-occipital_sulcus": {
+    "label": "Left Parieto-occipital Sulcus",
+    "description": "Located on the medial surface of the left hemisphere, it separates the parietal and occipital lobes."
+  },
+  "Model_5013_left_parieto-occipital_sulcus1": {
+    "label": "Left Parieto-occipital Sulcus",
+    "description": "Located on the medial surface of the left hemisphere, it separates the parietal and occipital lobes."
+  },
+  "Model_5014_right_parieto-occipital_sulcus": {
+    "label": "Right Parieto-occipital Sulcus",
+    "description": "Located on the medial surface of the right hemisphere, it separates the parietal and occipital lobes."
+  },
+  "Model_5014_right_parieto-occipital_sulcus1": {
+    "label": "Right Parieto-occipital Sulcus",
+    "description": "Located on the medial surface of the right hemisphere, it separates the parietal and occipital lobes."
+  },
+  "Model_5015_left_postcentral_sulcus": {
+    "label": "Left Postcentral Sulcus",
+    "description": "Located in the left parietal lobe, it lies posterior to the postcentral gyrus."
+  },
+  "Model_5015_left_postcentral_sulcus1": {
+    "label": "Left Postcentral Sulcus",
+    "description": "Located in the left parietal lobe, it lies posterior to the postcentral gyrus."
+  },
+  "Model_5016_right_postcentral_sulcus": {
+    "label": "Right Postcentral Sulcus",
+    "description": "Located in the right parietal lobe, it lies posterior to the postcentral gyrus."
+  },
+  "Model_5016_right_postcentral_sulcus1": {
+    "label": "Right Postcentral Sulcus",
+    "description": "Located in the right parietal lobe, it lies posterior to the postcentral gyrus."
+  },
+  "Model_5017_left_precentral_sulcus": {
+    "label": "Left Precentral Sulcus",
+    "description": "Located in the left frontal lobe, it lies anterior to the precentral gyrus."
+  },
+  "Model_5017_left_precentral_sulcus1": {
+    "label": "Left Precentral Sulcus",
+    "description": "Located in the left frontal lobe, it lies anterior to the precentral gyrus."
+  },
+  "Model_5018_right_precentral_sulcus": {
+    "label": "Right Precentral Sulcus",
+    "description": "Located in the right frontal lobe, it lies anterior to the precentral gyrus."
+  },
+  "Model_5018_right_precentral_sulcus1": {
+    "label": "Right Precentral Sulcus",
+    "description": "Located in the right frontal lobe, it lies anterior to the precentral gyrus."
+  },
+  "Model_5019_left_superior_frontal_sulcus": {
+    "label": "Left Superior Frontal Sulcus",
+    "description": "Located in the left frontal lobe, it separates the superior frontal gyrus from the middle frontal gyrus."
+  },
+  "Model_5019_left_superior_frontal_sulcus1": {
+    "label": "Left Superior Frontal Sulcus",
+    "description": "Located in the left frontal lobe, it separates the superior frontal gyrus from the middle frontal gyrus."
+  },
+  "Model_5020_right_superior_frontal_sulcus": {
+    "label": "Right Superior Frontal Sulcus",
+    "description": "Located in the right frontal lobe, it separates the superior frontal gyrus from the middle frontal gyrus."
+  },
+  "Model_5020_right_superior_frontal_sulcus1": {
+    "label": "Right Superior Frontal Sulcus",
+    "description": "Located in the right frontal lobe, it separates the superior frontal gyrus from the middle frontal gyrus."
+  },
+  "Model_5021_left_superior_temporal_sulcus": {
+    "label": "Left Superior Temporal Sulcus",
+    "description": "Located in the left temporal lobe, it separates the superior temporal gyrus from the middle temporal gyrus."
+  },
+  "Model_5021_left_superior_temporal_sulcus1": {
+    "label": "Left Superior Temporal Sulcus",
+    "description": "Located in the left temporal lobe, it separates the superior temporal gyrus from the middle temporal gyrus."
+  }
+}
