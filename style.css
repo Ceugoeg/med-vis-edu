@@ -55,6 +55,76 @@ body, html {
 }
 
 /* =========================================
+   2.5 首屏手势引导层
+========================================= */
+#onboarding-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 8, 12, 0.82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 120;
+    pointer-events: auto;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+}
+
+#onboarding-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#onboarding-card {
+    width: min(560px, 92vw);
+    background: linear-gradient(160deg, rgba(14, 20, 28, 0.98), rgba(8, 12, 18, 0.98));
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    padding: 22px 22px 18px;
+}
+
+#onboarding-card h2 {
+    margin: 0 0 10px;
+    color: #d4af37;
+    font-size: 22px;
+}
+
+#onboarding-card p {
+    margin: 0 0 10px;
+    color: #b9c3cf;
+    font-size: 14px;
+}
+
+#onboarding-card ul {
+    margin: 0 0 14px 18px;
+    padding: 0;
+}
+
+#onboarding-card li {
+    margin: 8px 0;
+    color: #e6edf5;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+#onboarding-close-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #041018;
+    background: #00d2ff;
+    cursor: pointer;
+}
+
+#onboarding-close-btn:hover {
+    background: #32dcff;
+}
+
+/* =========================================
    3. 顶部导航栏 (多语言/多模型选择)
 ========================================= */
 #top-nav {
