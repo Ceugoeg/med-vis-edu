@@ -74,7 +74,20 @@
             }
         }
     </script>
-    <script src="drivers/mock_hands.js"></script>
+    <script>
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            // 动态决定加载哪个驱动
+            const scriptSrc = urlParams.get('input') === 'mediapipe' 
+                ? 'drivers/mediapipe-sense/runtime_loader.js' 
+                : 'drivers/mock_hands.js';
+            
+            // 使用现代 DOM API 创建并挂载节点，彻底避免解析器被截断的问题
+            const driverScript = document.createElement('script');
+            driverScript.src = scriptSrc;
+            document.head.appendChild(driverScript);
+        })();
+    </script>
     <script type="module" src="app.js"></script>
 </body>
 </html>

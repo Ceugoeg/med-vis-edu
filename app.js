@@ -36,6 +36,7 @@ let anatomyConfig = {};
 let lastGestureState = 'NONE';
 let lastHandX = 0.5; 
 let lastHandY = 0.5;
+let smoothedIndexDist = 0.5; // 【新增】用于记录滤波后的食指-手腕距离
 
 // --- 2. Three.js 核心初始化 ---
 const container = document.getElementById('canvas-container');
@@ -162,7 +163,7 @@ function loadAssets(modelName, langName) {
             if(!res.ok) throw new Error("字典不存在，已降级为纯解析模式");
             return res.json();
         })
-        .catch(() => ({})) // 找不到字典就用空对象兜底
+        .catch(() => ({})) 
         .then(cfg => {
             anatomyConfig = cfg;
             anatomyMapper = new AnatomyMapper(anatomyConfig);
@@ -213,6 +214,8 @@ function loadAssets(modelName, langName) {
                 partNameUI.innerText = "加载完成，等待探索...";
                 chatInputUI.disabled = false;
                 micBtnUI.disabled = false;
+                // 【修复：初始化时彻底解放发送按钮】
+                sendBtnUI.disabled = false;
 
             }, undefined, () => showError(`加载模型 ${modelName}.glb 失败！`));
         });
@@ -292,11 +295,9 @@ function handleHit(mesh) {
     sidebar.classList.add('active');
     partNameUI.innerText = partContext.label;
     
-    // 【修改点】：不再依赖 query 发送网络请求，直接展示静态的 description
     const staticDesc = anatomyConfig[mesh.name]?.description || "暂无该部位的详细描述记录。";
     partDescUI.innerText = staticDesc;
     
-    // 允许提问
     chatInputUI.disabled = false;
     sendBtnUI.disabled = false;
 }
@@ -366,11 +367,9 @@ function appendMessage(role, content) {
     return msgDiv;
 }
 
-// 【新增核心功能】：意图解析器 (Intent Parser)
 async function parseIntent(text) {
     if (!llmService || !llmService.apiKey) return { action: 'qa' };
 
-    // 将字典 ID 和标签提取给大模型，节省 token 且保证 100% 精确映射
     const partsList = Object.keys(anatomyConfig).map(k => `${k}:${anatomyConfig[k].label}`).join('; ');
     
     const prompt = `你是一个 3D 医学可视化系统的自然语言中枢。
@@ -411,10 +410,8 @@ async function handleSendChat() {
     const assistantBubble = appendMessage('assistant', '<span id="spinner">意图解析中...</span>');
     assistantBubble.classList.add('cursor-blink');
 
-    // 1. 发起意图识别
     const intent = await parseIntent(text);
     
-    // 2. 路由分发
     if (intent.action === 'focus' && intent.targetId) {
         let targetMesh = null;
         anatomyGroup.children[0].traverse(child => {
@@ -427,7 +424,6 @@ async function handleSendChat() {
             chatInputUI.disabled = false;
             sendBtnUI.disabled = false;
 
-            // 强制状态机流转：选中 -> 全面散开 -> 镜头聚焦
             handleHit(targetMesh);
             gsap.to(State_Channel, { 
                 explodeFactor: 1, duration: 0.8, ease: "power2.out",
@@ -443,7 +439,6 @@ async function handleSendChat() {
         }
     } 
     else {
-        // 普通 QA 路由
         if (!State_Channel.activeContext) {
             assistantBubble.innerHTML = "请先使用鼠标或手势选中特定的解剖部位，或在提问时指明具体的部位名称。";
             assistantBubble.classList.remove('cursor-blink');
@@ -493,26 +488,41 @@ function checkHover(element, x, y) {
 function updateFromHandData() {
     if (!window.handData) return;
     const hand = window.handData;
-    const indexFinger = hand.landmarks[8];
     
-    gestureStateUI.innerText = `[${currentAppMode}] 输入: ${hand.state}`;
-    
-    crosshairUI.style.left = `${indexFinger.x * 100}%`;
-    crosshairUI.style.top = `${indexFinger.y * 100}%`;
+    // 【保留】防崩溃校验
+    if (!hand.landmarks || hand.landmarks.length < 21) {
+        gestureStateUI.innerText = `[${currentAppMode}] 寻找手势中...`;
+        return; 
+    }
 
-    const screenX = indexFinger.x * window.innerWidth;
-    const screenY = indexFinger.y * window.innerHeight;
+    const indexFinger = hand.landmarks[8];
+    // 【保留】前置摄像头的镜像坐标修正
+    const mirroredX = 1.0 - indexFinger.x;
+    const mirroredY = indexFinger.y;
+
+    // 【极简兼容】抛弃混乱的滤波，只做基本的底层状态映射
+    let currentState = hand.state;
+    if (currentState === 'CLOSED') currentState = 'FIST'; 
+
+    gestureStateUI.innerText = `[${currentAppMode}] 输入: ${currentState}`;
+    
+    // 【保留】焦点层级提升与点击穿透
+    crosshairUI.style.left = `${mirroredX * 100}%`;
+    crosshairUI.style.top = `${mirroredY * 100}%`;
+    crosshairUI.style.zIndex = '9999';
+    crosshairUI.style.pointerEvents = 'none';
+
+    const screenX = mirroredX * window.innerWidth;
+    const screenY = mirroredY * window.innerHeight;
     
     const isHoveringCancel = cancelZoneUI.classList.contains('active') && checkHover(cancelZoneUI, screenX, screenY);
     const isHoveringMic = checkHover(micBtnUI, screenX, screenY);
-    // 【新增】：虚空点击发送按钮的支持
     const isHoveringSend = checkHover(sendBtnUI, screenX, screenY);
 
-    if (hand.state !== lastGestureState) {
+    if (currentState !== lastGestureState) {
         
-        if (hand.state === 'OPEN' || hand.state === 'NONE') {
+        if (currentState === 'OPEN' || currentState === 'NONE') {
             
-            // 录音结束判定
             if (isGestureRecording) {
                 isGestureRecording = false;
                 if (isHoveringCancel) {
@@ -524,7 +534,6 @@ function updateFromHandData() {
                     cancelZoneUI.classList.remove('active', 'hover-danger');
                     micHintUI.innerText = "已取消";
                 } else {
-                    // 【交互修复】：这里不再主动触发发送，纯粹结束录音
                     sttService.stop();
                     micBtnUI.classList.remove('recording');
                     cancelZoneUI.classList.remove('active', 'hover-danger');
@@ -533,14 +542,14 @@ function updateFromHandData() {
                 setTimeout(() => {
                     if(!isGestureRecording) micHintUI.innerText = "捏合说话";
                 }, 1500);
-                lastGestureState = hand.state;
+                lastGestureState = currentState;
                 return; 
             }
 
             crosshairUI.style.background = 'rgba(255, 255, 255, 0.5)';
             crosshairUI.style.transform = 'translate(-50%, -50%) scale(1)';
 
-            if (hand.state === 'OPEN') {
+            if (currentState === 'OPEN') {
                 if (currentAppMode === 'WHOLE') {
                     gsap.to(State_Channel, { 
                         explodeFactor: 1, duration: 0.8, ease: "power2.out",
@@ -559,16 +568,14 @@ function updateFromHandData() {
             }
         }
         
-        else if (hand.state === 'PINCH') {
+        else if (currentState === 'PINCH') {
             
-            // 发送按钮被捏合触控
             if (isHoveringSend && !sendBtnUI.disabled) {
                 handleSendChat();
-                lastGestureState = hand.state;
+                lastGestureState = currentState;
                 return;
             }
 
-            // 麦克风被捏合录音
             if (isHoveringMic && !micBtnUI.disabled && sttService && sttService.isSupported) {
                 isGestureRecording = true;
                 chatInputUI.value = ''; 
@@ -577,12 +584,9 @@ function updateFromHandData() {
                 
                 sttService.start(
                     (finalText, interimText) => {
-                        // 文本只进输入框，不再自动流转
                         chatInputUI.value = finalText + interimText; 
                     },
-                    () => {
-                        // 回调已被静默处理
-                    },
+                    () => {},
                     (err) => {
                         micHintUI.innerText = "麦克风异常";
                         setTimeout(() => {
@@ -591,23 +595,23 @@ function updateFromHandData() {
                     }
                 );
                 
-                lastGestureState = hand.state;
+                lastGestureState = currentState;
                 return; 
             }
 
-            lastHandX = indexFinger.x;
-            lastHandY = indexFinger.y;
+            lastHandX = mirroredX;
+            lastHandY = mirroredY;
             
             crosshairUI.style.background = 'rgba(212, 175, 55, 0.9)'; 
             crosshairUI.style.transform = 'translate(-50%, -50%) scale(0.6)'; 
             lockStateUI.innerText = "ON (抓取旋转中)";
 
             if (currentAppMode === 'SCATTERED') {
-                checkIntersectionNDC((indexFinger.x * 2) - 1, -(indexFinger.y * 2) + 1);
+                checkIntersectionNDC((mirroredX * 2) - 1, -(mirroredY * 2) + 1);
             }
         }
         
-        else if (hand.state === 'FIST') {
+        else if (currentState === 'FIST') {
             crosshairUI.style.background = 'rgba(255, 255, 255, 0.5)';
             crosshairUI.style.transform = 'translate(-50%, -50%) scale(1)';
 
@@ -626,7 +630,7 @@ function updateFromHandData() {
             }
         }
 
-        lastGestureState = hand.state;
+        lastGestureState = currentState;
     }
 
     if (isGestureRecording) {
@@ -640,15 +644,15 @@ function updateFromHandData() {
         return; 
     }
 
-    if (hand.state === 'PINCH') {
-        const deltaX = indexFinger.x - lastHandX;
-        const deltaY = indexFinger.y - lastHandY;
+    if (currentState === 'PINCH') {
+        const deltaX = mirroredX - lastHandX;
+        const deltaY = mirroredY - lastHandY;
         
         State_Channel.targetRotationY += deltaX * Math.PI * 2.5; 
         State_Channel.targetRotationX += deltaY * Math.PI * 1.5;
         
-        lastHandX = indexFinger.x;
-        lastHandY = indexFinger.y;
+        lastHandX = mirroredX;
+        lastHandY = mirroredY;
     }
 }
 

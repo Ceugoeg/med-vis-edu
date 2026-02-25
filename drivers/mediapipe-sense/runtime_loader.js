@@ -65,7 +65,7 @@
       await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js');
       await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js');
 
-      const baseUrl = selfScriptSrc ? new URL('.', selfScriptSrc).href : '../mediapipe-sense/';
+      const baseUrl = selfScriptSrc ? new URL('.', selfScriptSrc).href : './drivers/mediapipe-sense/';
       const moduleUrl = new URL('mediapipe_hand_publisher.js', baseUrl).href;
       const mod = await import(moduleUrl);
       const { MediaPipeSensePublisher } = mod;
