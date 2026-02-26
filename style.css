@@ -21,14 +21,33 @@ body, html {
 #ui-layer { 
     position: absolute; width: 100%; height: 100%; 
     z-index: 10; 
-    pointer-events: none; /* 核心：允许射线穿透 UI 击中模型 */
+    pointer-events: none; 
     box-sizing: border-box; 
-    transition: box-shadow 0.3s ease; 
+    transition: box-shadow 0.5s ease, background 0.5s ease; 
 }
 
-/* 命中时的内阴影锁定光效 */
+/* 【修改】：命中时与散开时的白雾保持相同结构，仅改变色相为金色 */
 #ui-layer.hit-active { 
-    box-shadow: inset 0 0 120px rgba(212, 175, 55, 0.4), inset 0 0 15px rgba(212, 175, 55, 0.8); 
+    background: radial-gradient(ellipse at 50% 50%, 
+        rgba(212,175,55,0) 45%, 
+        rgba(212,175,55,0.05) 60%, 
+        rgba(212,175,55,0.4) 85%, 
+        rgba(212,175,55,1) 100%
+    );
+    box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.3), 
+                inset 0 0 20px rgba(212, 175, 55, 0.8);
+}
+
+/* SCATTERED状态下的高亮白色边缘漫游区 */
+#ui-layer.scatter-active {
+    background: radial-gradient(ellipse at 50% 50%, 
+        rgba(255,255,255,0) 45%, 
+        rgba(255,255,255,0.05) 60%, 
+        rgba(255,255,255,0.4) 85%, 
+        rgba(255,255,255,1) 100%
+    );
+    box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.3), 
+                inset 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 #status-bar { 
@@ -58,101 +77,43 @@ body, html {
    2.5 首屏手势引导层
 ========================================= */
 #onboarding-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(5, 8, 12, 0.82);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 120;
-    pointer-events: auto;
-    opacity: 1;
-    transition: opacity 0.25s ease;
+    position: absolute; inset: 0; background: rgba(5, 8, 12, 0.82);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 120; pointer-events: auto; opacity: 1; transition: opacity 0.25s ease;
 }
-
-#onboarding-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
+#onboarding-overlay.hidden { opacity: 0; pointer-events: none; }
 #onboarding-card {
-    width: min(560px, 92vw);
-    background: linear-gradient(160deg, rgba(14, 20, 28, 0.98), rgba(8, 12, 18, 0.98));
-    border: 1px solid rgba(0, 210, 255, 0.35);
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
-    padding: 22px 22px 18px;
+    width: min(560px, 92vw); background: linear-gradient(160deg, rgba(14, 20, 28, 0.98), rgba(8, 12, 18, 0.98));
+    border: 1px solid rgba(0, 210, 255, 0.35); border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45); padding: 22px 22px 18px;
 }
-
-#onboarding-card h2 {
-    margin: 0 0 10px;
-    color: #d4af37;
-    font-size: 22px;
-}
-
-#onboarding-card p {
-    margin: 0 0 10px;
-    color: #b9c3cf;
-    font-size: 14px;
-}
-
-#onboarding-card ul {
-    margin: 0 0 14px 18px;
-    padding: 0;
-}
-
-#onboarding-card li {
-    margin: 8px 0;
-    color: #e6edf5;
-    line-height: 1.5;
-    font-size: 14px;
-}
-
+#onboarding-card h2 { margin: 0 0 10px; color: #d4af37; font-size: 22px; }
+#onboarding-card p { margin: 0 0 10px; color: #b9c3cf; font-size: 14px; }
+#onboarding-card ul { margin: 0 0 14px 18px; padding: 0; }
+#onboarding-card li { margin: 8px 0; color: #e6edf5; line-height: 1.5; font-size: 14px; }
 #onboarding-close-btn {
-    width: 100%;
-    border: 0;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #041018;
-    background: #00d2ff;
-    cursor: pointer;
+    width: 100%; border: 0; border-radius: 8px; padding: 10px 12px;
+    font-size: 14px; font-weight: 700; color: #041018; background: #00d2ff; cursor: pointer;
 }
-
-#onboarding-close-btn:hover {
-    background: #32dcff;
-}
+#onboarding-close-btn:hover { background: #32dcff; }
 
 /* =========================================
    3. 顶部导航栏 (多语言/多模型选择)
 ========================================= */
 #top-nav {
     position: absolute; top: 0; left: 0; width: 100%;
-    display: flex; justify-content: center; gap: 40px;
-    padding: 15px 0;
+    display: flex; justify-content: center; gap: 40px; padding: 15px 0;
     background: linear-gradient(to bottom, rgba(10, 15, 20, 0.95) 0%, rgba(10, 15, 20, 0) 100%);
-    pointer-events: auto; /* 开启交互 */
-    z-index: 20;
+    pointer-events: auto; z-index: 20;
 }
-
-.nav-group {
-    display: flex; align-items: center; gap: 10px;
-}
-
-.nav-group label {
-    font-size: 14px; color: #aaa; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
-}
-
+.nav-group { display: flex; align-items: center; gap: 10px; }
+.nav-group label { font-size: 14px; color: #aaa; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
 .nav-group select {
     background: rgba(0, 0, 0, 0.6); border: 1px solid #444; color: #00d2ff;
     padding: 6px 12px; border-radius: 4px; outline: none; font-size: 14px;
     cursor: pointer; transition: border-color 0.3s;
 }
-
-.nav-group select:focus, .nav-group select:hover {
-    border-color: #00d2ff;
-}
+.nav-group select:focus, .nav-group select:hover { border-color: #00d2ff; }
 
 /* =========================================
    4. 取消录音的全局悬浮判定区
@@ -161,8 +122,7 @@ body, html {
     position: absolute; top: 60px; left: 0; width: 100%; height: 160px;
     background: linear-gradient(to bottom, rgba(255, 40, 40, 0.9) 0%, rgba(255, 40, 40, 0) 100%);
     display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-    padding-top: 25px; box-sizing: border-box;
-    color: #fff; opacity: 0; pointer-events: none; 
+    padding-top: 25px; box-sizing: border-box; color: #fff; opacity: 0; pointer-events: none; 
     transition: opacity 0.3s, background 0.3s; z-index: 100;
 }
 #cancel-zone.active { opacity: 1; }
@@ -174,58 +134,32 @@ body, html {
    5. 侧边栏 (信息展示板)
 ========================================= */
 #sidebar { 
-    position: absolute; right: 0; top: 0; 
-    width: 380px; height: 100%; 
+    position: absolute; right: 0; top: 0; width: 380px; height: 100%; 
     background: rgba(10, 15, 20, 0.85); backdrop-filter: blur(8px);
-    border-left: 1px solid rgba(255, 255, 255, 0.1); 
-    padding: 80px 20px 20px; /* 顶部留出空间防止被 nav 遮挡 */
-    box-sizing: border-box; 
-    transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.1, 0.8, 0.3, 1); 
-    display: flex; flex-direction: column; 
-    pointer-events: auto; 
+    border-left: 1px solid rgba(255, 255, 255, 0.1); padding: 80px 20px 20px; 
+    box-sizing: border-box; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.1, 0.8, 0.3, 1); 
+    display: flex; flex-direction: column; pointer-events: auto; 
 }
 #sidebar.active { transform: translateX(0); }
-
-#sidebar-header { 
-    flex-shrink: 0; margin-bottom: 20px; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 15px; 
-}
-
+#sidebar-header { flex-shrink: 0; margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 15px; }
 .ai-badge { 
-    display: inline-block; background: #00d2ff; color: #000; 
-    padding: 2px 8px; border-radius: 3px; font-size: 12px; 
+    display: inline-block; background: #00d2ff; color: #000; padding: 2px 8px; border-radius: 3px; font-size: 12px; 
     font-weight: bold; margin-bottom: 10px; 
 }
 #part-name { color: #d4af37; margin-top: 0; transition: color 0.3s; }
 #part-desc { line-height: 1.5; color: #aaa; font-size: 14px; }
-
-/* 聊天历史记录区 */
 #chat-history { 
-    flex-grow: 1; overflow-y: auto; padding-right: 5px; 
-    display: flex; flex-direction: column; gap: 15px; 
-    margin-bottom: 10px;
+    flex-grow: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 15px; margin-bottom: 10px;
 }
 #chat-history::-webkit-scrollbar { width: 4px; }
 #chat-history::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.3); border-radius: 2px; }
-
-.chat-msg { 
-    max-width: 95%; padding: 10px 14px; border-radius: 8px; 
-    font-size: 14px; line-height: 1.5; word-wrap: break-word; 
-    animation: fadeIn 0.3s ease-out; 
-}
-.chat-msg.user { 
-    align-self: flex-end; background: rgba(0, 210, 255, 0.15); 
-    border: 1px solid rgba(0, 210, 255, 0.3); color: #fff; border-bottom-right-radius: 2px; 
-}
-.chat-msg.assistant { 
-    align-self: flex-start; background: rgba(255, 255, 255, 0.05); 
-    border: 1px solid rgba(255, 255, 255, 0.1); color: #ddd; border-top-left-radius: 2px; 
-}
+.chat-msg { max-width: 95%; padding: 10px 14px; border-radius: 8px; font-size: 14px; line-height: 1.5; word-wrap: break-word; animation: fadeIn 0.3s ease-out; }
+.chat-msg.user { align-self: flex-end; background: rgba(0, 210, 255, 0.15); border: 1px solid rgba(0, 210, 255, 0.3); color: #fff; border-bottom-right-radius: 2px; }
+.chat-msg.assistant { align-self: flex-start; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #ddd; border-top-left-radius: 2px; }
 .chat-msg.assistant p { margin: 0 0 8px 0; }
 .chat-msg.assistant p:last-child { margin: 0; }
 .chat-msg.assistant ul, .chat-msg.assistant ol { margin: 5px 0; padding-left: 20px; }
 .chat-msg.assistant strong { color: #d4af37; }
-
 .cursor-blink::after { content: ' ▌'; color: #00d2ff; animation: pulse 1s infinite; }
 #loading-spinner { color: #00d2ff; font-size: 13px; margin: 10px 0; animation: pulse 1.5s infinite; text-align: center; flex-shrink: 0; }
 
@@ -233,46 +167,30 @@ body, html {
    6. 底部全局控制台 (意图驱动入口)
 ========================================= */
 #bottom-console {
-    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-    width: 600px; max-width: 90%;
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 600px; max-width: 90%;
     background: rgba(10, 15, 20, 0.7); backdrop-filter: blur(15px);
-    border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 12px;
-    padding: 20px; box-sizing: border-box;
-    display: flex; flex-direction: column; gap: 15px;
-    pointer-events: auto; /* 允许物理点击和手势穿透 */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 20;
+    border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 12px; padding: 20px; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 15px; pointer-events: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 20;
 }
-
 .mic-container { display: flex; justify-content: center; width: 100%; }
 #mic-btn {
-    width: 80px; height: 80px; border-radius: 50%;
-    background: rgba(0, 210, 255, 0.1); border: 2px solid rgba(0, 210, 255, 0.4);
+    width: 80px; height: 80px; border-radius: 50%; background: rgba(0, 210, 255, 0.1); border: 2px solid rgba(0, 210, 255, 0.4);
     color: #00d2ff; display: flex; flex-direction: column; align-items: center; justify-content: center;
     cursor: pointer; transition: all 0.2s cubic-bezier(0.1, 0.8, 0.3, 1);
 }
 #mic-btn:disabled { opacity: 0.2; cursor: not-allowed; border-color: #444; color: #666; }
 #mic-btn .mic-icon { font-size: 28px; margin-bottom: 2px; }
 #mic-btn .mic-hint { font-size: 11px; font-weight: bold; opacity: 0.8; }
-
-#mic-btn.recording {
-    background: rgba(255, 50, 50, 0.15); border-color: rgba(255, 50, 50, 0.8); color: #ff4444;
-    animation: micPulse 1.5s infinite;
-}
-
+#mic-btn.recording { background: rgba(255, 50, 50, 0.15); border-color: rgba(255, 50, 50, 0.8); color: #ff4444; animation: micPulse 1.5s infinite; }
 .input-row { display: flex; gap: 10px; width: 100%; }
 #chat-input { 
-    flex-grow: 1; background: rgba(0, 0, 0, 0.5); 
-    border: 1px solid #444; color: #fff; padding: 12px 15px; 
-    border-radius: 6px; outline: none; font-size: 14px;
-    transition: border-color 0.3s, box-shadow 0.3s; 
+    flex-grow: 1; background: rgba(0, 0, 0, 0.5); border: 1px solid #444; color: #fff; padding: 12px 15px; 
+    border-radius: 6px; outline: none; font-size: 14px; transition: border-color 0.3s, box-shadow 0.3s; 
 }
 #chat-input:focus:not(:disabled) { border-color: #00d2ff; box-shadow: 0 0 8px rgba(0, 210, 255, 0.3); }
 #chat-input:disabled { opacity: 0.5; cursor: not-allowed; }
-
 #send-btn { 
-    background: #00d2ff; color: #000; border: none; 
-    padding: 0 20px; border-radius: 6px; font-weight: bold; font-size: 14px;
+    background: #00d2ff; color: #000; border: none; padding: 0 20px; border-radius: 6px; font-weight: bold; font-size: 14px;
     cursor: pointer; transition: background 0.2s, transform 0.1s; 
 }
 #send-btn:active:not(:disabled) { transform: scale(0.95); }
@@ -281,11 +199,6 @@ body, html {
 /* =========================================
    7. 动画与特效定义
 ========================================= */
-@keyframes micPulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0.4); }
-    70% { box-shadow: 0 0 0 20px rgba(255, 50, 50, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0); }
-}
-
+@keyframes micPulse { 0% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(255, 50, 50, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0); } }
 @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
