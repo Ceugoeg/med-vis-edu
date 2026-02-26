@@ -72,19 +72,22 @@
 
       const videoElement = createHiddenVideo();
 
+      // 暴露新版的高级参数字典，方便后续在联调中微调
       const publisher = new MediaPipeSensePublisher({
         videoElement,
         config: {
-          smoothingAlpha: 0.2,
-          stateHoldFrames: 2,
           flipY: false,
           debug: false,
+          adaptiveSmoothing: true, // 开启自适应滤波
+          stateVoteWindow: 5,      // 滑动窗口长度
+          openConfirmFramesAfterAction: 2, // 离开 FIST/PINCH 后的缓冲死区帧数
+          dynamicPinch: true       // 开启基于手部比例的动态捏合检测
         },
       });
 
       await publisher.start();
       window.__mediapipePublisher = publisher;
-      console.log('[mediapipe-sense] 摄像头输入模式已启动。');
+      console.log('[mediapipe-sense] 摄像头输入模式已启动。高级防抖策略已挂载。');
     } catch (err) {
       console.error('[mediapipe-sense] 启动失败，回退为 NONE:', err);
       ensureDefaultHandData();

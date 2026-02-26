@@ -7,10 +7,30 @@ const DEFAULT_CONFIG = {
   minDetectionConfidence: 0.6,
   minTrackingConfidence: 0.6,
   smoothingAlpha: 0.2,
+  adaptiveSmoothing: true,
+  minAdaptiveAlpha: 0.16,
+  maxAdaptiveAlpha: 0.5,
+  velocityLow: 0.003,
+  velocityHigh: 0.03,
   pinchThreshold: 0.055,
-  openExtensionThreshold: 0.04,
-  fistCurlThreshold: -0.015,
-  stateHoldFrames: 2,
+  dynamicPinch: true,
+  pinchRatioThreshold: 0.34,
+  pinchOpenBaselineCount: 2,
+  openEnterExtensionThreshold: 0.035,
+  openExitExtensionThreshold: 0.02,
+  openEnterYGapThreshold: -0.065,
+  openExitYGapThreshold: -0.045,
+  fistEnterCurlThreshold: -0.01,
+  fistExitCurlThreshold: -0.004,
+  fistEnterYGapAbsThreshold: 0.065,
+  fistExitYGapAbsThreshold: 0.08,
+  thumbExtendedEnterThreshold: 0.05,
+  thumbExtendedExitThreshold: 0.04,
+  thumbCurledEnterThreshold: 0.065,
+  thumbCurledExitThreshold: 0.075,
+  stateVoteWindow: 5,
+  openConfirmFramesAfterAction: 2,
+  stateHoldFrames: 1,
   flipY: false,
   debug: false,
 };
@@ -51,9 +71,13 @@ export class MediaPipeSensePublisher {
     this.stream = null;
 
     this.lastSmoothedLandmarks = null;
+    this.lastRawLandmarks = null;
+    this.lastAdaptiveAlpha = this.config.smoothingAlpha;
     this.stableState = 'NONE';
     this.candidateState = 'NONE';
     this.candidateFrames = 0;
+    this.stateHistory = [];
+    this.openCandidateFrames = 0;
 
     this.publish(this.stableState, makeDefaultLandmarks(), 0);
   }
@@ -130,9 +154,13 @@ export class MediaPipeSensePublisher {
     this.videoElement.srcObject = null;
 
     this.lastSmoothedLandmarks = null;
+    this.lastRawLandmarks = null;
+    this.lastAdaptiveAlpha = this.config.smoothingAlpha;
     this.stableState = 'NONE';
     this.candidateState = 'NONE';
     this.candidateFrames = 0;
+    this.stateHistory = [];
+    this.openCandidateFrames = 0;
 
     this.publish(this.stableState, makeDefaultLandmarks(), 0);
   }
@@ -143,6 +171,10 @@ export class MediaPipeSensePublisher {
 
     if (!handLandmarks || handLandmarks.length !== HAND_LANDMARK_COUNT) {
       this.lastSmoothedLandmarks = null;
+      this.lastRawLandmarks = null;
+      this.lastAdaptiveAlpha = this.config.smoothingAlpha;
+      this.stateHistory = [];
+      this.openCandidateFrames = 0;
       const state = this.commitState('NONE');
       this.publish(state, makeDefaultLandmarks(), 0);
       return;
@@ -156,7 +188,9 @@ export class MediaPipeSensePublisher {
 
     const smoothed = this.smoothLandmarks(normalized);
     const rawState = this.detectGesture(smoothed);
-    const stable = this.commitState(rawState);
+    const constrainedState = this.applyTransitionConstraints(rawState);
+    const votedState = this.voteState(constrainedState);
+    const stable = this.commitState(votedState);
 
     const confidence = clamp01(
       typeof handednessScore === 'number'
@@ -167,13 +201,60 @@ export class MediaPipeSensePublisher {
     this.publish(stable, smoothed, confidence);
   }
 
+  applyTransitionConstraints(rawState) {
+    if (rawState === 'OPEN') {
+      this.openCandidateFrames += 1;
+    } else {
+      this.openCandidateFrames = 0;
+    }
+
+    const fromState = this.stableState;
+    const leavingCriticalState = fromState === 'FIST' || fromState === 'PINCH';
+    if (
+      leavingCriticalState &&
+      rawState === 'OPEN' &&
+      this.openCandidateFrames < this.config.openConfirmFramesAfterAction
+    ) {
+      return 'NONE';
+    }
+
+    return rawState;
+  }
+
+  voteState(state) {
+    this.stateHistory.push(state);
+    if (this.stateHistory.length > this.config.stateVoteWindow) {
+      this.stateHistory.shift();
+    }
+
+    const counts = new Map();
+    for (const s of this.stateHistory) {
+      counts.set(s, (counts.get(s) || 0) + 1);
+    }
+
+    let winner = this.stableState;
+    let winnerCount = -1;
+    for (const [candidate, count] of counts.entries()) {
+      if (count > winnerCount) {
+        winner = candidate;
+        winnerCount = count;
+      } else if (count === winnerCount && candidate === this.stableState) {
+        winner = candidate;
+      }
+    }
+
+    return winner;
+  }
+
   smoothLandmarks(current) {
     if (!this.lastSmoothedLandmarks) {
+      this.lastRawLandmarks = current.map((p) => ({ ...p }));
       this.lastSmoothedLandmarks = current.map((p) => ({ ...p }));
       return this.lastSmoothedLandmarks.map((p) => ({ ...p }));
     }
 
-    const alpha = this.config.smoothingAlpha;
+    const alpha = this.computeAdaptiveAlpha(current);
+    this.lastAdaptiveAlpha = alpha;
     const smoothed = current.map((p, i) => {
       const prev = this.lastSmoothedLandmarks[i];
       return {
@@ -183,15 +264,30 @@ export class MediaPipeSensePublisher {
       };
     });
 
+    this.lastRawLandmarks = current.map((p) => ({ ...p }));
     this.lastSmoothedLandmarks = smoothed.map((p) => ({ ...p }));
     return smoothed;
   }
 
+  computeAdaptiveAlpha(current) {
+    if (!this.config.adaptiveSmoothing || !this.lastRawLandmarks) {
+      return this.config.smoothingAlpha;
+    }
+
+    const v = distance3(current[8], this.lastRawLandmarks[8]);
+    const low = this.config.velocityLow;
+    const high = this.config.velocityHigh;
+    const t = clamp01((v - low) / Math.max(1e-6, high - low));
+    return this.config.minAdaptiveAlpha + (this.config.maxAdaptiveAlpha - this.config.minAdaptiveAlpha) * t;
+  }
+
   detectGesture(landmarks) {
     const pinchDist = distance3(landmarks[4], landmarks[8]);
-    if (pinchDist < this.config.pinchThreshold) {
-      return 'PINCH';
-    }
+    const handScale = Math.max(distance3(landmarks[0], landmarks[5]), 1e-6);
+    const pinchRatio = pinchDist / handScale;
+    const pinchMatched = this.config.dynamicPinch
+      ? pinchRatio < this.config.pinchRatioThreshold
+      : pinchDist < this.config.pinchThreshold;
 
     const wrist = landmarks[0];
     const fingerPairs = [
@@ -209,22 +305,86 @@ export class MediaPipeSensePublisher {
       const mcpDist = distance3(landmarks[mcpIndex], wrist);
       const delta = tipDist - mcpDist;
 
-      if (delta > this.config.openExtensionThreshold) {
+      if (delta > this.config.openEnterExtensionThreshold) {
         extendedCount += 1;
       }
-      if (delta < this.config.fistCurlThreshold) {
+      if (delta < this.config.fistEnterCurlThreshold) {
         curledCount += 1;
       }
     }
 
-    const thumbExtended = distance3(landmarks[4], landmarks[2]) > 0.05;
-    const thumbCurled = distance3(landmarks[4], landmarks[2]) < 0.03;
+    const thumbDist = distance3(landmarks[4], landmarks[2]);
+    const isOpenSticky = this.stableState === 'OPEN';
+    const isFistSticky = this.stableState === 'FIST';
 
-    if (extendedCount >= 4 && thumbExtended) {
+    const openDeltaThreshold = isOpenSticky
+      ? this.config.openExitExtensionThreshold
+      : this.config.openEnterExtensionThreshold;
+    const fistDeltaThreshold = isFistSticky
+      ? this.config.fistExitCurlThreshold
+      : this.config.fistEnterCurlThreshold;
+    const openCountThreshold = isOpenSticky ? 3 : 4;
+    const fistCountThreshold = isFistSticky ? 3 : 4;
+    const thumbOpenThreshold = isOpenSticky
+      ? this.config.thumbExtendedExitThreshold
+      : this.config.thumbExtendedEnterThreshold;
+    const thumbFistThreshold = isFistSticky
+      ? this.config.thumbCurledExitThreshold
+      : this.config.thumbCurledEnterThreshold;
+    const openYGapThreshold = isOpenSticky
+      ? this.config.openExitYGapThreshold
+      : this.config.openEnterYGapThreshold;
+    const fistYGapAbsThreshold = isFistSticky
+      ? this.config.fistExitYGapAbsThreshold
+      : this.config.fistEnterYGapAbsThreshold;
+
+    const openCount = fingerPairs.reduce((acc, [tipIndex, mcpIndex]) => {
+      const tipDist = distance3(landmarks[tipIndex], wrist);
+      const mcpDist = distance3(landmarks[mcpIndex], wrist);
+      return acc + (tipDist - mcpDist > openDeltaThreshold ? 1 : 0);
+    }, 0);
+
+    const fistCount = fingerPairs.reduce((acc, [tipIndex, mcpIndex]) => {
+      const tipDist = distance3(landmarks[tipIndex], wrist);
+      const mcpDist = distance3(landmarks[mcpIndex], wrist);
+      return acc + (tipDist - mcpDist < fistDeltaThreshold ? 1 : 0);
+    }, 0);
+    const openYCount = fingerPairs.reduce((acc, [tipIndex, mcpIndex]) => {
+      const yGap = landmarks[tipIndex].y - landmarks[mcpIndex].y;
+      return acc + (yGap < openYGapThreshold ? 1 : 0);
+    }, 0);
+    const fistYCount = fingerPairs.reduce((acc, [tipIndex, mcpIndex]) => {
+      const yGapAbs = Math.abs(landmarks[tipIndex].y - landmarks[mcpIndex].y);
+      return acc + (yGapAbs < fistYGapAbsThreshold ? 1 : 0);
+    }, 0);
+
+    const thumbExtendedHys = thumbDist > thumbOpenThreshold;
+    const thumbCurledHys = thumbDist < thumbFistThreshold;
+    const pinchBaselineReady =
+      this.stableState === 'PINCH' ||
+      this.stableState === 'OPEN' ||
+      openYCount >= this.config.pinchOpenBaselineCount;
+    const fistYCountThreshold = isFistSticky ? 3 : 4;
+
+    if (pinchMatched && pinchBaselineReady) {
+      return 'PINCH';
+    }
+
+    if (
+      openCount >= openCountThreshold &&
+      openYCount >= openCountThreshold &&
+      thumbExtendedHys &&
+      extendedCount >= 3
+    ) {
       return 'OPEN';
     }
 
-    if (curledCount >= 4 && thumbCurled) {
+    if (
+      fistCount >= fistCountThreshold &&
+      fistYCount >= fistYCountThreshold &&
+      thumbCurledHys &&
+      curledCount >= 2
+    ) {
       return 'FIST';
     }
 
@@ -255,6 +415,11 @@ export class MediaPipeSensePublisher {
       landmarks,
       confidence,
     };
+    if (this.config.debug) {
+      this.handDataTarget.handData.meta = {
+        adaptiveAlpha: this.lastAdaptiveAlpha,
+      };
+    }
   }
 
   handleError(err) {
