@@ -12,6 +12,20 @@
     <div id="canvas-container"></div>
     
     <div id="ui-layer">
+        <div id="onboarding-overlay" aria-live="polite">
+            <div id="onboarding-card">
+                <h2>手势操作引导</h2>
+                <p>进入系统后可使用以下手势：</p>
+                <ul>
+                    <li><strong>PINCH（捏合）</strong>：利用两根手指选中部位、旋转、或激活麦克风！</li>
+                    <li><strong>OPEN（张开）</strong>：张开手掌来从你想要的视角散开模型！</li>
+                    <li><strong>FIST（握拳）</strong>：用手掌方向正对屏幕，然后握拳，确保五根手指都在屏幕内以进入！<br>利用该状态以自由旋转模型，或是从各类状态返回！</li>
+                    <li><strong>NONE（放松）</strong>：中性状态，用于动作间缓冲。</li>
+                </ul>
+                <button id="onboarding-close-btn" type="button">开始体验</button>
+            </div>
+        </div>
+
         <div id="top-nav">
             <div class="nav-group">
                 <label for="model-select">解剖模型</label>
@@ -74,7 +88,36 @@
             }
         }
     </script>
-    <script src="drivers/mock_hands.js"></script>
+    <script>
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            // 动态决定加载哪个驱动
+            const scriptSrc = urlParams.get('input') === 'mediapipe' 
+                ? 'drivers/mediapipe-sense/runtime_loader.js' 
+                : 'drivers/mock_hands.js';
+            
+            // 使用现代 DOM API 创建并挂载节点，彻底避免解析器被截断的问题
+            const driverScript = document.createElement('script');
+            driverScript.src = scriptSrc;
+            document.head.appendChild(driverScript);
+        })();
+    </script>
+    <script>
+        (function () {
+            const overlay = document.getElementById('onboarding-overlay');
+            const closeBtn = document.getElementById('onboarding-close-btn');
+            if (!overlay || !closeBtn) return;
+
+            function closeGuide() {
+                overlay.classList.add('hidden');
+            }
+
+            closeBtn.addEventListener('click', closeGuide);
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeGuide();
+            });
+        })();
+    </script>
     <script type="module" src="app.js"></script>
 </body>
 </html>
