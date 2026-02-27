@@ -185,7 +185,7 @@ function showError(msg) {
 // --- 5. 动画与交互路由 ---
 function animateExplode(factor) {
     if(!anatomyGroup.children.length) return;
-    const explosionRadius = 12.0; 
+    const explosionRadius = 8.0; 
     const modelScale = anatomyGroup.children[0].scale.x;
     const actualRadius = explosionRadius / (modelScale > 0 ? modelScale : 1);
 
@@ -396,7 +396,8 @@ function animate() {
         const isPinchJustStarted = (handData.state === 'PINCH' && prevHandState !== 'PINCH');
 
         const renderState = hsm.update(handData, hsmCallbacks);
-        gestureStateUI.innerText = `[${hsm.appMode}] 输入: ${handData.state}`;
+        const displayGesture = renderState?.effectiveGesture || handData.state;
+        gestureStateUI.innerText = `[${hsm.appMode}] 输入: ${displayGesture}`;
 
         if (renderState && renderState.cursorScreen) {
             const rawMirroredX = renderState.cursorScreen.x;
