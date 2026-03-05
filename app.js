@@ -392,12 +392,11 @@ function animate() {
     if (handData && handData.landmarks) {
         if (handData.state === 'CLOSED') handData.state = 'FIST';
 
-        // 计算物理 PINCH 动作是否发生在当前这一帧（上升沿边缘触发器）
-        const isPinchJustStarted = (handData.state === 'PINCH' && prevHandState !== 'PINCH');
-
         const renderState = hsm.update(handData, hsmCallbacks);
-        const displayGesture = renderState?.effectiveGesture || handData.state;
-        gestureStateUI.innerText = `[${hsm.appMode}] 输入: ${displayGesture}`;
+        const effectiveState = renderState?.effectiveGesture || handData.state;
+        // 计算有效 PINCH 动作是否发生在当前这一帧（上升沿边缘触发器）
+        const isPinchJustStarted = (effectiveState === 'PINCH' && prevHandState !== 'PINCH');
+        gestureStateUI.innerText = `[${hsm.appMode}] 输入: ${effectiveState}`;
 
         if (renderState && renderState.cursorScreen) {
             const rawMirroredX = renderState.cursorScreen.x;
@@ -453,7 +452,7 @@ function animate() {
                 crosshairUI.style.transform = `translate(-50%, -50%) rotate(${angle}rad) scale(2.0, 0.4)`;
                 crosshairUI.style.borderRadius = '5px';
                 crosshairUI.style.boxShadow = 'none';
-            } else if (handData.state === 'PINCH') {
+            } else if (effectiveState === 'PINCH') {
                 crosshairUI.style.background = 'rgba(212, 175, 55, 0.9)'; 
                 crosshairUI.style.transform = 'translate(-50%, -50%) scale(0.6)'; 
                 crosshairUI.style.borderRadius = '50%';
@@ -479,7 +478,7 @@ function animate() {
             if (isGestureRecording) {
                 cancelZoneUI.classList.toggle('hover-danger', isHoveringCancel);
                 micHintUI.innerText = isHoveringCancel ? "松开取消" : "录音中...";
-                if (handData.state === 'OPEN' || handData.state === 'NONE') {
+                if (effectiveState === 'OPEN' || effectiveState === 'NONE') {
                     isGestureRecording = false; sttService.stop(); micBtnUI.classList.remove('recording'); cancelZoneUI.classList.remove('active', 'hover-danger');
                     if (isHoveringCancel) { sttService.onEndCallback = null; chatInputUI.value = ''; micHintUI.innerText = "已取消"; }
                     else micHintUI.innerText = "捏合说话";
@@ -488,7 +487,7 @@ function animate() {
         }
         
         // 渲染完当前帧后，将状态保存，供下一帧对比
-        prevHandState = handData.state;
+        prevHandState = effectiveState;
     } else {
         gestureStateUI.innerText = `[${hsm.appMode}] 寻找手势...`;
         prevHandState = 'NONE';
