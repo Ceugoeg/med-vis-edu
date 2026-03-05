@@ -19,11 +19,10 @@ export class InteractionHSM {
         this.isDragging = false;
         this.fistHoldStartMs = null;
         this.wholePinchMode = false;
-        this.wholePinchActivateMs = 1000;
-        this.wholeEdgeGuardRatio = 0.05;
-        this.wholeReentryFramesRequired = 3;
-        this.wholeDeltaClamp = 0.03;
-        this.wholeReentryCooldownFrames = 0;
+        this.wholeEdgeGuardRatio = 0.03;
+        this.wholeReentryFramesRequired = 1;
+        this.wholeDeltaClamp = 0.06;
+        this.wholeReentryCooldownFrames = 1;
         this.wholeEdgeLocked = false;
         this.wholeSafeReentryFrames = 0;
         
@@ -39,27 +38,22 @@ export class InteractionHSM {
         const indexFinger = handData.landmarks[8];
         const mirroredX = 1.0 - indexFinger.x;
         const mirroredY = indexFinger.y;
-        const nowMs = (typeof performance !== 'undefined' ? performance.now() : Date.now());
 
         let isEdgePanning = false;
 
         if (currentState === 'FIST') {
             this.pinchFired = false;
 
-            if (this.appMode === 'WHOLE') {
-                if (this.fistHoldStartMs === null) this.fistHoldStartMs = nowMs;
-                if (nowMs - this.fistHoldStartMs >= this.wholePinchActivateMs) {
-                    this.wholePinchMode = true;
-                }
-            } else {
+            // WHOLE 下 FIST 即 FIST，不再 1 秒后合成 PINCH；非 WHOLE 时重置相关状态
+            if (this.appMode !== 'WHOLE') {
                 this.fistHoldStartMs = null;
                 this.wholePinchMode = false;
             }
-            
-            // 【修改】：上升沿触发，彻底解决帧穿透退回的 Bug
+
+            // 上升沿触发
             if (!this.fistActionFired) {
                 this.fistActionFired = true;
-                
+
                 if (this.appMode === 'FOCUSED') {
                     if (callbacks.onResetFocus) callbacks.onResetFocus();
                     this.appMode = 'SCATTERED';
@@ -76,14 +70,17 @@ export class InteractionHSM {
                     this.currentVelocityY = 0;
                 }
             } else {
-                // 稳态触发：如果一直保持握拳，仅在 WHOLE 状态下允许持续拖拽
+                // 稳态：WHOLE 下握拳持续驱动旋转（FIST 即旋转，不合成 PINCH）
                 if (this.appMode === 'WHOLE' && this.isDragging) {
-                    const sensitivity = this.wholePinchMode ? 1.9 : 1.5;
-                    this.consumeWholeRotationInput(mirroredX, mirroredY, sensitivity);
+                    this.consumeWholeRotationInput(mirroredX, mirroredY, 1.5);
                 }
             }
-        } 
-        else if (currentState === 'OPEN') {
+        }
+        // 全局模式下 FIST 就是 FIST、PINCH 就是 PINCH，不再混用
+        const syntheticWholePinch = false;
+        const controlState = syntheticWholePinch ? 'PINCH' : currentState;
+
+        if (controlState === 'OPEN') {
             this.isDragging = false;
             this.pinchFired = false;
             this.fistActionFired = false; // 重置防抖锁
@@ -96,10 +93,9 @@ export class InteractionHSM {
                 this.appMode = 'SCATTERED';
             }
             if (this.appMode === 'SCATTERED') isEdgePanning = true;
-        } 
-        else if (currentState === 'PINCH') {
+        } else if (controlState === 'PINCH') {
             this.isDragging = false;
-            this.fistActionFired = false; // 重置防抖锁
+            this.fistActionFired = false;
             this.fistHoldStartMs = null;
             this.wholePinchMode = false;
 
@@ -137,8 +133,9 @@ export class InteractionHSM {
                     this.lastHandY = mirroredY;
                 }
             }
-        } 
-        else {
+        } else if (controlState === 'FIST') {
+            // 已在上方 FIST 分支处理，这里无需额外逻辑
+        } else {
             this.isDragging = false;
             this.pinchFired = false;
             this.fistActionFired = false; // 重置防抖锁
@@ -171,9 +168,7 @@ export class InteractionHSM {
             appMode: this.appMode,
             cursorScreen: { x: mirroredX, y: mirroredY },
             panDirection: panDirection,
-            effectiveGesture: (this.appMode === 'WHOLE' && this.wholePinchMode && currentState === 'FIST')
-                ? 'PINCH'
-                : currentState
+            effectiveGesture: controlState
         };
     }
 
