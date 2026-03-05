@@ -74,7 +74,17 @@
             }
         }
     </script>
-    <script src="drivers/mock_hands.js"></script>
+    <!-- MEDIAPIPE_INPUT_ROUTER_START -->
+    <script>
+        (function () {
+            const mode = new URLSearchParams(window.location.search).get('input');
+            const scriptPath = mode === 'mediapipe'
+                ? '../mediapipe-sense/runtime_loader.js'
+                : 'drivers/mock_hands.js';
+            document.write('<script src=\"' + scriptPath + '\"><\\/script>');
+        })();
+    </script>
+    <!-- MEDIAPIPE_INPUT_ROUTER_END -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
