@@ -48,3 +48,7 @@ credentials.json
 /assets/models/*.glb.bak
 /assets/models/*.gltf
 /assets/models/*.gltf.bak
+
+# Edge Perception (Pico Max)
+/drivers/pico_python/libs/
+/drivers/pico_python/models/*.tflite

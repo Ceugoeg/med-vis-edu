@@ -88,20 +88,6 @@
             }
         }
     </script>
-<<<<<<< HEAD
-    <script>
-        (function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            // 默认使用摄像头 MediaPipe；需要键盘模拟时加 ?input=mock
-            const scriptSrc = urlParams.get('input') === 'mock'
-                ? 'drivers/mock_hands.js'
-                : 'drivers/mediapipe-sense/runtime_loader.js';
-
-            const driverScript = document.createElement('script');
-            driverScript.src = scriptSrc;
-            document.head.appendChild(driverScript);
-        })();
-    </script>
     <script>
         (function () {
             const overlay = document.getElementById('onboarding-overlay');
@@ -118,19 +104,6 @@
             });
         })();
     </script>
-=======
-    <!-- MEDIAPIPE_INPUT_ROUTER_START -->
-    <script>
-        (function () {
-            const mode = new URLSearchParams(window.location.search).get('input');
-            const scriptPath = mode === 'mediapipe'
-                ? '../mediapipe-sense/runtime_loader.js'
-                : 'drivers/mock_hands.js';
-            document.write('<script src=\"' + scriptPath + '\"><\\/script>');
-        })();
-    </script>
-    <!-- MEDIAPIPE_INPUT_ROUTER_END -->
->>>>>>> 3be7e1a175f441d171f5a11fac5c67c038211668
     <script type="module" src="app.js"></script>
 </body>
 </html>

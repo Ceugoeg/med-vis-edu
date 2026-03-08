@@ -11,7 +11,11 @@ import { STTService } from './services/stt_service.js';
 import { InteractionHSM } from './controllers/interaction_hsm.js';
 
 // --- 0. 系统配置与依赖注入 ---
+// 还原为你最初始的配置
 const MOCK_MODE = true; 
+
+// [TODO: 修改为你的 Pico Max 板子的实际局域网 IP 地址]
+const EDGE_WS_URL = 'ws://<YOUR_PICO_IP_HERE>:8080'; 
 
 let llmService = null;
 let anatomyMapper = null; 
@@ -29,7 +33,7 @@ const State_Channel = {
 };
 
 let currentSnappedNDC = { x: 0, y: 0 };
-let prevHandState = 'NONE'; // 记录上一帧状态，用于构建边缘触发锁
+let prevHandState = 'NONE'; 
 
 // --- 1. Three.js 核心初始化 ---
 const container = document.getElementById('canvas-container');
@@ -177,9 +181,12 @@ function loadAssets(modelName, langName) {
 
 topNavModel.addEventListener('change', (e) => loadAssets(e.target.value, currentLang));
 topNavLang.addEventListener('change', (e) => loadAssets(currentModelName, e.target.value));
-function showError(msg) {
-    toastMsg.innerText = msg; toastMsg.style.background = 'rgba(255, 0, 0, 0.9)';
-    toastMsg.style.opacity = '1'; setTimeout(() => { toastMsg.style.opacity = '0'; }, 3000);
+
+function showError(msg, type = 'error') {
+    toastMsg.innerText = msg; 
+    toastMsg.style.background = type === 'error' ? 'rgba(255, 0, 0, 0.9)' : 'rgba(0, 200, 100, 0.9)';
+    toastMsg.style.opacity = '1'; 
+    setTimeout(() => { toastMsg.style.opacity = '0'; }, 3000);
 }
 
 // --- 5. 动画与交互路由 ---
@@ -302,7 +309,85 @@ const hsmCallbacks = {
     }
 };
 
-// --- 6. 原生降级交互 ---
+// --- 6. 视觉感知启动与降级策略 (Edge -> Local) ---
+function bootVisionSystem() {
+    console.log("[Boot] 尝试连接 Pico Max 边缘感知节点...");
+    gestureStateUI.innerText = "连接边缘节点中...";
+    
+    let ws = null;
+    let edgeConnected = false;
+
+    const fallbackTimer = setTimeout(() => {
+        if (!edgeConnected) {
+            console.warn("[Boot] 连接边缘节点超时，降级为本地前置摄像头模式 (Phase 1)");
+            if (ws) {
+                ws.onopen = null; ws.onmessage = null; ws.onerror = null; ws.close();
+            }
+            initLocalPhase1Vision();
+        }
+    }, 3000);
+
+    try {
+        ws = new WebSocket(EDGE_WS_URL);
+
+        ws.onopen = () => {
+            edgeConnected = true;
+            clearTimeout(fallbackTimer);
+            console.log("[Boot] 已成功握手边缘节点: " + EDGE_WS_URL);
+            showError("已连接至 Pico NPU 边缘集群", "success");
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const payload = JSON.parse(event.data);
+                window.handData = {
+                    state: payload.state,
+                    landmarks: payload.landmarks,
+                    confidence: 1.0, 
+                    fps: payload.metrics?.fps || 0
+                };
+                if (payload.metrics) {
+                    gestureStateUI.dataset.metrics = ` | Edge FPS: ${payload.metrics.fps} | Latency: ${payload.metrics.latency_ms}ms`;
+                }
+            } catch (e) {}
+        };
+
+        ws.onerror = (err) => {
+            if (!edgeConnected) {
+                clearTimeout(fallbackTimer);
+                console.warn("[Boot] WebSocket连接拒绝，降级为本地摄像头 (Phase 1)");
+                initLocalPhase1Vision();
+            }
+        };
+        
+        ws.onclose = () => {
+            if (edgeConnected) {
+                showError("与边缘节点断开连接！", "error");
+                window.handData = null; 
+            }
+        };
+
+    } catch (e) {
+        clearTimeout(fallbackTimer);
+        console.warn("[Boot] URL格式非法，触发立即降级 (Phase 1)。详细:", e.message);
+        initLocalPhase1Vision();
+    }
+}
+
+// 完美衔接你原有的 Phase 1 架构：动态注入 runtime_loader.js
+function initLocalPhase1Vision() {
+    showError("启用本地浏览器感知推流 (Phase 1)");
+    gestureStateUI.innerText = "本地摄像头模式加载中...";
+    
+    const script = document.createElement('script');
+    script.src = 'drivers/mediapipe-sense/runtime_loader.js';
+    script.onerror = () => showError("本地感知驱动加载失败！", "error");
+    document.head.appendChild(script);
+}
+
+bootVisionSystem();
+
+// --- 原生降级交互 (严格按照你原版的 MOCK_MODE 开关设计恢复) ---
 let isMockDragging = false; let prevMousePos = { x: 0, y: 0 }; let startMousePos = { x: 0, y: 0 };
 if (!MOCK_MODE) {
     gestureStateUI.innerText = "鼠标降级模式"; crosshairUI.style.display = 'none'; 
@@ -394,9 +479,10 @@ function animate() {
 
         const renderState = hsm.update(handData, hsmCallbacks);
         const effectiveState = renderState?.effectiveGesture || handData.state;
-        // 计算有效 PINCH 动作是否发生在当前这一帧（上升沿边缘触发器）
         const isPinchJustStarted = (effectiveState === 'PINCH' && prevHandState !== 'PINCH');
-        gestureStateUI.innerText = `[${hsm.appMode}] 输入: ${effectiveState}`;
+        
+        const metricsStr = gestureStateUI.dataset.metrics || '';
+        gestureStateUI.innerText = `[${hsm.appMode}] 输入: ${effectiveState}${metricsStr}`;
 
         if (renderState && renderState.cursorScreen) {
             const rawMirroredX = renderState.cursorScreen.x;
@@ -466,7 +552,6 @@ function animate() {
 
             const isHoveringCancel = cancelZoneUI.classList.contains('active') && checkHover(cancelZoneUI, screenX, screenY);
             
-            // 【UI 交互防护】：仅在捏合瞬间（isPinchJustStarted）且在按钮上时，才能触发录音和发送
             if (isPinchJustStarted) {
                 if (checkHover(micBtnUI, screenX, screenY) && !micBtnUI.disabled && !isGestureRecording) {
                     isGestureRecording = true; micBtnUI.classList.add('recording'); cancelZoneUI.classList.add('active'); 
@@ -486,9 +571,9 @@ function animate() {
             }
         }
         
-        // 渲染完当前帧后，将状态保存，供下一帧对比
         prevHandState = effectiveState;
     } else {
+        delete gestureStateUI.dataset.metrics;
         gestureStateUI.innerText = `[${hsm.appMode}] 寻找手势...`;
         prevHandState = 'NONE';
     }
